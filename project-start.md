@@ -61,7 +61,7 @@ Use one of these status labels: **Not started**, **In progress**, **Ready for te
 
 ## Team check
 
-- [ ] We added our team name and the correct private GitHub repository link.
+- [X] We added our team name and the correct private GitHub repository link.
 - [X] We selected the area based first on genuine team interest.
 - [X] A and B are distinct candidate Visions within the same area.
 - [X] The candidate comparison uses verified evidence rather than unsupported claims.
