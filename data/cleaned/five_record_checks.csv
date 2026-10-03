@@ -1,0 +1,6 @@
+source_row,UniqueNIBRNo,selection_reason,field_checked,original_value,expected_result,reason,actual_cleaned_result,match
+4,26170796_13B_0,Typical valid nighttime,nighttime_unambiguous,0200,True,Original HHMM lies in 20:00–05:59 and is not all zeros.,True,True
+55,26172245_220_0,Ambiguous midnight,flag_0000_ambiguous,0000,True,All-zero original time remains present and gets an ambiguity flag.,True,True
+630,971726272__1,Missing premise,flag_missing_premise,,True,An empty original premise cannot be inferred from the offense and remains missing.,True,True
+152,26179469_270_0,Historical occurrence,analysis_post2024,08/08/2024 12:00:00 AM,False,"The original occurrence precedes January 1, 2025; retain it outside the focus flag.",False,True
+2,25088246_13A_0,Multiple offenses in a case,flag_repeated_CaseNo,25088246,True,Other original offense rows share this case; case repetition is preserved.,True,True
