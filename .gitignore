@@ -3,3 +3,4 @@
 __pycache__/
 data/raw/*.csv
 data/cleaned/lapd_nibrs_cleaned.csv
+/Olga_Tovstogan_DSO576_Data_Cleaning.pdf

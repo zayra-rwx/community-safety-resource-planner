@@ -38,10 +38,10 @@ The original raw file is not modified and is excluded from Git.
 - `cleaning_decision_log.csv`: Cleaning rules, reasons, affected counts, and limitations.
 - `five_record_checks.csv`: Expected and actual results for five individual record checks.
 
-Audits, reconciliation, metrics, and district/month results remain displayed in the notebook; see the complete district tables in section 11 to view all rows. The full cleaned master remains in memory as `df`. No builder script is needed.
+Audits, reconciliation, metrics, and compact district/month previews are displayed in the notebook. Complete result tables remain in memory; their shapes appear in section 11. The full cleaned master remains in memory as `df`. No builder script is needed.
 
 ## Submission information
 
 - **Branch:** `Olga`.
 - **Branch URL:** https://github.com/zayra-rwx/community-safety-resource-planner/tree/Olga.
-- **Commit ID:** Use `git rev-parse HEAD` to identify the checked-out submission commit.
+- Verified analysis commit: 30c9809
