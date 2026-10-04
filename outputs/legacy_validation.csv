@@ -1,0 +1,6 @@
+check,passed
+row count preserved,True
+all 28 source columns observed,True
+DR_NO nonmissing,True
+DR_NO unique,True
+every row processed,True

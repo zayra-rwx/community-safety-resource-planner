@@ -1,0 +1,7 @@
+check,passed
+row count preserved,True
+source columns preserved,True
+UniqueNIBRNo nonmissing,True
+UniqueNIBRNo unique,True
+CaseNo remains text,True
+Time OCC remains text,True

@@ -1,0 +1,60 @@
+source,column,raw_missing,clean_missing
+NIBRS,CaseNo,0,0
+NIBRS,UniqueNIBRNo,0,0
+NIBRS,Date Rptd,7416,7416
+NIBRS,Date OCC,0,0
+NIBRS,Time OCC,0,0
+NIBRS,AREA,0,0
+NIBRS,AREA NAME,0,0
+NIBRS,RPT Dist No,0,0
+NIBRS,TotalOffenseCount,0,0
+NIBRS,Group,14220,14220
+NIBRS,NIBR Code,557,557
+NIBRS,NIBR Description,0,0
+NIBRS,Crime Against,1699,1699
+NIBRS,Premise Cd,21999,21999
+NIBRS,Premise Desc,48,48
+NIBRS,Weapon Used Cd,332339,332339
+NIBRS,Weapon Desc,332339,332339
+NIBRS,Status,472,472
+NIBRS,Status Desc,470,470
+NIBRS,TotalVictimCount,0,0
+NIBRS,Victim Shot,0,0
+NIBRS,Domestic Violence Crime,0,0
+NIBRS,Hate Crime,0,0
+NIBRS,Gang-related Crime,0,0
+NIBRS,Transit-related Crime,0,0
+NIBRS,Homeless-Victim Crime,0,0
+NIBRS,Homeless-Suspect Crime,0,0
+NIBRS,Homeless-Arrestee Crime,0,0
+NIBRS,LOCATION,0,0
+NIBRS,LAT,132,132
+NIBRS,LON,132,132
+Legacy,DR_NO,0,0
+Legacy,Date Rptd,0,0
+Legacy,DATE OCC,0,0
+Legacy,TIME OCC,0,0
+Legacy,AREA,0,0
+Legacy,AREA NAME,0,0
+Legacy,Rpt Dist No,0,0
+Legacy,Part 1-2,0,0
+Legacy,Crm Cd,0,0
+Legacy,Crm Cd Desc,0,0
+Legacy,Mocodes,151598,151598
+Legacy,Vict Age,0,0
+Legacy,Vict Sex,144631,144631
+Legacy,Vict Descent,144643,144643
+Legacy,Premis Cd,16,16
+Legacy,Premis Desc,588,588
+Legacy,Weapon Used Cd,677678,677678
+Legacy,Weapon Desc,677678,677678
+Legacy,Status,1,1
+Legacy,Status Desc,0,0
+Legacy,Crm Cd 1,11,11
+Legacy,Crm Cd 2,935740,935740
+Legacy,Crm Cd 3,1002580,1002580
+Legacy,Crm Cd 4,1004830,1004830
+Legacy,LOCATION,0,0
+Legacy,Cross Street,850666,850666
+Legacy,LAT,0,0
+Legacy,LON,0,0

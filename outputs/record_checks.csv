@@ -1,0 +1,6 @@
+source,record_id,difficult_case,original,expected,actual,matches
+NIBRS,25164160_11B_0,occurrence date before 2000,1984 Feb 16 01:00:00 PM,"parse the date, retain the row, and set early_date_review_flag=True",Date OCC=1984-02-16 13:00:00; early_date_review_flag=True,True
+NIBRS,25161740_200_0,zero coordinates,LAT=0; LON=0,retain numeric zeros and set coordinate_issue_flag=True,LAT=0.0; LON=0.0; coordinate_issue_flag=True,True
+NIBRS,25158829_13B_0,Time OCC equals 0000,Time OCC=0000,"retain 0000, derive Hour OCC=0, and set both time_0000_flag and nighttime_flag",Time OCC=0000; Hour OCC=0; time_0000_flag=True; nighttime_flag=True,True
+NIBRS,CaseNo 25164452,one case has multiple offense rows,UniqueNIBRNo values=25164452_23G_0; 25164452_290_1,retain two offense rows while counting one distinct case,offense_rows=2; distinct_cases=1,True
+Legacy,201115217,additional legacy crime code,Crm Cd=812; Crm Cd 1=812; Crm Cd 2=860,retain the primary and additional codes and set additional_crime_code_flag=True,Crm Cd=812; Crm Cd 1=812; Crm Cd 2=860; additional_crime_code_flag=True,True

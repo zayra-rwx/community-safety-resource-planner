@@ -1,0 +1,5 @@
+outputs/full/
+*.parquet
+.venv/
+.ipynb_checkpoints/
+__pycache__/

@@ -1,0 +1,11 @@
+rule,reason,implementation,check
+Preserve source files,Source files are the audit trail,Read-only paths; outputs written separately,source paths and row counts recorded
+Preserve source row meanings,NIBRS offense rows and Legacy records are not equivalent,Clean separately; do not append,separate validation summaries
+Trim outer whitespace,NIBRS AREA NAME contains padding,Trim text only; preserve internal text,"NIBRS changed cells=471,285; Legacy changed cells=0"
+Preserve identifiers as text,Leading zeros and code formatting matter,Load all source columns as string,identifier uniqueness and dtype checks
+Parse dates explicitly,Analysis requires dates and failed conversions must be visible,Use the documented source format with errors='coerce',NIBRS early dates=135; Legacy invalid occurrence dates=0
+Keep suspicious dates,An unusual date is not proof of error,Flag NIBRS dates before 2000,flagged rows=135
+Validate occurrence time,HHMM must have a valid hour and minute,Keep source text; derive Hour OCC and flags,NIBRS invalid=0; Legacy invalid=0
+Flag coordinate problems,Missing or zero coordinates cannot support point mapping,Keep rows; add coordinate_issue_flag,"NIBRS flagged=679; Legacy flagged=2,240"
+Nighttime is an analysis rule,Clock time is not proof of darkness,Temporarily use 20:00-05:59 and label it,"NIBRS nighttime rows=171,847"
+Preserve additional Legacy codes,One Legacy row may contain multiple recorded codes,Keep Crm Cd 1-4 and add a flag,approved record 201115217 passed
