@@ -73,4 +73,4 @@ Running the script recreates these small files in `outputs/`:
 
 - Branch: `jiatongy-svg`
 - Branch URL: `https://github.com/zayra-rwx/community-safety-resource-planner/tree/jiatongy-svg`
-- Commit ID: `[fill after the final commit]`
+- Cleaning evidence commit ID: `b4be924ac7860d8b4f9ce3d8e1174050fddf03bc`

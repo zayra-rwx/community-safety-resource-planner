@@ -4,7 +4,7 @@ Project: Community Safety Resource Planner
 Student: Thomas Yin  
 Branch: `jiatongy-svg`  
 Branch URL: `https://github.com/zayra-rwx/community-safety-resource-planner/tree/jiatongy-svg`  
-Commit ID: [fill after final commit]
+Cleaning evidence commit ID: `b4be924ac7860d8b4f9ce3d8e1174050fddf03bc`
 
 The confirmed vision is Vision B: identify areas with recurring nighttime
 reported offenses for further on-site lighting assessment. The confirmed
