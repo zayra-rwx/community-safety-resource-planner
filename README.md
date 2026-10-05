@@ -5,7 +5,7 @@ Team project: Community Safety Resource Planner, Vision B (street-lighting asses
 
 - **Branch:** carolineromero19
 - **Branch URL:** https://github.com/zayra-rwx/community-safety-resource-planner/tree/carolineromero19
-- **Commit ID:** 
+- **Commit ID:** 9e887e8 (cleaning script, sample, and requirements)
 
 ## Data source
 - LAPD NIBRS Offenses dataset (City of Los Angeles open data)
