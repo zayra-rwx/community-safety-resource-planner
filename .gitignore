@@ -1,0 +1,28 @@
+# Do not commit downloaded or private data. Remove a matching rule only when
+# the professor explicitly says a specific instructor-provided sample belongs
+# in Git.
+data/
+downloads/
+*.csv
+*.tsv
+*.parquet
+*.xlsx
+*.xls
+*.zip
+
+# Do not commit credentials or local environment settings.
+.env
+.env.*
+
+# Local operating-system files.
+.DS_Store
+Thumbs.db
+
+# Python caches.
+__pycache__/
+
+# Module 6 submission: two small derived CSVs are included on purpose
+# (a 50-row cleaned sample and the aggregate monthly summary). The raw data in
+# data/ and the full cleaned file outputs/nibrs_clean.csv stay ignored.
+!outputs/sample_cleaned_rows.csv
+!outputs/district_month_night.csv

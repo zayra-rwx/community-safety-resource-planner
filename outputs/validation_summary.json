@@ -1,0 +1,2133 @@
+{
+  "source_file": "data/LAPD_NIBRS_Offenses_Dataset_20261004.csv",
+  "source_sha256_expected": "97a8dbadafe60eee4b4d86e99769df3aaa23307d45539283879414f8760b39e5",
+  "source_sha256_before_run": "97a8dbadafe60eee4b4d86e99769df3aaa23307d45539283879414f8760b39e5",
+  "source_sha256_after_run": "97a8dbadafe60eee4b4d86e99769df3aaa23307d45539283879414f8760b39e5",
+  "load_missing_tokens": {
+    "tokens_converted_to_na": {
+      "Date Rptd": {
+        "<empty field>": 7787
+      },
+      "Group": {
+        "<empty field>": 15480
+      },
+      "NIBR Code": {
+        "<empty field>": 1149
+      },
+      "Crime Against": {
+        "<empty field>": 2297
+      },
+      "Premise Cd": {
+        "<empty field>": 22853
+      },
+      "Premise Desc": {
+        "<empty field>": 109
+      },
+      "Weapon Used Cd": {
+        "<empty field>": 345971
+      },
+      "Weapon Desc": {
+        "<empty field>": 345971
+      },
+      "Status": {
+        "<empty field>": 1044
+      },
+      "Status Desc": {
+        "<empty field>": 1042
+      },
+      "LAT": {
+        "<empty field>": 131
+      },
+      "LON": {
+        "<empty field>": 131
+      }
+    },
+    "only_empty_fields_became_na": true,
+    "non_missing_values_identical_to_literal_text": true
+  },
+  "text_standardization": {
+    "AREA NAME": {
+      "changed_cells": 489955,
+      "distinct_before": 21,
+      "distinct_after": 21,
+      "examples": [
+        {
+          "before": "Harbor              ",
+          "after": "Harbor"
+        },
+        {
+          "before": "Central             ",
+          "after": "Central"
+        },
+        {
+          "before": "N Hollywood         ",
+          "after": "N Hollywood"
+        },
+        {
+          "before": "Southwest           ",
+          "after": "Southwest"
+        },
+        {
+          "before": "Hollywood           ",
+          "after": "Hollywood"
+        }
+      ]
+    },
+    "NIBR Description": {
+      "changed_cells": 82058,
+      "distinct_before": 2409,
+      "distinct_after": 2398,
+      "examples": [
+        {
+          "before": "487(D)(1) - PC - F - Grand Theft Auto - GTA  - 240",
+          "after": "487(D)(1) - PC - F - Grand Theft Auto - GTA - 240"
+        },
+        {
+          "before": "273.5(A) - PC - F - IPV w/ Injury - Aggravated Assault  - 13A",
+          "after": "273.5(A) - PC - F - IPV w/ Injury - Aggravated Assault - 13A"
+        },
+        {
+          "before": "484(A) - PC - M - Petty Theft -  Theft From Building - 23D",
+          "after": "484(A) - PC - M - Petty Theft - Theft From Building - 23D"
+        },
+        {
+          "before": "459 - PC - F - BFMV- Burglary From Motor Vehicle  - 23F",
+          "after": "459 - PC - F - BFMV- Burglary From Motor Vehicle - 23F"
+        },
+        {
+          "before": "278 - PC - F - Child Stealing  - 100",
+          "after": "278 - PC - F - Child Stealing - 100"
+        }
+      ],
+      "merged_values": {
+        "210 - ROBBERY": [
+          "210  - ROBBERY",
+          "210 - ROBBERY"
+        ],
+        "230 - ASSAULT WITH DEADLY WEAPON, AGGRAVATED ASSAULT": [
+          "230  - ASSAULT WITH DEADLY WEAPON, AGGRAVATED ASSAULT",
+          "230 - ASSAULT WITH DEADLY WEAPON, AGGRAVATED ASSAULT"
+        ],
+        "236 - PC - F - False Imprisonment - 100": [
+          "236 - PC - F - False Imprisonment  - 100",
+          "236 - PC - F - False Imprisonment - 100"
+        ],
+        "278 - PC - F - Child Stealing - 100": [
+          "278 - PC - F - Child Stealing  - 100",
+          "278 - PC - F - Child Stealing - 100"
+        ],
+        "286(B)(2) - PC - F - Sodomy W/Person Under 16 Years - 11A": [
+          "286(B)(2) - PC - F - Sodomy W/Person Under 16 Years  - 11A",
+          "286(B)(2) - PC - F - Sodomy W/Person Under 16 Years - 11A"
+        ],
+        "810 - SEX,UNLAWFUL(INC MUTUAL CONSENT, PENETRATION W/ FRGN OBJ": [
+          "810  - SEX,UNLAWFUL(INC MUTUAL CONSENT, PENETRATION W/ FRGN OBJ",
+          "810 - SEX,UNLAWFUL(INC MUTUAL CONSENT, PENETRATION W/ FRGN OBJ"
+        ],
+        "812 - CRM AGNST CHLD (13 OR UNDER) (14-15 & SUSP 10 YRS OLDER)": [
+          "812  - CRM AGNST CHLD (13 OR UNDER) (14-15 & SUSP 10 YRS OLDER)",
+          "812 - CRM AGNST CHLD (13 OR UNDER) (14-15 & SUSP 10 YRS OLDER)"
+        ],
+        "815 - SEXUAL PENETRATION W/FOREIGN OBJECT": [
+          "815  - SEXUAL PENETRATION W/FOREIGN OBJECT",
+          "815 - SEXUAL PENETRATION W/FOREIGN OBJECT"
+        ],
+        "820 - ORAL COPULATION": [
+          "820  - ORAL COPULATION",
+          "820 - ORAL COPULATION"
+        ],
+        "860 - BATTERY WITH SEXUAL CONTACT": [
+          "860  - BATTERY WITH SEXUAL CONTACT",
+          "860 - BATTERY WITH SEXUAL CONTACT"
+        ],
+        "930 - CRIMINAL THREATS - NO WEAPON DISPLAYED": [
+          "930  - CRIMINAL THREATS - NO WEAPON DISPLAYED",
+          "930 - CRIMINAL THREATS - NO WEAPON DISPLAYED"
+        ]
+      }
+    },
+    "leading_zero_lengths_unchanged": {
+      "AREA": true,
+      "RPT Dist No": true,
+      "Premise Cd": true,
+      "Weapon Used Cd": true,
+      "Time OCC": true
+    }
+  },
+  "type_conversion": {
+    "failed_conversions": {
+      "Date Rptd": 0,
+      "Date OCC": 0,
+      "TotalOffenseCount": 0,
+      "TotalVictimCount": 0,
+      "LAT": 0,
+      "LON": 0,
+      "Victim Shot": 0,
+      "Domestic Violence Crime": 0,
+      "Hate Crime": 0,
+      "Gang-related Crime": 0,
+      "Transit-related Crime": 0,
+      "Homeless-Victim Crime": 0,
+      "Homeless-Suspect Crime": 0,
+      "Homeless-Arrestee Crime": 0
+    },
+    "yes_no": {
+      "Victim Shot": {
+        "yes_before": 2062,
+        "true_after": 2062,
+        "unexpected_values": []
+      },
+      "Domestic Violence Crime": {
+        "yes_before": 46396,
+        "true_after": 46396,
+        "unexpected_values": []
+      },
+      "Hate Crime": {
+        "yes_before": 1800,
+        "true_after": 1800,
+        "unexpected_values": []
+      },
+      "Gang-related Crime": {
+        "yes_before": 6932,
+        "true_after": 6932,
+        "unexpected_values": []
+      },
+      "Transit-related Crime": {
+        "yes_before": 15521,
+        "true_after": 15521,
+        "unexpected_values": []
+      },
+      "Homeless-Victim Crime": {
+        "yes_before": 13890,
+        "true_after": 13890,
+        "unexpected_values": []
+      },
+      "Homeless-Suspect Crime": {
+        "yes_before": 20267,
+        "true_after": 20267,
+        "unexpected_values": []
+      },
+      "Homeless-Arrestee Crime": {
+        "yes_before": 31363,
+        "true_after": 31363,
+        "unexpected_values": []
+      }
+    }
+  },
+  "time_checks": {
+    "invalid_hhmm": 0,
+    "time_matches_date_occ": 489955,
+    "minute_min": 0,
+    "minute_max": 1439
+  },
+  "validation": [
+    {
+      "check": "raw CSV SHA-256 before run",
+      "expected": "97a8dbadafe60eee4b4d86e99769df3aaa23307d45539283879414f8760b39e5",
+      "actual": "97a8dbadafe60eee4b4d86e99769df3aaa23307d45539283879414f8760b39e5",
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "raw CSV SHA-256 after run (file unchanged)",
+      "expected": "97a8dbadafe60eee4b4d86e99769df3aaa23307d45539283879414f8760b39e5",
+      "actual": "97a8dbadafe60eee4b4d86e99769df3aaa23307d45539283879414f8760b39e5",
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "raw rows",
+      "expected": 489955,
+      "actual": 489955,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "raw columns",
+      "expected": 31,
+      "actual": 31,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "only empty fields became NA on load",
+      "expected": true,
+      "actual": true,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "non-missing values identical to literal text",
+      "expected": true,
+      "actual": true,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "exact duplicate rows",
+      "expected": 0,
+      "actual": 0,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "UniqueNIBRNo unique in cleaned data",
+      "expected": true,
+      "actual": true,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "cleaned rows = raw rows (no rows removed by cleaning)",
+      "expected": 489955,
+      "actual": 489955,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "distinct CaseNo",
+      "expected": 440121,
+      "actual": 440121,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "AREA NAME changed cells",
+      "expected": 489955,
+      "actual": 489955,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "AREA NAME distinct after",
+      "expected": 21,
+      "actual": 21,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "NIBR Description changed cells",
+      "expected": 82058,
+      "actual": 82058,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "NIBR Description distinct before",
+      "expected": 2409,
+      "actual": 2409,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "NIBR Description distinct after",
+      "expected": 2398,
+      "actual": 2398,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "leading-zero columns keep their lengths",
+      "expected": true,
+      "actual": true,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "AREA -> AREA NAME one-to-one after cleaning",
+      "expected": true,
+      "actual": true,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "failed type conversions (all columns)",
+      "expected": 0,
+      "actual": 0,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "Yes/No columns: True count = original Yes count",
+      "expected": true,
+      "actual": true,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "NA counts unchanged except LAT/LON",
+      "expected": true,
+      "actual": true,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "LAT NA after cleaning (131 missing + 550 zero)",
+      "expected": 681,
+      "actual": 681,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "LON NA after cleaning (131 missing + 550 zero)",
+      "expected": 681,
+      "actual": 681,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "Time OCC invalid HHMM",
+      "expected": 0,
+      "actual": 0,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "Time OCC equals Date OCC HH:MM",
+      "expected": 489955,
+      "actual": 489955,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "minute of day within 0-1439",
+      "expected": true,
+      "actual": true,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "occ_implausible_year",
+      "expected": 3,
+      "actual": 3,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "rpt_before_occ",
+      "expected": 523,
+      "actual": 523,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "rpt_before_occ (in scope)",
+      "expected": 29,
+      "actual": 29,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "rpt_dist_area_only",
+      "expected": 558,
+      "actual": 558,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "rpt_dist_area_only (in scope)",
+      "expected": 504,
+      "actual": 504,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "toc_mismatch rows",
+      "expected": 96,
+      "actual": 96,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "toc_mismatch cases",
+      "expected": 80,
+      "actual": 80,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "tvc_conflict cases",
+      "expected": 17,
+      "actual": 17,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "nibr_code_missing",
+      "expected": 1149,
+      "actual": 1149,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "nibr_code_missing (in scope)",
+      "expected": 72,
+      "actual": 72,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "nibr_desc_code_conflict",
+      "expected": 16,
+      "actual": 16,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "location_suspected_generalized",
+      "expected": 10412,
+      "actual": 10412,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "location_suspected_generalized (in scope)",
+      "expected": 8217,
+      "actual": 8217,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "same_code_repeat_in_case (in scope)",
+      "expected": 8380,
+      "actual": 8380,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "rows identical except UniqueNIBRNo (in scope, kept)",
+      "expected": 1374,
+      "actual": 1374,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "coord_missing",
+      "expected": 131,
+      "actual": 131,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "coord_missing (in scope)",
+      "expected": 109,
+      "actual": 109,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "coord_zero",
+      "expected": 550,
+      "actual": 550,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "coord_zero (in scope)",
+      "expected": 478,
+      "actual": 478,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "coord_nonnumeric",
+      "expected": 0,
+      "actual": 0,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "coord_nonfinite",
+      "expected": 0,
+      "actual": 0,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "coord_out_of_global_bounds",
+      "expected": 0,
+      "actual": 0,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "coord_outside_basic_range (review)",
+      "expected": 161,
+      "actual": 161,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "coord_outside_basic_range (review, in scope)",
+      "expected": 120,
+      "actual": 120,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "coord_far_from_district_review",
+      "expected": 2479,
+      "actual": 2479,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "coord_far_from_district_review (in scope)",
+      "expected": 1848,
+      "actual": 1848,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "map_eligible (in scope)",
+      "expected": 379504,
+      "actual": 379504,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "map_eligible rows: coordinates present (no NA)",
+      "expected": true,
+      "actual": true,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "map_eligible rows: finite and within global bounds",
+      "expected": true,
+      "actual": true,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "map_eligible rows: no (0, 0) pair in cleaned values",
+      "expected": 0,
+      "actual": 0,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "map_eligible rows: no (0, 0) pair in original values",
+      "expected": 0,
+      "actual": 0,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "map_eligible rows: none flagged missing/zero/nonnumeric/nonfinite/out of bounds",
+      "expected": 0,
+      "actual": 0,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "scope: pre_2024",
+      "expected": 6824,
+      "actual": 6824,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "scope: 2024_pre_rms",
+      "expected": 1351,
+      "actual": 1351,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "scope: 2024_rms_transition",
+      "expected": 101689,
+      "actual": 101689,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "scope: in scope rows",
+      "expected": 380091,
+      "actual": 380091,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "scope: in-scope + out-of-scope = all rows",
+      "expected": 489955,
+      "actual": 489955,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "scope: in-scope distinct cases",
+      "expected": 344186,
+      "actual": 344186,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "district_eligible (in scope)",
+      "expected": 379587,
+      "actual": 379587,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "Time OCC 0000 (in scope)",
+      "expected": 10330,
+      "actual": 10330,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "night incl. 0000 (in scope)",
+      "expected": 137415,
+      "actual": 137415,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "night excl. 0000 (in scope)",
+      "expected": 127085,
+      "actual": 127085,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "district-month rows (observed combinations)",
+      "expected": 21290,
+      "actual": 21290,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "district-month distinct districts",
+      "expected": 1140,
+      "actual": 1140,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "district-month night incl. 0000 total",
+      "expected": 137243,
+      "actual": 137243,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "district-month night excl. 0000 total",
+      "expected": 126919,
+      "actual": 126919,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "unassigned night incl. 0000",
+      "expected": 172,
+      "actual": 172,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "unassigned night excl. 0000",
+      "expected": 166,
+      "actual": 166,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "reconcile incl.: district-month + unassigned = in-scope night",
+      "expected": 137415,
+      "actual": 137415,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "reconcile excl.: district-month + unassigned = in-scope night excl. 0000",
+      "expected": 127085,
+      "actual": 127085,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "no zero-count rows in observed district-month table",
+      "expected": 0,
+      "actual": 0,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "independent raw recount of 3 cells matches",
+      "expected": true,
+      "actual": true,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "2026-09 in-scope rows kept",
+      "expected": 10097,
+      "actual": 10097,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "2026-09 night incl. 0000",
+      "expected": 3643,
+      "actual": 3643,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "2026-09 night excl. 0000",
+      "expected": 3446,
+      "actual": 3446,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "2026-09-19 records kept",
+      "expected": 8,
+      "actual": 8,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "only 2026-09 labeled partial",
+      "expected": [
+        "2026-09"
+      ],
+      "actual": [
+        "2026-09"
+      ],
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "join [district-month night counts <- month context]: result rows = left rows (no extra rows)",
+      "expected": 21290,
+      "actual": 21290,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "join [district-month night counts <- month context]: unmatched left rows",
+      "expected": 0,
+      "actual": 0,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "join [district-month night counts <- month context]: duplicate keys on right side",
+      "expected": 0,
+      "actual": 0,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "join [unassigned-district night counts <- month context]: result rows = left rows (no extra rows)",
+      "expected": 54,
+      "actual": 54,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "join [unassigned-district night counts <- month context]: unmatched left rows",
+      "expected": 0,
+      "actual": 0,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "join [unassigned-district night counts <- month context]: duplicate keys on right side",
+      "expected": 0,
+      "actual": 0,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "join [in-scope month summary <- month context]: result rows = left rows (no extra rows)",
+      "expected": 21,
+      "actual": 21,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "join [in-scope month summary <- month context]: unmatched left rows",
+      "expected": 0,
+      "actual": 0,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "join [in-scope month summary <- month context]: duplicate keys on right side",
+      "expected": 0,
+      "actual": 0,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "lookup [CaseNo counts]: unmatched rows",
+      "expected": 0,
+      "actual": 0,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "lookup [CaseNo counts]: values equal an independent recount",
+      "expected": true,
+      "actual": true,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "lookup [district median]: eligible rows before = eligible rows with a distance after",
+      "expected": 489274,
+      "actual": 489274,
+      "passed": true,
+      "note": "eligible = map-eligible and 4-digit district"
+    },
+    {
+      "check": "lookup [district median]: unmatched among eligible rows",
+      "expected": 0,
+      "actual": 0,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "lookup [district median]: area-only rows not looked up",
+      "expected": 558,
+      "actual": 558,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "lookup [district median]: other non-mappable rows not looked up",
+      "expected": 123,
+      "actual": 123,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "lookup [district median]: rows not looked up with missing distance",
+      "expected": 681,
+      "actual": 681,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "lookup [district median]: rows not looked up with far flag True",
+      "expected": 0,
+      "actual": 0,
+      "passed": true,
+      "note": "False here means not assessed, not close to the district median"
+    },
+    {
+      "check": "lookup [district median]: looked up + area-only + other = all rows",
+      "expected": 489955,
+      "actual": 489955,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "sample rows <= 50",
+      "expected": true,
+      "actual": true,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "sample UniqueNIBRNo unique",
+      "expected": true,
+      "actual": true,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "sample includes R1-R5",
+      "expected": true,
+      "actual": true,
+      "passed": true,
+      "note": ""
+    },
+    {
+      "check": "record checks: all fields match expectations",
+      "expected": true,
+      "actual": true,
+      "passed": true,
+      "note": "53/53 fields match"
+    }
+  ],
+  "validation_passed": 104,
+  "validation_failed": 0,
+  "independent_recount": [
+    {
+      "RPT Dist No": "1912",
+      "occ_year_month": "2025-06",
+      "raw_recount_incl_0000": 2,
+      "table_incl_0000": 2,
+      "raw_recount_excl_0000": 1,
+      "table_excl_0000": 1,
+      "match": true
+    },
+    {
+      "RPT Dist No": "1566",
+      "occ_year_month": "2025-09",
+      "raw_recount_incl_0000": 7,
+      "table_incl_0000": 7,
+      "raw_recount_excl_0000": 7,
+      "table_excl_0000": 7,
+      "match": true
+    },
+    {
+      "RPT Dist No": "2114",
+      "occ_year_month": "2025-05",
+      "raw_recount_incl_0000": 4,
+      "table_incl_0000": 4,
+      "raw_recount_excl_0000": 4,
+      "table_excl_0000": 4,
+      "match": true
+    }
+  ],
+  "missing_values": [
+    {
+      "column": "Date Rptd",
+      "na_before": 7787,
+      "na_after": 7787,
+      "na_after_in_scope": 6577
+    },
+    {
+      "column": "Group",
+      "na_before": 15480,
+      "na_after": 15480,
+      "na_after_in_scope": 10153
+    },
+    {
+      "column": "NIBR Code",
+      "na_before": 1149,
+      "na_after": 1149,
+      "na_after_in_scope": 72
+    },
+    {
+      "column": "Crime Against",
+      "na_before": 2297,
+      "na_after": 2297,
+      "na_after_in_scope": 203
+    },
+    {
+      "column": "Premise Cd",
+      "na_before": 22853,
+      "na_after": 22853,
+      "na_after_in_scope": 10959
+    },
+    {
+      "column": "Premise Desc",
+      "na_before": 109,
+      "na_after": 109,
+      "na_after_in_scope": 4
+    },
+    {
+      "column": "Weapon Used Cd",
+      "na_before": 345971,
+      "na_after": 345971,
+      "na_after_in_scope": 277461
+    },
+    {
+      "column": "Weapon Desc",
+      "na_before": 345971,
+      "na_after": 345971,
+      "na_after_in_scope": 277461
+    },
+    {
+      "column": "Status",
+      "na_before": 1044,
+      "na_after": 1044,
+      "na_after_in_scope": 36
+    },
+    {
+      "column": "Status Desc",
+      "na_before": 1042,
+      "na_after": 1042,
+      "na_after_in_scope": 36
+    },
+    {
+      "column": "LAT",
+      "na_before": 131,
+      "na_after": 681,
+      "na_after_in_scope": 587
+    },
+    {
+      "column": "LON",
+      "na_before": 131,
+      "na_after": 681,
+      "na_after_in_scope": 587
+    }
+  ],
+  "scope_accounting": {
+    "pre_2024": 6824,
+    "2024_pre_rms": 1351,
+    "2024_rms_transition": 101689,
+    "in_scope": 380091
+  },
+  "flag_counts": [
+    {
+      "flag": "occ_implausible_year",
+      "all_rows": 3,
+      "in_scope": 0
+    },
+    {
+      "flag": "rpt_before_occ",
+      "all_rows": 523,
+      "in_scope": 29
+    },
+    {
+      "flag": "rpt_dist_area_only",
+      "all_rows": 558,
+      "in_scope": 504
+    },
+    {
+      "flag": "district_eligible",
+      "all_rows": 489397,
+      "in_scope": 379587
+    },
+    {
+      "flag": "toc_mismatch",
+      "all_rows": 96,
+      "in_scope": 96
+    },
+    {
+      "flag": "tvc_conflict",
+      "all_rows": 39,
+      "in_scope": 39
+    },
+    {
+      "flag": "nibr_code_missing",
+      "all_rows": 1149,
+      "in_scope": 72
+    },
+    {
+      "flag": "nibr_desc_code_conflict",
+      "all_rows": 16,
+      "in_scope": 14
+    },
+    {
+      "flag": "same_code_repeat_in_case",
+      "all_rows": 10425,
+      "in_scope": 8380
+    },
+    {
+      "flag": "case_field_inconsistent",
+      "all_rows": 12,
+      "in_scope": 12
+    },
+    {
+      "flag": "location_suspected_generalized",
+      "all_rows": 10412,
+      "in_scope": 8217
+    },
+    {
+      "flag": "coord_missing",
+      "all_rows": 131,
+      "in_scope": 109
+    },
+    {
+      "flag": "coord_zero",
+      "all_rows": 550,
+      "in_scope": 478
+    },
+    {
+      "flag": "coord_nonnumeric",
+      "all_rows": 0,
+      "in_scope": 0
+    },
+    {
+      "flag": "coord_nonfinite",
+      "all_rows": 0,
+      "in_scope": 0
+    },
+    {
+      "flag": "coord_out_of_global_bounds",
+      "all_rows": 0,
+      "in_scope": 0
+    },
+    {
+      "flag": "map_eligible",
+      "all_rows": 489274,
+      "in_scope": 379504
+    },
+    {
+      "flag": "coord_outside_basic_range",
+      "all_rows": 161,
+      "in_scope": 120
+    },
+    {
+      "flag": "coord_far_from_district_review",
+      "all_rows": 2479,
+      "in_scope": 1848
+    },
+    {
+      "flag": "time_is_0000",
+      "all_rows": 15333,
+      "in_scope": 10330
+    },
+    {
+      "flag": "time_is_1200",
+      "all_rows": 13314,
+      "in_scope": 9333
+    },
+    {
+      "flag": "time_conflict",
+      "all_rows": 0,
+      "in_scope": 0
+    },
+    {
+      "flag": "night",
+      "all_rows": 178762,
+      "in_scope": 137415
+    }
+  ],
+  "in_scope_months": [
+    {
+      "occ_year_month": "2025-01",
+      "in_scope_offenses": 18295,
+      "night_incl_0000": 6539,
+      "time_0000": 641,
+      "night_excl_0000": 5898,
+      "calendar_coverage": "complete",
+      "days_since_month_end_to_last_report": 605
+    },
+    {
+      "occ_year_month": "2025-02",
+      "in_scope_offenses": 17764,
+      "night_incl_0000": 6272,
+      "time_0000": 526,
+      "night_excl_0000": 5746,
+      "calendar_coverage": "complete",
+      "days_since_month_end_to_last_report": 577
+    },
+    {
+      "occ_year_month": "2025-03",
+      "in_scope_offenses": 19241,
+      "night_incl_0000": 6942,
+      "time_0000": 544,
+      "night_excl_0000": 6398,
+      "calendar_coverage": "complete",
+      "days_since_month_end_to_last_report": 546
+    },
+    {
+      "occ_year_month": "2025-04",
+      "in_scope_offenses": 18441,
+      "night_incl_0000": 6684,
+      "time_0000": 543,
+      "night_excl_0000": 6141,
+      "calendar_coverage": "complete",
+      "days_since_month_end_to_last_report": 516
+    },
+    {
+      "occ_year_month": "2025-05",
+      "in_scope_offenses": 19721,
+      "night_incl_0000": 7169,
+      "time_0000": 536,
+      "night_excl_0000": 6633,
+      "calendar_coverage": "complete",
+      "days_since_month_end_to_last_report": 485
+    },
+    {
+      "occ_year_month": "2025-06",
+      "in_scope_offenses": 18099,
+      "night_incl_0000": 6942,
+      "time_0000": 539,
+      "night_excl_0000": 6403,
+      "calendar_coverage": "complete",
+      "days_since_month_end_to_last_report": 455
+    },
+    {
+      "occ_year_month": "2025-07",
+      "in_scope_offenses": 19245,
+      "night_incl_0000": 7206,
+      "time_0000": 521,
+      "night_excl_0000": 6685,
+      "calendar_coverage": "complete",
+      "days_since_month_end_to_last_report": 424
+    },
+    {
+      "occ_year_month": "2025-08",
+      "in_scope_offenses": 19250,
+      "night_incl_0000": 7185,
+      "time_0000": 547,
+      "night_excl_0000": 6638,
+      "calendar_coverage": "complete",
+      "days_since_month_end_to_last_report": 393
+    },
+    {
+      "occ_year_month": "2025-09",
+      "in_scope_offenses": 18333,
+      "night_incl_0000": 6580,
+      "time_0000": 487,
+      "night_excl_0000": 6093,
+      "calendar_coverage": "complete",
+      "days_since_month_end_to_last_report": 363
+    },
+    {
+      "occ_year_month": "2025-10",
+      "in_scope_offenses": 18888,
+      "night_incl_0000": 6772,
+      "time_0000": 479,
+      "night_excl_0000": 6293,
+      "calendar_coverage": "complete",
+      "days_since_month_end_to_last_report": 332
+    },
+    {
+      "occ_year_month": "2025-11",
+      "in_scope_offenses": 17771,
+      "night_incl_0000": 6325,
+      "time_0000": 487,
+      "night_excl_0000": 5838,
+      "calendar_coverage": "complete",
+      "days_since_month_end_to_last_report": 302
+    },
+    {
+      "occ_year_month": "2025-12",
+      "in_scope_offenses": 18259,
+      "night_incl_0000": 6359,
+      "time_0000": 479,
+      "night_excl_0000": 5880,
+      "calendar_coverage": "complete",
+      "days_since_month_end_to_last_report": 271
+    },
+    {
+      "occ_year_month": "2026-01",
+      "in_scope_offenses": 18313,
+      "night_incl_0000": 6417,
+      "time_0000": 498,
+      "night_excl_0000": 5919,
+      "calendar_coverage": "complete",
+      "days_since_month_end_to_last_report": 240
+    },
+    {
+      "occ_year_month": "2026-02",
+      "in_scope_offenses": 16676,
+      "night_incl_0000": 5829,
+      "time_0000": 374,
+      "night_excl_0000": 5455,
+      "calendar_coverage": "complete",
+      "days_since_month_end_to_last_report": 212
+    },
+    {
+      "occ_year_month": "2026-03",
+      "in_scope_offenses": 18741,
+      "night_incl_0000": 6693,
+      "time_0000": 516,
+      "night_excl_0000": 6177,
+      "calendar_coverage": "complete",
+      "days_since_month_end_to_last_report": 181
+    },
+    {
+      "occ_year_month": "2026-04",
+      "in_scope_offenses": 18410,
+      "night_incl_0000": 6365,
+      "time_0000": 500,
+      "night_excl_0000": 5865,
+      "calendar_coverage": "complete",
+      "days_since_month_end_to_last_report": 151
+    },
+    {
+      "occ_year_month": "2026-05",
+      "in_scope_offenses": 18549,
+      "night_incl_0000": 6797,
+      "time_0000": 477,
+      "night_excl_0000": 6320,
+      "calendar_coverage": "complete",
+      "days_since_month_end_to_last_report": 120
+    },
+    {
+      "occ_year_month": "2026-06",
+      "in_scope_offenses": 18361,
+      "night_incl_0000": 6751,
+      "time_0000": 545,
+      "night_excl_0000": 6206,
+      "calendar_coverage": "complete",
+      "days_since_month_end_to_last_report": 90
+    },
+    {
+      "occ_year_month": "2026-07",
+      "in_scope_offenses": 19324,
+      "night_incl_0000": 7147,
+      "time_0000": 478,
+      "night_excl_0000": 6669,
+      "calendar_coverage": "complete",
+      "days_since_month_end_to_last_report": 59
+    },
+    {
+      "occ_year_month": "2026-08",
+      "in_scope_offenses": 18313,
+      "night_incl_0000": 6798,
+      "time_0000": 416,
+      "night_excl_0000": 6382,
+      "calendar_coverage": "complete",
+      "days_since_month_end_to_last_report": 28
+    },
+    {
+      "occ_year_month": "2026-09",
+      "in_scope_offenses": 10097,
+      "night_incl_0000": 3643,
+      "time_0000": 197,
+      "night_excl_0000": 3446,
+      "calendar_coverage": "partial",
+      "days_since_month_end_to_last_report": null
+    }
+  ],
+  "join_audits": [
+    {
+      "join": "district-month night counts <- month context",
+      "key": "occ_year_month",
+      "expected_relationship": "many-to-one left join (each left row matches at most one right row)",
+      "left_rows": 21290,
+      "right_rows": 21,
+      "right_duplicate_keys": 0,
+      "result_rows": 21290,
+      "extra_rows": 0,
+      "unmatched_left_rows": 0,
+      "unmatched_left_keys": [],
+      "right_keys_not_in_left": []
+    },
+    {
+      "join": "unassigned-district night counts <- month context",
+      "key": "occ_year_month",
+      "expected_relationship": "many-to-one left join (each left row matches at most one right row)",
+      "left_rows": 54,
+      "right_rows": 21,
+      "right_duplicate_keys": 0,
+      "result_rows": 54,
+      "extra_rows": 0,
+      "unmatched_left_rows": 0,
+      "unmatched_left_keys": [],
+      "right_keys_not_in_left": [
+        "2025-04",
+        "2025-05",
+        "2025-06",
+        "2025-07",
+        "2025-08",
+        "2025-09",
+        "2025-10",
+        "2025-11",
+        "2025-12",
+        "2026-02",
+        "2026-03",
+        "2026-04",
+        "2026-05",
+        "2026-06",
+        "2026-07",
+        "2026-08",
+        "2026-09"
+      ]
+    },
+    {
+      "join": "in-scope month summary <- month context",
+      "key": "occ_year_month",
+      "expected_relationship": "many-to-one left join (each left row matches at most one right row)",
+      "left_rows": 21,
+      "right_rows": 21,
+      "right_duplicate_keys": 0,
+      "result_rows": 21,
+      "extra_rows": 0,
+      "unmatched_left_rows": 0,
+      "unmatched_left_keys": [],
+      "right_keys_not_in_left": []
+    }
+  ],
+  "lookup_audits": [
+    {
+      "join": "rows -> per-CaseNo counts (case_rows_in_file, tvc_conflict, case_field_inconsistent)",
+      "key": "CaseNo",
+      "expected_relationship": "many-to-one lookup built from the same rows; every key must match",
+      "left_rows": 489955,
+      "right_rows": 440121,
+      "result_rows": 489955,
+      "extra_rows": 0,
+      "unmatched_left_rows": 0,
+      "values_consistent_with_recount": true
+    },
+    {
+      "join": "rows -> district median point (coord_far_from_district_review)",
+      "key": "RPT Dist No",
+      "expected_relationship": "many-to-one lookup for map-eligible rows with a 4-digit district; districts without street-address reference rows would have no median",
+      "left_rows": 489274,
+      "right_rows": 1161,
+      "result_rows": 489274,
+      "extra_rows": 0,
+      "unmatched_left_rows": 0,
+      "unmatched_left_keys": [],
+      "not_looked_up": {
+        "area_only_rpt_dist_no": {
+          "description": "RPT Dist No holds only the 2-digit area code",
+          "rows": 558,
+          "rows_in_scope": 504,
+          "distance_missing": 558,
+          "far_flag_true": 0
+        },
+        "other_not_mappable": {
+          "description": "4-digit district but coordinates missing, (0, 0) or otherwise not map-eligible",
+          "rows": 123,
+          "rows_in_scope": 83,
+          "distance_missing": 123,
+          "far_flag_true": 0
+        }
+      },
+      "reconciliation": {
+        "looked_up": 489274,
+        "area_only_not_looked_up": 558,
+        "other_not_looked_up": 123,
+        "sum": 489955,
+        "all_rows": 489955
+      },
+      "interpretation": "coord_far_from_district_review = False means 'not flagged'. Rows without a distance were not assessed; False does not establish that their coordinates are close to the district median."
+    }
+  ],
+  "unassigned_district_night_by_area_month": [
+    {
+      "AREA": "01",
+      "AREA NAME": "Central",
+      "occ_year_month": "2025-01",
+      "calendar_coverage": "complete",
+      "days_since_month_end_to_last_report": 605,
+      "night_offenses_incl_0000": 3,
+      "night_offenses_excl_0000": 3,
+      "night_offenses_0000": 0,
+      "night_distinct_cases_incl_0000": 3,
+      "night_distinct_cases_excl_0000": 3
+    },
+    {
+      "AREA": "01",
+      "AREA NAME": "Central",
+      "occ_year_month": "2025-02",
+      "calendar_coverage": "complete",
+      "days_since_month_end_to_last_report": 577,
+      "night_offenses_incl_0000": 4,
+      "night_offenses_excl_0000": 4,
+      "night_offenses_0000": 0,
+      "night_distinct_cases_incl_0000": 4,
+      "night_distinct_cases_excl_0000": 4
+    },
+    {
+      "AREA": "01",
+      "AREA NAME": "Central",
+      "occ_year_month": "2025-03",
+      "calendar_coverage": "complete",
+      "days_since_month_end_to_last_report": 546,
+      "night_offenses_incl_0000": 4,
+      "night_offenses_excl_0000": 3,
+      "night_offenses_0000": 1,
+      "night_distinct_cases_incl_0000": 4,
+      "night_distinct_cases_excl_0000": 3
+    },
+    {
+      "AREA": "02",
+      "AREA NAME": "Rampart",
+      "occ_year_month": "2025-01",
+      "calendar_coverage": "complete",
+      "days_since_month_end_to_last_report": 605,
+      "night_offenses_incl_0000": 7,
+      "night_offenses_excl_0000": 7,
+      "night_offenses_0000": 0,
+      "night_distinct_cases_incl_0000": 7,
+      "night_distinct_cases_excl_0000": 7
+    },
+    {
+      "AREA": "02",
+      "AREA NAME": "Rampart",
+      "occ_year_month": "2025-02",
+      "calendar_coverage": "complete",
+      "days_since_month_end_to_last_report": 577,
+      "night_offenses_incl_0000": 5,
+      "night_offenses_excl_0000": 5,
+      "night_offenses_0000": 0,
+      "night_distinct_cases_incl_0000": 5,
+      "night_distinct_cases_excl_0000": 5
+    },
+    {
+      "AREA": "02",
+      "AREA NAME": "Rampart",
+      "occ_year_month": "2025-03",
+      "calendar_coverage": "complete",
+      "days_since_month_end_to_last_report": 546,
+      "night_offenses_incl_0000": 5,
+      "night_offenses_excl_0000": 5,
+      "night_offenses_0000": 0,
+      "night_distinct_cases_incl_0000": 5,
+      "night_distinct_cases_excl_0000": 5
+    },
+    {
+      "AREA": "03",
+      "AREA NAME": "Southwest",
+      "occ_year_month": "2025-01",
+      "calendar_coverage": "complete",
+      "days_since_month_end_to_last_report": 605,
+      "night_offenses_incl_0000": 5,
+      "night_offenses_excl_0000": 5,
+      "night_offenses_0000": 0,
+      "night_distinct_cases_incl_0000": 5,
+      "night_distinct_cases_excl_0000": 5
+    },
+    {
+      "AREA": "03",
+      "AREA NAME": "Southwest",
+      "occ_year_month": "2025-02",
+      "calendar_coverage": "complete",
+      "days_since_month_end_to_last_report": 577,
+      "night_offenses_incl_0000": 3,
+      "night_offenses_excl_0000": 3,
+      "night_offenses_0000": 0,
+      "night_distinct_cases_incl_0000": 3,
+      "night_distinct_cases_excl_0000": 3
+    },
+    {
+      "AREA": "03",
+      "AREA NAME": "Southwest",
+      "occ_year_month": "2025-03",
+      "calendar_coverage": "complete",
+      "days_since_month_end_to_last_report": 546,
+      "night_offenses_incl_0000": 2,
+      "night_offenses_excl_0000": 2,
+      "night_offenses_0000": 0,
+      "night_distinct_cases_incl_0000": 2,
+      "night_distinct_cases_excl_0000": 2
+    },
+    {
+      "AREA": "04",
+      "AREA NAME": "Hollenbeck",
+      "occ_year_month": "2025-01",
+      "calendar_coverage": "complete",
+      "days_since_month_end_to_last_report": 605,
+      "night_offenses_incl_0000": 4,
+      "night_offenses_excl_0000": 4,
+      "night_offenses_0000": 0,
+      "night_distinct_cases_incl_0000": 4,
+      "night_distinct_cases_excl_0000": 4
+    },
+    {
+      "AREA": "04",
+      "AREA NAME": "Hollenbeck",
+      "occ_year_month": "2025-02",
+      "calendar_coverage": "complete",
+      "days_since_month_end_to_last_report": 577,
+      "night_offenses_incl_0000": 3,
+      "night_offenses_excl_0000": 3,
+      "night_offenses_0000": 0,
+      "night_distinct_cases_incl_0000": 3,
+      "night_distinct_cases_excl_0000": 3
+    },
+    {
+      "AREA": "04",
+      "AREA NAME": "Hollenbeck",
+      "occ_year_month": "2025-03",
+      "calendar_coverage": "complete",
+      "days_since_month_end_to_last_report": 546,
+      "night_offenses_incl_0000": 2,
+      "night_offenses_excl_0000": 2,
+      "night_offenses_0000": 0,
+      "night_distinct_cases_incl_0000": 2,
+      "night_distinct_cases_excl_0000": 2
+    },
+    {
+      "AREA": "06",
+      "AREA NAME": "Hollywood",
+      "occ_year_month": "2025-01",
+      "calendar_coverage": "complete",
+      "days_since_month_end_to_last_report": 605,
+      "night_offenses_incl_0000": 6,
+      "night_offenses_excl_0000": 6,
+      "night_offenses_0000": 0,
+      "night_distinct_cases_incl_0000": 6,
+      "night_distinct_cases_excl_0000": 6
+    },
+    {
+      "AREA": "06",
+      "AREA NAME": "Hollywood",
+      "occ_year_month": "2025-02",
+      "calendar_coverage": "complete",
+      "days_since_month_end_to_last_report": 577,
+      "night_offenses_incl_0000": 5,
+      "night_offenses_excl_0000": 5,
+      "night_offenses_0000": 0,
+      "night_distinct_cases_incl_0000": 5,
+      "night_distinct_cases_excl_0000": 5
+    },
+    {
+      "AREA": "06",
+      "AREA NAME": "Hollywood",
+      "occ_year_month": "2025-03",
+      "calendar_coverage": "complete",
+      "days_since_month_end_to_last_report": 546,
+      "night_offenses_incl_0000": 7,
+      "night_offenses_excl_0000": 7,
+      "night_offenses_0000": 0,
+      "night_distinct_cases_incl_0000": 7,
+      "night_distinct_cases_excl_0000": 7
+    },
+    {
+      "AREA": "07",
+      "AREA NAME": "Wilshire",
+      "occ_year_month": "2025-01",
+      "calendar_coverage": "complete",
+      "days_since_month_end_to_last_report": 605,
+      "night_offenses_incl_0000": 4,
+      "night_offenses_excl_0000": 4,
+      "night_offenses_0000": 0,
+      "night_distinct_cases_incl_0000": 4,
+      "night_distinct_cases_excl_0000": 4
+    },
+    {
+      "AREA": "07",
+      "AREA NAME": "Wilshire",
+      "occ_year_month": "2025-02",
+      "calendar_coverage": "complete",
+      "days_since_month_end_to_last_report": 577,
+      "night_offenses_incl_0000": 4,
+      "night_offenses_excl_0000": 4,
+      "night_offenses_0000": 0,
+      "night_distinct_cases_incl_0000": 4,
+      "night_distinct_cases_excl_0000": 4
+    },
+    {
+      "AREA": "07",
+      "AREA NAME": "Wilshire",
+      "occ_year_month": "2025-03",
+      "calendar_coverage": "complete",
+      "days_since_month_end_to_last_report": 546,
+      "night_offenses_incl_0000": 1,
+      "night_offenses_excl_0000": 1,
+      "night_offenses_0000": 0,
+      "night_distinct_cases_incl_0000": 1,
+      "night_distinct_cases_excl_0000": 1
+    },
+    {
+      "AREA": "08",
+      "AREA NAME": "West LA",
+      "occ_year_month": "2025-01",
+      "calendar_coverage": "complete",
+      "days_since_month_end_to_last_report": 605,
+      "night_offenses_incl_0000": 4,
+      "night_offenses_excl_0000": 4,
+      "night_offenses_0000": 0,
+      "night_distinct_cases_incl_0000": 4,
+      "night_distinct_cases_excl_0000": 4
+    },
+    {
+      "AREA": "08",
+      "AREA NAME": "West LA",
+      "occ_year_month": "2025-02",
+      "calendar_coverage": "complete",
+      "days_since_month_end_to_last_report": 577,
+      "night_offenses_incl_0000": 4,
+      "night_offenses_excl_0000": 4,
+      "night_offenses_0000": 0,
+      "night_distinct_cases_incl_0000": 4,
+      "night_distinct_cases_excl_0000": 4
+    },
+    {
+      "AREA": "08",
+      "AREA NAME": "West LA",
+      "occ_year_month": "2025-03",
+      "calendar_coverage": "complete",
+      "days_since_month_end_to_last_report": 546,
+      "night_offenses_incl_0000": 2,
+      "night_offenses_excl_0000": 2,
+      "night_offenses_0000": 0,
+      "night_distinct_cases_incl_0000": 2,
+      "night_distinct_cases_excl_0000": 2
+    },
+    {
+      "AREA": "09",
+      "AREA NAME": "Van Nuys",
+      "occ_year_month": "2025-01",
+      "calendar_coverage": "complete",
+      "days_since_month_end_to_last_report": 605,
+      "night_offenses_incl_0000": 5,
+      "night_offenses_excl_0000": 4,
+      "night_offenses_0000": 1,
+      "night_distinct_cases_incl_0000": 5,
+      "night_distinct_cases_excl_0000": 4
+    },
+    {
+      "AREA": "09",
+      "AREA NAME": "Van Nuys",
+      "occ_year_month": "2025-02",
+      "calendar_coverage": "complete",
+      "days_since_month_end_to_last_report": 577,
+      "night_offenses_incl_0000": 1,
+      "night_offenses_excl_0000": 1,
+      "night_offenses_0000": 0,
+      "night_distinct_cases_incl_0000": 1,
+      "night_distinct_cases_excl_0000": 1
+    },
+    {
+      "AREA": "09",
+      "AREA NAME": "Van Nuys",
+      "occ_year_month": "2025-03",
+      "calendar_coverage": "complete",
+      "days_since_month_end_to_last_report": 546,
+      "night_offenses_incl_0000": 1,
+      "night_offenses_excl_0000": 1,
+      "night_offenses_0000": 0,
+      "night_distinct_cases_incl_0000": 1,
+      "night_distinct_cases_excl_0000": 1
+    },
+    {
+      "AREA": "10",
+      "AREA NAME": "West Valley",
+      "occ_year_month": "2025-01",
+      "calendar_coverage": "complete",
+      "days_since_month_end_to_last_report": 605,
+      "night_offenses_incl_0000": 2,
+      "night_offenses_excl_0000": 2,
+      "night_offenses_0000": 0,
+      "night_distinct_cases_incl_0000": 2,
+      "night_distinct_cases_excl_0000": 2
+    },
+    {
+      "AREA": "10",
+      "AREA NAME": "West Valley",
+      "occ_year_month": "2025-02",
+      "calendar_coverage": "complete",
+      "days_since_month_end_to_last_report": 577,
+      "night_offenses_incl_0000": 2,
+      "night_offenses_excl_0000": 2,
+      "night_offenses_0000": 0,
+      "night_distinct_cases_incl_0000": 2,
+      "night_distinct_cases_excl_0000": 2
+    },
+    {
+      "AREA": "10",
+      "AREA NAME": "West Valley",
+      "occ_year_month": "2025-03",
+      "calendar_coverage": "complete",
+      "days_since_month_end_to_last_report": 546,
+      "night_offenses_incl_0000": 2,
+      "night_offenses_excl_0000": 2,
+      "night_offenses_0000": 0,
+      "night_distinct_cases_incl_0000": 2,
+      "night_distinct_cases_excl_0000": 2
+    },
+    {
+      "AREA": "11",
+      "AREA NAME": "Northeast",
+      "occ_year_month": "2025-01",
+      "calendar_coverage": "complete",
+      "days_since_month_end_to_last_report": 605,
+      "night_offenses_incl_0000": 4,
+      "night_offenses_excl_0000": 3,
+      "night_offenses_0000": 1,
+      "night_distinct_cases_incl_0000": 4,
+      "night_distinct_cases_excl_0000": 3
+    },
+    {
+      "AREA": "11",
+      "AREA NAME": "Northeast",
+      "occ_year_month": "2025-02",
+      "calendar_coverage": "complete",
+      "days_since_month_end_to_last_report": 577,
+      "night_offenses_incl_0000": 1,
+      "night_offenses_excl_0000": 1,
+      "night_offenses_0000": 0,
+      "night_distinct_cases_incl_0000": 1,
+      "night_distinct_cases_excl_0000": 1
+    },
+    {
+      "AREA": "11",
+      "AREA NAME": "Northeast",
+      "occ_year_month": "2025-03",
+      "calendar_coverage": "complete",
+      "days_since_month_end_to_last_report": 546,
+      "night_offenses_incl_0000": 2,
+      "night_offenses_excl_0000": 2,
+      "night_offenses_0000": 0,
+      "night_distinct_cases_incl_0000": 2,
+      "night_distinct_cases_excl_0000": 2
+    },
+    {
+      "AREA": "12",
+      "AREA NAME": "77th Street",
+      "occ_year_month": "2025-02",
+      "calendar_coverage": "complete",
+      "days_since_month_end_to_last_report": 577,
+      "night_offenses_incl_0000": 7,
+      "night_offenses_excl_0000": 7,
+      "night_offenses_0000": 0,
+      "night_distinct_cases_incl_0000": 7,
+      "night_distinct_cases_excl_0000": 7
+    },
+    {
+      "AREA": "12",
+      "AREA NAME": "77th Street",
+      "occ_year_month": "2025-03",
+      "calendar_coverage": "complete",
+      "days_since_month_end_to_last_report": 546,
+      "night_offenses_incl_0000": 3,
+      "night_offenses_excl_0000": 2,
+      "night_offenses_0000": 1,
+      "night_distinct_cases_incl_0000": 3,
+      "night_distinct_cases_excl_0000": 2
+    },
+    {
+      "AREA": "12",
+      "AREA NAME": "77th Street",
+      "occ_year_month": "2026-01",
+      "calendar_coverage": "complete",
+      "days_since_month_end_to_last_report": 240,
+      "night_offenses_incl_0000": 1,
+      "night_offenses_excl_0000": 1,
+      "night_offenses_0000": 0,
+      "night_distinct_cases_incl_0000": 1,
+      "night_distinct_cases_excl_0000": 1
+    },
+    {
+      "AREA": "13",
+      "AREA NAME": "Newton",
+      "occ_year_month": "2025-01",
+      "calendar_coverage": "complete",
+      "days_since_month_end_to_last_report": 605,
+      "night_offenses_incl_0000": 2,
+      "night_offenses_excl_0000": 2,
+      "night_offenses_0000": 0,
+      "night_distinct_cases_incl_0000": 2,
+      "night_distinct_cases_excl_0000": 2
+    },
+    {
+      "AREA": "13",
+      "AREA NAME": "Newton",
+      "occ_year_month": "2025-02",
+      "calendar_coverage": "complete",
+      "days_since_month_end_to_last_report": 577,
+      "night_offenses_incl_0000": 6,
+      "night_offenses_excl_0000": 6,
+      "night_offenses_0000": 0,
+      "night_distinct_cases_incl_0000": 6,
+      "night_distinct_cases_excl_0000": 6
+    },
+    {
+      "AREA": "13",
+      "AREA NAME": "Newton",
+      "occ_year_month": "2025-03",
+      "calendar_coverage": "complete",
+      "days_since_month_end_to_last_report": 546,
+      "night_offenses_incl_0000": 3,
+      "night_offenses_excl_0000": 3,
+      "night_offenses_0000": 0,
+      "night_distinct_cases_incl_0000": 3,
+      "night_distinct_cases_excl_0000": 3
+    },
+    {
+      "AREA": "14",
+      "AREA NAME": "Pacific",
+      "occ_year_month": "2025-01",
+      "calendar_coverage": "complete",
+      "days_since_month_end_to_last_report": 605,
+      "night_offenses_incl_0000": 6,
+      "night_offenses_excl_0000": 6,
+      "night_offenses_0000": 0,
+      "night_distinct_cases_incl_0000": 6,
+      "night_distinct_cases_excl_0000": 6
+    },
+    {
+      "AREA": "14",
+      "AREA NAME": "Pacific",
+      "occ_year_month": "2025-02",
+      "calendar_coverage": "complete",
+      "days_since_month_end_to_last_report": 577,
+      "night_offenses_incl_0000": 2,
+      "night_offenses_excl_0000": 2,
+      "night_offenses_0000": 0,
+      "night_distinct_cases_incl_0000": 2,
+      "night_distinct_cases_excl_0000": 2
+    },
+    {
+      "AREA": "14",
+      "AREA NAME": "Pacific",
+      "occ_year_month": "2025-03",
+      "calendar_coverage": "complete",
+      "days_since_month_end_to_last_report": 546,
+      "night_offenses_incl_0000": 2,
+      "night_offenses_excl_0000": 2,
+      "night_offenses_0000": 0,
+      "night_distinct_cases_incl_0000": 2,
+      "night_distinct_cases_excl_0000": 2
+    },
+    {
+      "AREA": "15",
+      "AREA NAME": "N Hollywood",
+      "occ_year_month": "2025-01",
+      "calendar_coverage": "complete",
+      "days_since_month_end_to_last_report": 605,
+      "night_offenses_incl_0000": 4,
+      "night_offenses_excl_0000": 4,
+      "night_offenses_0000": 0,
+      "night_distinct_cases_incl_0000": 4,
+      "night_distinct_cases_excl_0000": 4
+    },
+    {
+      "AREA": "15",
+      "AREA NAME": "N Hollywood",
+      "occ_year_month": "2025-02",
+      "calendar_coverage": "complete",
+      "days_since_month_end_to_last_report": 577,
+      "night_offenses_incl_0000": 3,
+      "night_offenses_excl_0000": 3,
+      "night_offenses_0000": 0,
+      "night_distinct_cases_incl_0000": 3,
+      "night_distinct_cases_excl_0000": 3
+    },
+    {
+      "AREA": "16",
+      "AREA NAME": "Foothill",
+      "occ_year_month": "2025-01",
+      "calendar_coverage": "complete",
+      "days_since_month_end_to_last_report": 605,
+      "night_offenses_incl_0000": 3,
+      "night_offenses_excl_0000": 3,
+      "night_offenses_0000": 0,
+      "night_distinct_cases_incl_0000": 3,
+      "night_distinct_cases_excl_0000": 3
+    },
+    {
+      "AREA": "16",
+      "AREA NAME": "Foothill",
+      "occ_year_month": "2025-02",
+      "calendar_coverage": "complete",
+      "days_since_month_end_to_last_report": 577,
+      "night_offenses_incl_0000": 1,
+      "night_offenses_excl_0000": 1,
+      "night_offenses_0000": 0,
+      "night_distinct_cases_incl_0000": 1,
+      "night_distinct_cases_excl_0000": 1
+    },
+    {
+      "AREA": "17",
+      "AREA NAME": "Devonshire",
+      "occ_year_month": "2025-01",
+      "calendar_coverage": "complete",
+      "days_since_month_end_to_last_report": 605,
+      "night_offenses_incl_0000": 6,
+      "night_offenses_excl_0000": 6,
+      "night_offenses_0000": 0,
+      "night_distinct_cases_incl_0000": 6,
+      "night_distinct_cases_excl_0000": 6
+    },
+    {
+      "AREA": "17",
+      "AREA NAME": "Devonshire",
+      "occ_year_month": "2025-02",
+      "calendar_coverage": "complete",
+      "days_since_month_end_to_last_report": 577,
+      "night_offenses_incl_0000": 1,
+      "night_offenses_excl_0000": 1,
+      "night_offenses_0000": 0,
+      "night_distinct_cases_incl_0000": 1,
+      "night_distinct_cases_excl_0000": 1
+    },
+    {
+      "AREA": "18",
+      "AREA NAME": "Southeast",
+      "occ_year_month": "2025-01",
+      "calendar_coverage": "complete",
+      "days_since_month_end_to_last_report": 605,
+      "night_offenses_incl_0000": 1,
+      "night_offenses_excl_0000": 1,
+      "night_offenses_0000": 0,
+      "night_distinct_cases_incl_0000": 1,
+      "night_distinct_cases_excl_0000": 1
+    },
+    {
+      "AREA": "18",
+      "AREA NAME": "Southeast",
+      "occ_year_month": "2025-03",
+      "calendar_coverage": "complete",
+      "days_since_month_end_to_last_report": 546,
+      "night_offenses_incl_0000": 1,
+      "night_offenses_excl_0000": 1,
+      "night_offenses_0000": 0,
+      "night_distinct_cases_incl_0000": 1,
+      "night_distinct_cases_excl_0000": 1
+    },
+    {
+      "AREA": "19",
+      "AREA NAME": "Mission",
+      "occ_year_month": "2025-01",
+      "calendar_coverage": "complete",
+      "days_since_month_end_to_last_report": 605,
+      "night_offenses_incl_0000": 1,
+      "night_offenses_excl_0000": 1,
+      "night_offenses_0000": 0,
+      "night_distinct_cases_incl_0000": 1,
+      "night_distinct_cases_excl_0000": 1
+    },
+    {
+      "AREA": "19",
+      "AREA NAME": "Mission",
+      "occ_year_month": "2025-02",
+      "calendar_coverage": "complete",
+      "days_since_month_end_to_last_report": 577,
+      "night_offenses_incl_0000": 3,
+      "night_offenses_excl_0000": 3,
+      "night_offenses_0000": 0,
+      "night_distinct_cases_incl_0000": 3,
+      "night_distinct_cases_excl_0000": 3
+    },
+    {
+      "AREA": "20",
+      "AREA NAME": "Olympic",
+      "occ_year_month": "2025-01",
+      "calendar_coverage": "complete",
+      "days_since_month_end_to_last_report": 605,
+      "night_offenses_incl_0000": 1,
+      "night_offenses_excl_0000": 1,
+      "night_offenses_0000": 0,
+      "night_distinct_cases_incl_0000": 1,
+      "night_distinct_cases_excl_0000": 1
+    },
+    {
+      "AREA": "20",
+      "AREA NAME": "Olympic",
+      "occ_year_month": "2025-02",
+      "calendar_coverage": "complete",
+      "days_since_month_end_to_last_report": 577,
+      "night_offenses_incl_0000": 5,
+      "night_offenses_excl_0000": 5,
+      "night_offenses_0000": 0,
+      "night_distinct_cases_incl_0000": 5,
+      "night_distinct_cases_excl_0000": 5
+    },
+    {
+      "AREA": "20",
+      "AREA NAME": "Olympic",
+      "occ_year_month": "2025-03",
+      "calendar_coverage": "complete",
+      "days_since_month_end_to_last_report": 546,
+      "night_offenses_incl_0000": 4,
+      "night_offenses_excl_0000": 4,
+      "night_offenses_0000": 0,
+      "night_distinct_cases_incl_0000": 4,
+      "night_distinct_cases_excl_0000": 4
+    },
+    {
+      "AREA": "21",
+      "AREA NAME": "Topanga",
+      "occ_year_month": "2025-01",
+      "calendar_coverage": "complete",
+      "days_since_month_end_to_last_report": 605,
+      "night_offenses_incl_0000": 1,
+      "night_offenses_excl_0000": 0,
+      "night_offenses_0000": 1,
+      "night_distinct_cases_incl_0000": 1,
+      "night_distinct_cases_excl_0000": 0
+    },
+    {
+      "AREA": "21",
+      "AREA NAME": "Topanga",
+      "occ_year_month": "2025-03",
+      "calendar_coverage": "complete",
+      "days_since_month_end_to_last_report": 546,
+      "night_offenses_incl_0000": 1,
+      "night_offenses_excl_0000": 0,
+      "night_offenses_0000": 1,
+      "night_distinct_cases_incl_0000": 1,
+      "night_distinct_cases_excl_0000": 0
+    }
+  ]
+}
