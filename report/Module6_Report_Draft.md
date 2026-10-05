@@ -7,7 +7,7 @@ All results below come from the final run of `clean_nibrs.py` and `Data Cleaning
 
 **Branch:** `zayra-rwx`
 **Branch URL:** https://github.com/zayra-rwx/community-safety-resource-planner/tree/zayra-rwx
-**Commit ID:** `<COMMIT_ID>`
+**Commit ID:** `06460a04e74f9cf59f9dd226c20c7c76b76bb07d`
 
 ---
 
@@ -205,5 +205,5 @@ AI tools used: **ChatGPT** (OpenAI) for planning and review, and **Claude Code**
 ## Part 5: Repository and access
 
 - Branch `zayra-rwx`: https://github.com/zayra-rwx/community-safety-resource-planner/tree/zayra-rwx
-- Commit ID: `<COMMIT_ID>`
+- Commit ID: `06460a04e74f9cf59f9dd226c20c7c76b76bb07d`
 - Instructor access: `yalimohammadi` is a collaborator on `zayra-rwx/community-safety-resource-planner`. Confirmed 2026-10-04 with `gh api repos/zayra-rwx/community-safety-resource-planner/collaborators/yalimohammadi`, which returned HTTP 204 No Content.
