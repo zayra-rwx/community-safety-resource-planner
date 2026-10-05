@@ -196,7 +196,7 @@ AI tools used: **ChatGPT** (OpenAI) for planning and review, and **Claude Code**
 
 **What I found:**
 - **5 records** match, and all 5 share one coordinate pair: **(34.149, −118.4537)**.
-- The street-address records shown for district 0984 have varied coordinates; repeated addresses share a point, while different addresses have different points.
+- The street-address records shown for district 0984 contain several coordinate pairs, unlike the five matching records, which all share one pair.
 
 **Conclusion:** this supports keeping the suspected-generalized-location flag as a review flag. It does not prove how LAPD assigned these coordinates, which the source does not document. I checked one district only. I did not check a second district or inspect the points on a map.
 
