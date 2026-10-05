@@ -10,7 +10,7 @@ Source: LAPD_NIBRS_Offenses_Dataset_20261004.csv. Active raw SHA-256: 97a8dbadaf
 
 Personal branch: anselyulin
 Branch URL: https://github.com/zayra-rwx/community-safety-resource-planner/tree/anselyulin
-Submitted commit: Pending; the current Module 6 work has not been pushed.
+Submitted analysis commit: [099cb874e738e2d0f8fccf31c74aa55223e3b4f1](https://github.com/zayra-rwx/community-safety-resource-planner/commit/099cb874e738e2d0f8fccf31c74aa55223e3b4f1). A subsequent documentation commit adds the PDF and records this ID without changing the analysis.
 Instructor access: not independently confirmed.
 
 ## Verified totals

@@ -16,9 +16,9 @@
 
 - Personal branch: anselyulin
 - Branch URL: https://github.com/zayra-rwx/community-safety-resource-planner/tree/anselyulin
-- Submitted Module 6 commit ID: Pending - current assignment files have not been pushed.
+- Submitted analysis commit ID: [099cb874e738e2d0f8fccf31c74aa55223e3b4f1](https://github.com/zayra-rwx/community-safety-resource-planner/commit/099cb874e738e2d0f8fccf31c74aa55223e3b4f1)
 - Instructor repository access: not independently confirmed.
-- The existing branch HEAD 2c546442e4d83a1121bad685ece5c3226fed51a1 is the September 13 starting-point commit containing only members.md and project-start.md. It is not this assignment's submission commit.
+- This analysis commit identifies the submitted scripts, executed notebook, sample, dependencies and verification evidence. A later documentation commit records this ID and adds the PDF; it does not change the analysis files or results.
 
 ## Run from the repository root (the local Project directory)
 
@@ -50,4 +50,4 @@ The 50-row cleaned sample includes the five validation cases, one double-zero-co
 
 Row semantics, special code meanings, midnight meaning, historical dates and reporting completeness remain unresolved. Coordinate checks do not prove every point is in LA. Reported offenses are not population crime rates or evidence of lighting causality. No external merge was performed.
 
-Module_6_Homework_Yu_Lin.pdf contains the local results and evidence, with the actual submission commit explicitly pending. Complete that field in the PDF and README after publishing the current files. No GitHub push or Gradescope submission was performed. The older exploratory nibrs_exploration.ipynb is not the current cleaning notebook and was not rerun. The obsolete module5_submission.zip is archived.
+[Module_6_Homework_Yu_Lin.pdf](../Module_6_Homework_Yu_Lin.pdf) contains the results and evidence and records the submitted analysis commit. Gradescope submission remains separate and has not been performed. The older exploratory nibrs_exploration.ipynb is not the current cleaning notebook and was not rerun. The obsolete module5_submission.zip is archived.
