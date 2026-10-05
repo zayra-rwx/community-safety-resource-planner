@@ -19,7 +19,7 @@ Requires Python 3.14 and pandas 3.0.6. From the repository's main folder:
     python3 -m pip install -r requirements.txt
     python3 scripts/clean_lapd.py
 
-The script prints labeled checks for each section (Sections 0–12), matching the checklist items in the submitted PDF.
+The script prints labeled checks for each section (Sections 0–14), matching the checklist items in the submitted PDF.
 
 ## Expected output files
 - `data/clean/lapd_nibrs_clean.csv`: full cleaned dataset, 489,955 rows × 40 columns (not pushed to GitHub because of size and the data folder rule)
