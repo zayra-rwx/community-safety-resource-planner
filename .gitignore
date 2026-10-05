@@ -1,0 +1,10 @@
+# Full source and derived datasets stay local
+/LAPD_NIBRS_Offenses_Dataset*.csv
+/module5_cleaning/outputs/cleaned_nibrs.csv
+/module5_cleaning/reruns/
+/backups/
+.venv/
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.DS_Store

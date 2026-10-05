@@ -1,0 +1,161 @@
+[
+  {
+    "UniqueNIBRNo": "25088246_13A_0",
+    "selection_reason": "leading-zero AREA code and trailing whitespace",
+    "original_values": {
+      "Date OCC": "2025 May 15 02:21:00 PM",
+      "Time OCC": "1421",
+      "AREA": "05",
+      "AREA NAME": "Harbor              ",
+      "LAT": "33.746",
+      "LON": "-118.2817",
+      "CaseNo": "25088246"
+    },
+    "expected_values": {
+      "Date OCC": "2025 May 15 02:21:00 PM",
+      "Time OCC": "1421",
+      "AREA": "05",
+      "AREA NAME": "Harbor",
+      "LAT": "33.746",
+      "LON": "-118.2817",
+      "Date OCC Year >= 2025": true,
+      "Time OCC Midnight": false,
+      "Coordinates Missing": false,
+      "Coordinates Double Zero": false,
+      "Date OCC Year <= 1900": false,
+      "Coordinates Valid For Mapping": true,
+      "case_unique_nibr_ids_retained": [
+        "25088246_13A_0",
+        "25088246_23F_1",
+        "25088246_290_2"
+      ]
+    },
+    "expected_reason": "Strip only surrounding whitespace from AREA NAME; keep AREA as a two-character code with its leading zero."
+  },
+  {
+    "UniqueNIBRNo": "25088246_290_2",
+    "selection_reason": "same CaseNo with multiple offense records",
+    "original_values": {
+      "Date OCC": "2025 May 15 02:21:00 PM",
+      "Time OCC": "1421",
+      "AREA": "05",
+      "AREA NAME": "Harbor              ",
+      "LAT": "33.746",
+      "LON": "-118.2817",
+      "CaseNo": "25088246"
+    },
+    "expected_values": {
+      "Date OCC": "2025 May 15 02:21:00 PM",
+      "Time OCC": "1421",
+      "AREA": "05",
+      "AREA NAME": "Harbor",
+      "LAT": "33.746",
+      "LON": "-118.2817",
+      "Date OCC Year >= 2025": true,
+      "Time OCC Midnight": false,
+      "Coordinates Missing": false,
+      "Coordinates Double Zero": false,
+      "Date OCC Year <= 1900": false,
+      "Coordinates Valid For Mapping": true,
+      "case_unique_nibr_ids_retained": [
+        "25088246_13A_0",
+        "25088246_23F_1",
+        "25088246_290_2"
+      ]
+    },
+    "expected_reason": "Keep every distinct UniqueNIBRNo sharing the CaseNo; a repeated case is not automatically a duplicate offense."
+  },
+  {
+    "UniqueNIBRNo": "26172245_220_0",
+    "selection_reason": "midnight offense record",
+    "original_values": {
+      "Date OCC": "2026 Aug 31 12:00:00 AM",
+      "Time OCC": "0000",
+      "AREA": "15",
+      "AREA NAME": "N Hollywood         ",
+      "LAT": "34.1545",
+      "LON": "-118.3683",
+      "CaseNo": "26172245"
+    },
+    "expected_values": {
+      "Date OCC": "2026 Aug 31 12:00:00 AM",
+      "Time OCC": "0000",
+      "AREA": "15",
+      "AREA NAME": "N Hollywood",
+      "LAT": "34.1545",
+      "LON": "-118.3683",
+      "Date OCC Year >= 2025": true,
+      "Time OCC Midnight": true,
+      "Coordinates Missing": false,
+      "Coordinates Double Zero": false,
+      "Date OCC Year <= 1900": false,
+      "Coordinates Valid For Mapping": true,
+      "case_unique_nibr_ids_retained": [
+        "26172245_220_0"
+      ]
+    },
+    "expected_reason": "Keep 0000 as a valid time, flag midnight, and exclude it only from the sensitivity numerator and denominator."
+  },
+  {
+    "UniqueNIBRNo": "26003810_240_0",
+    "selection_reason": "early occurrence year",
+    "original_values": {
+      "Date OCC": "1800 Jan 06 12:00:00 AM",
+      "Time OCC": "0000",
+      "AREA": "20",
+      "AREA NAME": "Olympic             ",
+      "LAT": "34.0636",
+      "LON": "-118.3053",
+      "CaseNo": "26003810"
+    },
+    "expected_values": {
+      "Date OCC": "1800 Jan 06 12:00:00 AM",
+      "Time OCC": "0000",
+      "AREA": "20",
+      "AREA NAME": "Olympic",
+      "LAT": "34.0636",
+      "LON": "-118.3053",
+      "Date OCC Year >= 2025": false,
+      "Time OCC Midnight": true,
+      "Coordinates Missing": false,
+      "Coordinates Double Zero": false,
+      "Date OCC Year <= 1900": true,
+      "Coordinates Valid For Mapping": true,
+      "case_unique_nibr_ids_retained": [
+        "26003810_240_0"
+      ]
+    },
+    "expected_reason": "Retain the unusual original occurrence date, flag year <= 1900, and exclude it from the 2025 onward analysis."
+  },
+  {
+    "UniqueNIBRNo": "24100353_240_0",
+    "selection_reason": "missing coordinates",
+    "original_values": {
+      "Date OCC": "2024 Dec 21 05:00:00 PM",
+      "Time OCC": "1700",
+      "AREA": "09",
+      "AREA NAME": "Van Nuys            ",
+      "LAT": "",
+      "LON": "",
+      "CaseNo": "24100353"
+    },
+    "expected_values": {
+      "Date OCC": "2024 Dec 21 05:00:00 PM",
+      "Time OCC": "1700",
+      "AREA": "09",
+      "AREA NAME": "Van Nuys",
+      "LAT": "",
+      "LON": "",
+      "Date OCC Year >= 2025": false,
+      "Time OCC Midnight": false,
+      "Coordinates Missing": true,
+      "Coordinates Double Zero": false,
+      "Date OCC Year <= 1900": false,
+      "Coordinates Valid For Mapping": false,
+      "case_unique_nibr_ids_retained": [
+        "24100353_240_0"
+      ]
+    },
+    "expected_reason": "Keep empty coordinates missing and flag them as unsuitable for mapping; keep the record for eligible area metrics."
+  }
+]

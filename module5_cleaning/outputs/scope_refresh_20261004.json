@@ -1,0 +1,12 @@
+{
+  "source_sha256": "97a8dbadafe60eee4b4d86e99769df3aaa23307d45539283879414f8760b39e5",
+  "backup": "/Users/linyu/Desktop/DSO 576 - Python and Agentic Coding for BA/Project/backups/before_2025_onward_20261004_195814",
+  "rows": 489955,
+  "valid_2025_onward": 380091,
+  "nighttime": 179209,
+  "midnight": 10330,
+  "valid_excluding_midnight": 369761,
+  "nighttime_excluding_midnight": 168879,
+  "checks_passed": 13,
+  "period": "2025-01-01 onward"
+}

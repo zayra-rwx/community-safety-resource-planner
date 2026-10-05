@@ -1,0 +1,43 @@
+{
+  "input_sha256": "97a8dbadafe60eee4b4d86e99769df3aaa23307d45539283879414f8760b39e5",
+  "analysis_period": "Date OCC >= 2025-01-01; all later dates in the fixed team snapshot",
+  "methods": [
+    "Fresh kernel ran all notebook cells including full-data validation",
+    "Separate Python process regenerated cleaned data and both metric tables"
+  ],
+  "file_sha256": {
+    "cleaned_nibrs.csv": {
+      "notebook": "6beb1439958f1510bbb64bda8c462ee09daeb5a1af27362fc4421b2ec604aa25",
+      "fresh_cli_process": "6beb1439958f1510bbb64bda8c462ee09daeb5a1af27362fc4421b2ec604aa25"
+    },
+    "metrics_by_area.csv": {
+      "notebook": "13fbee4b12a8d598f29d4dd72ef1e5ca6d7eb6fb8fecea5f42fd923cbc806527",
+      "fresh_cli_process": "13fbee4b12a8d598f29d4dd72ef1e5ca6d7eb6fb8fecea5f42fd923cbc806527"
+    },
+    "metrics_by_area_excluding_midnight.csv": {
+      "notebook": "36a8ca948dd9e68ad32b1e275b409544fcaa122c6ac381471e84fce792d6e4f5",
+      "fresh_cli_process": "36a8ca948dd9e68ad32b1e275b409544fcaa122c6ac381471e84fce792d6e4f5"
+    }
+  },
+  "byte_identical": {
+    "cleaned_nibrs.csv": true,
+    "metrics_by_area.csv": true,
+    "metrics_by_area_excluding_midnight.csv": true
+  },
+  "validation_checks": {
+    "row_count_preserved": true,
+    "unique_identifier_preserved": true,
+    "no_raw_full_duplicates": true,
+    "all_time_values_valid": true,
+    "raw_sha256_unchanged": true,
+    "metrics_recomputed_independently": true,
+    "boundary_dates_correct": true,
+    "original_fields_only_documented_changes": true,
+    "record_fields_match_by_unique_nibr": true,
+    "metrics_match": true,
+    "metrics_excluding_midnight_match": true,
+    "leading_zero_preserved": true,
+    "five_record_validation": true
+  },
+  "boundary_and_sensitivity_smoke_test_passed": true
+}
