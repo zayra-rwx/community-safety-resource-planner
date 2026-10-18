@@ -1,0 +1,15 @@
+{
+  "status": "passed",
+  "source_sha256": "97a8dbadafe60eee4b4d86e99769df3aaa23307d45539283879414f8760b39e5",
+  "processed_rows": 489955,
+  "districts": 1172,
+  "district_month_rows": 24612,
+  "eligible_months": 21,
+  "nighttime_offenses": 179209,
+  "mapped_nighttime_offenses": 178921,
+  "recent_start": "2026-06-01",
+  "recent_end": "2026-08-31",
+  "recent_nighttime_offenses": 26646,
+  "checks": "Full-data count, monthly, coverage, category, filter, comparison and recent-period reconciliations passed",
+  "spatial": "Unavailable: approved streetlight GIS input absent"
+}
