@@ -2,14 +2,13 @@
 
 ## 1. Repository
 
-Work in [https://github.com/zayra-rwx/community-safety-resource-planner](https://github.com/zayra-rwx/community-safety-resource-planner).
-Use the tested Phase 2 backend introduced by commit
-`9e170fccde1a5a7bc2e479428b42e5fd02ecc015` on `Olga`; do not assume it is on
-`main`. Inspect Git status, branch, repository instructions, README, `src/`,
-tests and `reports/phase2/` before editing. Keep work on `Olga` unless the owner
-authorizes another branch. Preserve unrelated changes, `.vscode/`, raw files and
-historical notebooks. Show tested changes before asking to commit or push.
-Do not force-push or merge into `main`.
+**Repository:** https://github.com/zayra-rwx/community-safety-resource-planner
+**Primary branch:** `main`
+The `main` branch contains the finalized Phase 2 deliverables and serves as the authoritative starting point for Phase 3 development.
+Before beginning implementation, review the repository structure, `README.md`, `BUILD_SPEC.md`, the canonical cleaned dataset, the backend analysis modules in `src/`, and the existing tests.
+All Phase 3 development must follow the specifications, data definitions, and backend contracts established in Phase 2.
+For Phase 3 development, create a separate feature branch from the latest `main`. Keep all changes on that feature branch until they have been tested, reviewed, and explicitly approved for merging into `main`.
+Do not overwrite or modify the canonical cleaned dataset or existing backend analysis logic without documenting and validating the changes.
 
 ## 2. Agent role and objective
 
