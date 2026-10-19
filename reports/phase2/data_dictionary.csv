@@ -1,0 +1,46 @@
+column,origin,dtype,description
+CaseNo,source,string,"Case identifier; repeated cases retained, never a deduplication key."
+UniqueNIBRNo,source,string,Offense identifier; all offense metrics use distinct nonmissing IDs.
+Date Rptd,source,datetime64[us],Parsed report timestamp; invalid values become NaT.
+Date OCC,source,datetime64[us],Parsed occurrence timestamp; invalid values become NaT.
+Time OCC,source,string,Zero-padded source HHMM; invalid values retained and flagged.
+AREA,source,string,"Source AREA; surrounding whitespace trimmed, missing values preserved."
+AREA NAME,source,string,"Source AREA NAME; surrounding whitespace trimmed, missing values preserved."
+RPT Dist No,source,string,"Reporting-district geographic analysis key, retained as string."
+TotalOffenseCount,source,Int64,"Source TotalOffenseCount; surrounding whitespace trimmed, missing values preserved."
+Group,source,string,"Source Group; surrounding whitespace trimmed, missing values preserved."
+NIBR Code,source,string,"Source NIBR Code; surrounding whitespace trimmed, missing values preserved."
+NIBR Description,source,string,"Source NIBR Description; surrounding whitespace trimmed, missing values preserved."
+Crime Against,source,string,"Source Crime Against; surrounding whitespace trimmed, missing values preserved."
+Premise Cd,source,string,"Source Premise Cd; surrounding whitespace trimmed, missing values preserved."
+Premise Desc,source,string,"Source Premise Desc; surrounding whitespace trimmed, missing values preserved."
+Weapon Used Cd,source,string,"Source Weapon Used Cd; surrounding whitespace trimmed, missing values preserved."
+Weapon Desc,source,string,"Source Weapon Desc; surrounding whitespace trimmed, missing values preserved."
+Status,source,string,"Source Status; surrounding whitespace trimmed, missing values preserved."
+Status Desc,source,string,"Source Status Desc; surrounding whitespace trimmed, missing values preserved."
+TotalVictimCount,source,Int64,"Source TotalVictimCount; surrounding whitespace trimmed, missing values preserved."
+Victim Shot,source,string,"Source Victim Shot; surrounding whitespace trimmed, missing values preserved."
+Domestic Violence Crime,source,string,"Source Domestic Violence Crime; surrounding whitespace trimmed, missing values preserved."
+Hate Crime,source,string,"Source Hate Crime; surrounding whitespace trimmed, missing values preserved."
+Gang-related Crime,source,string,"Source Gang-related Crime; surrounding whitespace trimmed, missing values preserved."
+Transit-related Crime,source,string,"Source Transit-related Crime; surrounding whitespace trimmed, missing values preserved."
+Homeless-Victim Crime,source,string,"Source Homeless-Victim Crime; surrounding whitespace trimmed, missing values preserved."
+Homeless-Suspect Crime,source,string,"Source Homeless-Suspect Crime; surrounding whitespace trimmed, missing values preserved."
+Homeless-Arrestee Crime,source,string,"Source Homeless-Arrestee Crime; surrounding whitespace trimmed, missing values preserved."
+LOCATION,source,string,"Source LOCATION; surrounding whitespace trimmed, missing values preserved."
+LAT,source,Float64,Numeric source latitude; validity determined separately.
+LON,source,Float64,Numeric source longitude; validity determined separately.
+Date OCC_source,derived/audit,string,Trimmed source value before conversion.
+Date Rptd_source,derived/audit,string,Trimmed source value before conversion.
+Time OCC_source,derived/audit,string,Trimmed source value before conversion.
+LAT_source,derived/audit,string,Trimmed source value before conversion.
+LON_source,derived/audit,string,Trimmed source value before conversion.
+offense_date,derived/audit,datetime64[us],Occurrence date normalized to midnight; no time classification from this field.
+offense_month,derived/audit,datetime64[us],First calendar day of occurrence month.
+has_valid_time,derived/audit,boolean,"HHMM has 1-4 source digits, hour 00-23, minute 00-59."
+offense_hour,derived/audit,Int64,Nullable integer hour from valid Time OCC only.
+is_midnight_code,derived/audit,bool[pyarrow],Normalized Time OCC equals 0000; valid midnight.
+is_night,derived/audit,boolean,Valid time in 18:00-23:59 or 00:00-05:59.
+has_valid_coordinates,derived/audit,boolean,Latitude 33.5-34.9 and longitude -118.9 to -117.5 inclusive; screening only.
+in_analysis_scope,derived/audit,bool,Valid offense_date on or after 2025-01-01.
+has_repeated_offense_id,derived/audit,bool,Nonmissing offense ID occurs in multiple nonidentical records; retained for review.

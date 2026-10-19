@@ -1,0 +1,347 @@
+Premise Desc,nighttime_offenses
+Street/Parkway,50785
+Residence / Home / Driveway,18770
+Apartment/Condominium/Townhouse,13367
+Parking Lot / Garage / Drop Lot,12827
+Sidewalk,8334
+Highway / Road / Alley / Street,7723
+Victim's Residence,7504
+Other Business,5665
+Single Family Home,3423
+"Vehicle, Passenger/Truck",2765
+Restaurant,2318
+"Bar, Cocktail Lounge, Restaurant",1861
+Department / Discount Store,1858
+Convenience Store,1519
+Hotel/Motel,1513
+Clothing Store,1471
+Alley,1440
+Apartment/Condo Common Laundry Room,1438
+Parking underground/building,1424
+Driveway (Residential),1332
+Park / Playground,1137
+Commercial / Office Building / Other Commerical,1132
+Service / Gas Station,1025
+Air / Bus / Train Terminal,1002
+Other Residence,994
+Grocery/Supermarket,935
+Any Vehicle,929
+Offender's Residence,916
+Shared Residence,914
+Other Store,825
+Liquor Store,606
+Airports/Transportation Facility,580
+Location Unknown,546
+Warehouse,544
+Multiple Family Dwelling,530
+Driveway (other),528
+Residential Facility,521
+Shopping Mall,486
+Night Club (open evenings only),455
+Yard (adjacent to Residential Location),455
+Rental Storage Facility,429
+Bank / Savings and Loan,421
+Hospital,402
+Porch Residential,399
+Police Facility,381
+School / College,347
+Market,322
+Concert Venue/Mass Gathering,317
+Health Spa/Gym,298
+Dry Cleaner / Laundry,291
+Drug Store / Pharmacy / Medical Supply Building,290
+MTA Bus,257
+Single Residence Occupancy (SRO's) Locations,254
+Website,253
+Other,246
+Mobile Home/Trailers/Construction Trailers/RV's/Motorhome,245
+Public Use Area,236
+Project/Tenement/Public Housing,235
+Shelter - Mission / Homeless,226
+Pharmacy Inside Store/Supermarket,209
+Auto Mechanic / Repair Shop,205
+Church / Synagogue / Temple / Religious Facility,204
+Mail Box,195
+Construction Site,191
+"Coffee Shop (Starbucks, Coffee Bean, Peet's, Etc.)",177
+Transitional Housing/Halfway House,164
+School - Elementary,162
+Auto Dealership New / Used,158
+"Government Facility (Federal, State, County and City)",155
+Beach,151
+7th and Metro Center (not line specific),149
+Cell Phone Store,149
+MTA B Red Line -North Hollywood,148
+High-rise Building,147
+Government / Public Building,144
+ATM Separate from Bank,138
+Cyber Space,138
+Hardware Supply Store,132
+Auto Supply Store,131
+Church/Chapel,131
+School - High School,128
+Yard (Business),125
+Dodger Stadium,124
+Arena / Stadium / Fairgrounds /Coliseum,123
+Beauty Supply Store,123
+MTA B Red Line -Westlake/Macarthur Park,123
+Patio (Residential),122
+LA Union Station (not line specific),120
+Telecommunications Facility/loc,119
+Library,116
+Freeway (incl ramps),103
+Tobacco Shop,102
+Barber / Beauty Shop,96
+Entertainment/Comedy Club (other),96
+Group Home,95
+"Studio (film/photo, music)",93
+Marijuana Dispensary,92
+Detention/Jail Facility,91
+Abandoned / Condemned Structure,89
+Jewelry Store,88
+"Speciality Store (TV, Fur, Etc)",87
+"DIY Center (Lowe's, Home Depot, etc.)",86
+Storage Shed (Other),86
+"Electronics Store (Best Buy, etc.)",85
+Train Tracks,83
+Underpass/Bridge,81
+Uninhabited Residence,81
+MTA Parking Lot,80
+Nursing Home,80
+Sporting Goods Store,80
+MTA B Red Line -Union Station,79
+Balcony,78
+Storage Shed (Residential),78
+Car Wash,75
+Movie Theater,73
+MTA A Blue Line -Pico,70
+Vehicle Storage Lot,70
+School - Junior High,69
+Locker Room,66
+Medical Clinic,64
+Community Center,63
+Medical Office/Dental Office,63
+Tow Yard,63
+Condominium/Townhouse,62
+Pool/Public/Indoor or outdoor,61
+MTA B Red Line -7th and Metro Center,60
+"Sport Venue, other",59
+Massage Parlor,55
+Nail Salon,51
+Common Laundry Room,49
+Drive-thru (meals/beverages),49
+MTA B Red Line -Pershing Square,48
+Convention Center,47
+Mini-Mart,47
+Tram/Streetcar,47
+MTA B Red Line -Hollywood/Western,46
+Stairwell,46
+MTA L Gold Line - Chinatown,45
+Patio (Other),45
+MTA L Gold Line - Little Tokyo/Arts District,44
+Private Health Facility,44
+Transient Encampment,44
+Elevator,43
+Post Office,43
+Valet,43
+MTA B Red Line -Wilshire/Vermont,42
+Check Cashing,40
+MTA A Blue Line -Grand/LATTC,40
+Museum,39
+Metrolink Train,38
+Taxi,38
+Furniture Store,37
+MTA A Blue Line -7th and Metro Center,37
+Public Restroom,37
+Financial Institutuion,36
+Jail / Prison / Penitentiary / Correction Facility,35
+Recycling Center,35
+Truck-Commercial,35
+MTA L Gold Line - Union Station,34
+River Bed,34
+Field / Woods / Vacant Field,33
+Industrial Site,33
+The Grove,32
+"Train, other than MTA",32
+Cannabis - retail location,31
+Fire Station,29
+MTA B Red Line -Hollywood/Vine,29
+"Municipal Bus Lines (LADOT, DASH)",29
+Adult Daycare Facility,28
+"Delivery Service/FedEx, UPS, Couriers",28
+Pet Store,27
+Abatement Location,25
+Aircraft,25
+Crypto.com,25
+Doctor's Office,25
+MTA D Purple Line -Westlake/Macarthur Park,25
+Golf Course,24
+Marijuana Grow Site (Non-Residential),24
+Book Store,23
+Equipment Rental,23
+Frat/Sorority/Dormitory,23
+MTA G Orange Line - Reseda,23
+MTA E Expo Line - Expo/Western,22
+MTA G Orange Line - North Hollywood,22
+Manufacturing Company,22
+"Other Railroad (Santa Fe, etc.)",22
+Other place of worship,22
+The Beverly Connection,22
+Train Depot/Terminal other than MTA,22
+Bowling Alley,21
+MTA B Red Line -Hollywood/Highland,21
+Nursery Flower Shop,21
+Specialty School/Other,21
+"Arcade, Game Room (Ex. Chuckie cheese)",20
+Basketball Courts,20
+Tunnel,20
+Credit Union,19
+MTA A Blue Line -Washington,19
+MTA B Red Line -Universal City/Studio City,19
+MTA E Expo Line - La Cienega/Jefferson,19
+Short-term vacation rental,19
+Veterinary Office/Hospital,19
+Children Daycare Facility,18
+MTA E Expo Line - Expo/Crenshaw,18
+MTA E Expo Line - Farmdale,18
+MTA E Expo Line - Pico,18
+Public Health Facility,18
+Bank Drop Box/Money Drop (outside bank),17
+"Cannabis- non-retail location (grow/testing/lab/delivery, etc.)",17
+Loan / Cash Advance,17
+MTA A Blue Line -103rd/Watts Tower,17
+MTA B Red Line -Civic Center/Grand Park,17
+MTA E Expo Line - Expo/La Brea,17
+Skateboard Park/Facility,17
+Cargo Container,16
+MTA D Purple Line -Wilshire/Vermont,16
+Tattoo Parlor,16
+Auto Salvages / Junk Yard,14
+Catering/Ice Cream Truck,14
+MTA A Blue Line -San Pedro,14
+MTA B Red Line -Vermont/Sunset,14
+MTA C Green Line - Aviation/LAX,14
+MTA L Gold Line - Mariachi Plaza,14
+"Membership Store (i.e.: Costco, Sams Club)",14
+Factory,13
+MTA B Red Line -Vermont/Santa Monica,13
+MTA E Expo Line - Expo/Sepulveda,13
+Public Restroom Outside Area,13
+Synagogue/Temple,13
+Arcade / Mini-Golf / Jump / Laser Tag,12
+Bus-Charter/Private,12
+Drive Thru banking window/counter,12
+MTA B Red Line -Vermont/Beverly,12
+MTA L Gold Line - Soto,12
+Pawn / Buy-Sell-Trade Shops,12
+Sewage Facility/Pipe,12
+Amusement Park,11
+Bus-School/Church,11
+Daycare Facility,11
+Gambling Facility / Casino / Race Track,11
+Hospice,11
+Rest Area,11
+MTA A Blue Line -Vernon,10
+MTA C Green Line - Harbor Fwy,10
+MTA D Purple Line -Wilshire/Western,10
+MTA K Crenshaw Line - Aviation/Century Station,10
+Record-CD Music Store,10
+Tool Shed,10
+Trade School (medical/technical),10
+Dock / Wharf / Freight / Modal Terminal,9
+Drive Thru (other),9
+MTA D Purple Line -7th and Metro Center,9
+MTA D Purple Line -Pershing square,9
+MTA E Expo Line - Expo/Vermont,9
+MTA G Orange Line - Canoga,9
+MTA J Silver Line -Harbor Gateway Transit Ctr,9
+Water Facility,9
+Banking inside supermarket (or other facility),8
+MTA E Expo Line - LATTC/Ortho Institute,8
+MTA G Orange Line - Sherman Way,8
+The Beverly Center,8
+Trash Can/ Trash Dumpster,8
+Coliseum,7
+MTA C Green Line - Avalon,7
+MTA E Expo Line - Expo Park/USC,7
+MTA E Expo Line - Jefferson/USC,7
+Swap Meet,7
+Computer Services/Repairs/Sales,6
+MTA D Purple Line -Union Station,6
+MTA E Expo Line - Westwood/Rancho Park,6
+MTA G Orange Line -Roscoe,6
+MTA K Crenshaw Line - Leimert Park,6
+MTA L Gold Line - Highland Park,6
+MTA L Gold Line - Lincoln/Cypress,6
+Oil Refinery,6
+Zoo,6
+Abortion Clinic or Facility,5
+Dam/Reservoir,5
+Energy Plant/Facility,5
+Garment Manufacturer,5
+Greyhound or Interstate Bus,5
+MTA D Purple Line -Civic Center/Grand Park,5
+MTA D Purple Line -Wilshire/Normandie,5
+MTA E Expo Line - Palms,5
+MTA J Silver Line - Harbor Fwy,5
+MTA K Crenshaw Line - Crenshaw/Exposition,5
+MTA L Gold Line - Southwest Museum,5
+Mosque,5
+Camp / Campground,4
+"Foster Home/Boys, Girls",4
+MTA E Expo Line - Expo/Bundy,4
+MTA G Orange Line - Van Nuys,4
+MTA G Orange Line -Chatsworth,4
+MTA G Orange Line -Sepulveda,4
+MTA J Silver Line -Downtown Street Stops,4
+MTA J Silver Line -Slauson,4
+MTA L Gold Line - Heritage Sq.,4
+Slips/Dock/Marina/Boat,4
+Amtrak Train,3
+Escalator,3
+Gun/Sporting Goods,3
+Highway Patrol,3
+Lake / Waterway,3
+MTA G Orange Line -De Soto,3
+MTA G Orange Line -Laurel Canyon,3
+MTA J Silver Line -37th St/USC,3
+MTA J Silver Line -San Pedro Street Stops,3
+MTA J Silver Line -Union Station,3
+MTA K Crenshaw Line - Crenshaw/Martin Luther King,3
+MTA L Gold Line - Pico/Aliso,3
+Mortuary,3
+Muscle Beach,3
+Ped Overcrossing,3
+TV/Radio/Appliance,3
+Video Rental Store,3
+Vision Care Facility,3
+Cemetary,2
+Chemical Storage/Manufacturing Plant,2
+Cultural significance/ Monument,2
+Department of Corrections,2
+Department of Defense Facility,2
+MTA G Orange Line - Nordhoff,2
+MTA G Orange Line -Balboa,2
+"Other Interstate, Charter Bus",2
+Pay Phone,2
+101 - STREET,1
+203 - OTHER BUSINESS,1
+Cannabis-Medical Location,1
+Firearm Retailer,1
+Harbor Frwy Station (not line specific),1
+Hockey Rink/Ice Hockey,1
+Horse Racing/Santa Anita Park,1
+MTA G Orange Line - Pierce College,1
+MTA G Orange Line - Valley College,1
+MTA G Orange Line -Tampa,1
+MTA G Orange Line -Warner Ctr,1
+MTA G Orange Line -Woodman,1
+MTA J Silver Line -Cal State LA,1
+MTA J Silver Line -LAC/USC Medical Center,1
+MTA J Silver Line -Rosecrans,1
+MTA K Crenshaw Line - Hyde Park,1
+MTA L Gold Line - Indiana,1
+Private/Preschool,1
+Skating rink/Facility,1
+Tribal Lands,1
+Unknown,1
