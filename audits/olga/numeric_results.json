@@ -1,0 +1,66 @@
+{
+  "district_0182": {
+    "nighttime": 1167,
+    "active_months": 21,
+    "eligible_months": 21,
+    "persistence": 1.0,
+    "frequency_rank_numerator": 1172.0,
+    "persistence_rank_numerator": 811.0,
+    "percentile_denominator": 1172,
+    "frequency_percentile": 1.0,
+    "persistence_percentile": 0.6919795221843004,
+    "score": 87.67918088737201
+  },
+  "filter_counts": {
+    "input_rows": 489955,
+    "after_inclusive_dates": 380091,
+    "universe_districts_before_night_filter": 1172,
+    "after_nonmissing_district": 380091,
+    "after_nonmissing_offense_id": 380091,
+    "after_valid_hhmm": 380091,
+    "after_nighttime_1800_through_0559": 179209,
+    "distinct_nighttime_ids": 179209,
+    "coordinates_filter": "Not applied: unmapped offenses remain eligible."
+  },
+  "maximum_absolute_difference": 0.0,
+  "persistence_lower": 449,
+  "persistence_tied": 723,
+  "small_case": {
+    "A": {
+      "nighttime": 2,
+      "active_months": 2,
+      "eligible_months": 3,
+      "persistence": 0.6666666666666666,
+      "frequency_rank_numerator": 2.5,
+      "persistence_rank_numerator": 2.5,
+      "percentile_denominator": 3,
+      "frequency_percentile": 0.8333333333333334,
+      "persistence_percentile": 0.8333333333333334,
+      "score": 83.33333333333334
+    },
+    "B": {
+      "nighttime": 2,
+      "active_months": 2,
+      "eligible_months": 3,
+      "persistence": 0.6666666666666666,
+      "frequency_rank_numerator": 2.5,
+      "persistence_rank_numerator": 2.5,
+      "percentile_denominator": 3,
+      "frequency_percentile": 0.8333333333333334,
+      "persistence_percentile": 0.8333333333333334,
+      "score": 83.33333333333334
+    },
+    "C": {
+      "nighttime": 0,
+      "active_months": 0,
+      "eligible_months": 3,
+      "persistence": 0.0,
+      "frequency_rank_numerator": 1.0,
+      "persistence_rank_numerator": 1.0,
+      "percentile_denominator": 3,
+      "frequency_percentile": 0.3333333333333333,
+      "persistence_percentile": 0.3333333333333333,
+      "score": 0.0
+    }
+  }
+}

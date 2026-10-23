@@ -1,0 +1,4 @@
+Targeted compact ranking check only; no new full-data recomputation.
+Small case: {'A': 83.333333, 'B': 83.333333, 'C': 0.0}
+Without C: {'A': 75.0, 'B': 75.0}
+District 0182: 87.679181

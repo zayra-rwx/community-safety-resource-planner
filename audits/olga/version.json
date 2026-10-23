@@ -1,0 +1,38 @@
+{
+  "audited_commit": "87a892a392727cfaff176d3c0fbbf6019a60eb4a",
+  "tracked_git_blobs": {
+    "BUILD_SPEC.md": "b26cb909bd2025eb36d2d606041ad7ab21921f80",
+    "README.md": "63e2842e3ec143d2d7fe3fe983ad7e75c3363ba7",
+    "data/processed/lapd_nibrs_offenses.parquet": "9521617726237c040cb5517061bc684e57466028",
+    "reports/phase2/backend_validation.json": "123bfef2370f670d92406f7f0e24c4afb180630b",
+    "reports/phase2/cleaning_decisions.md": "652b78c9f9434b7cb39ad69f24faf1f1ff4db875",
+    "reports/phase2/data_dictionary.csv": "93493c7495f54e8f12ef3c9912cef13b4d98ba88",
+    "reports/phase2/data_quality.json": "0c14884429126f9cbaac19166e60f2c228a5b615",
+    "reports/phase2/district_ranking.csv": "2130525e21ef21f3d3fe1b3429b1560652ca0d12",
+    "reports/phase2/example_comparison_monthly.csv": "70ee40aea0d41589b04268d931f7b2b59940b117",
+    "reports/phase2/fresh_agent_test.md": "8042343d55d6d40a41e31a125bb81525f06b499c",
+    "reports/phase2/handoff.md": "0a243251362b5a0a97570aa386f3c42d0260f5f1",
+    "reports/phase2/offense_summary.csv": "88159f119557cab10cde7a5d9a134d8c3bf53e6b",
+    "reports/phase2/premise_summary.csv": "dfa3e11391476b43c094b7c4ea6fb10daf0cc8e1",
+    "requirements-phase2.txt": "43865a85fb8df6ce5b9fd2b0068bd5a4cafde19d",
+    "src/__init__.py": "1560a32e2f75611542badf3898ac74706a7c93cb",
+    "src/analysis.py": "c29aa69a1cbfa6ea8b97d332b7fbb3a807cc611c",
+    "src/clean_data.py": "8fef76e75f4ae42d1eae6b3d4232c4e8c26f1fb1",
+    "src/config.py": "95b79e2c02c8118f6f54ae3a17d5c336034c0d46",
+    "src/validate_phase2.py": "6e603dc610f4c2c7c2ab9e34056529d3811ba6ef",
+    "tests/test_phase2.py": "daea4dabe59a4d966f8dbb60ca7150d470655710"
+  },
+  "processed_sha256": "36b136f5484624977f9d69d77e61bd12e82e24f6e1b1e9d50bb58a82153409b9",
+  "python": "3.14.7",
+  "versions": {
+    "pandas": "3.0.6",
+    "pyarrow": "23.0.1",
+    "pytest": "9.0.2"
+  },
+  "excluded_unfinished_files": [
+    "pytest.ini",
+    "requirements-phase3.txt",
+    "src/dashboard.py"
+  ],
+  "scope": "Committed CLI/backend only; audit code is new supporting evidence."
+}

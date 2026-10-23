@@ -1,0 +1,89 @@
+October 23 revision: executed exact Python block extracted from my-audit.md.
+Audited base: 87a892a392727cfaff176d3c0fbbf6019a60eb4a
+Processed SHA256: 36b136f5484624977f9d69d77e61bd12e82e24f6e1b1e9d50bb58a82153409b9
+Python: 3.14.7
+Versions: {"pandas": "3.0.6", "pyarrow": "23.0.1", "pytest": "9.0.2"}
+INDEPENDENT FILTER COUNTS {
+  "input_rows": 489955,
+  "after_inclusive_dates": 380091,
+  "universe_districts_before_night_filter": 1172,
+  "after_nonmissing_district": 380091,
+  "after_nonmissing_offense_id": 380091,
+  "after_valid_hhmm": 380091,
+  "after_nighttime_1800_through_0559": 179209,
+  "distinct_nighttime_ids": 179209,
+  "coordinates_filter": "Not applied: unmapped offenses remain eligible."
+}
+DISTRICT 0182 {
+  "nighttime": 1167,
+  "active_months": 21,
+  "eligible_months": 21,
+  "persistence": 1.0,
+  "frequency_rank_numerator": 1172.0,
+  "persistence_rank_numerator": 811.0,
+  "percentile_denominator": 1172,
+  "frequency_percentile": 1.0,
+  "persistence_percentile": 0.6919795221843004,
+  "score": 87.67918088737201
+}
+Persistence tie: 449 lower districts; 723 tied; average rank=449+(723+1)/2
+Production unrounded: 87.67918088737201
+CLI displayed (6 decimals): 87.679181
+Selected difference: 0.0
+Maximum difference across all districts: 0.0
+District selection preserves original score and rank: PASS
+If max-rank were used for the top persistence tie, district 0182 would score 100 instead.
+SMALL CASE: expected before execution A=B=83.33333333333334; C=0; active/eligible=2/3
+UniqueNIBRNo RPT Dist No   Date OCC Time OCC
+          a1           A 2025-01-01     1800
+          a2           A 2025-03-31     0559
+          b1           B 2025-01-01     0000
+          b2           B 2025-03-31     2359
+          c1           C 2025-03-31     0600
+          a3           A 2025-02-01     1759
+          a4           A 2025-02-01     2400
+         old           A 2024-12-31     1800
+ no-district         NaN 2025-02-01     1800
+         NaN           A 2025-02-01     1800
+SMALL CASE actual: {
+  "A": {
+    "nighttime": 2,
+    "active_months": 2,
+    "eligible_months": 3,
+    "persistence": 0.6666666666666666,
+    "frequency_rank_numerator": 2.5,
+    "persistence_rank_numerator": 2.5,
+    "percentile_denominator": 3,
+    "frequency_percentile": 0.8333333333333334,
+    "persistence_percentile": 0.8333333333333334,
+    "score": 83.33333333333334
+  },
+  "B": {
+    "nighttime": 2,
+    "active_months": 2,
+    "eligible_months": 3,
+    "persistence": 0.6666666666666666,
+    "frequency_rank_numerator": 2.5,
+    "persistence_rank_numerator": 2.5,
+    "percentile_denominator": 3,
+    "frequency_percentile": 0.8333333333333334,
+    "persistence_percentile": 0.8333333333333334,
+    "score": 83.33333333333334
+  },
+  "C": {
+    "nighttime": 0,
+    "active_months": 0,
+    "eligible_months": 3,
+    "persistence": 0.0,
+    "frequency_rank_numerator": 1.0,
+    "persistence_rank_numerator": 1.0,
+    "percentile_denominator": 3,
+    "frequency_percentile": 0.3333333333333333,
+    "persistence_percentile": 0.3333333333333333,
+    "score": 0.0
+  }
+}
+ASSUMPTION CHECK: remove daytime-only C -> A=B=75; original -> A=B=83.33333333333334
+PRODUCTION boundary checks: two equal positive districts=75 each; single positive district=100; PASS
+ALL NUMERIC ASSERTIONS PASSED
+PASS: prior numeric, feature, test and identity evidence bytes preserved.
