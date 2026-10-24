@@ -68,6 +68,7 @@ export or map. Complete calendar months need not be fully reported months.
 
 Yu Lin requested and accepted this audit scope. Codex inspected code, wrote and
 ran checks, constructed fixture arithmetic, and drafted findings and prose.
-These results do not claim human manual calculation, personal live-dashboard
-use, or that Yu has independently rerun the checks. `my-audit.md` is prepared
-for Yu's review before Gradescope submission. No submission is performed.
+Yu Lin has subsequently confirmed verification of the report's findings and
+takes responsibility for the final judgments and explanations. This does not
+claim personal live-dashboard use or specify an unreported verification method.
+No Gradescope submission is performed as part of this audit.

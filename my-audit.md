@@ -145,7 +145,7 @@ A fifth fixture retains only F01, F05 and F11. For February 2-April 1, March is
 still the valid recent period even though it has **0** offenses. This distinguishes
 an eligible zero-offense month from the absence of a complete month. All five
 predeclared expected results matched production behavior. The fixture arithmetic
-was prepared and executed by Codex; human manual verification is not claimed.
+was prepared and executed by Codex.
 
 ## 5. Finding and requested change
 
@@ -201,9 +201,7 @@ repository and specifications, wrote and ran the independent checks and CLI
 commands, constructed fixture arithmetic, and drafted the evidence and prose.
 No teammate's execution or analysis is claimed as my own.
 
-This is a prepared report for my review before submission. I have not yet
-independently rerun the checks or personally verified the fixture arithmetic;
-no human manual calculation or live dashboard use is claimed. The technical
-findings above describe the recorded execution; final judgments and explanations
-remain my responsibility. No Gradescope submission, production-code fix, or
-merge into team `main` was performed.
+I have verified the findings in this report and take responsibility for the
+final judgments and explanations. The technical evidence above documents the
+recorded execution; no live dashboard use is claimed. No Gradescope submission,
+production-code fix, or merge into team `main` was performed as part of this audit.
