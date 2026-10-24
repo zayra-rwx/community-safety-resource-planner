@@ -5,7 +5,7 @@
 - **Project:** Community Safety Resource Planner: Streetlight Assessment
 - **Feature:** occurrence-date selection in the existing CLI; supporting backend filter checks
 - **Number:** `Recent nighttime offenses`, with reporting district **1494 (Pacific)** as the focal example
-**Audited version:** [`87a892a392727cfaff176d3c0fbbf6019a60eb4a`](https://github.com/zayra-rwx/community-safety-resource-planner/tree/87a892a392727cfaff176d3c0fbbf6019a60eb4a), the shared `main` baseline at inspection.
+- **Audited version:** [`87a892a392727cfaff176d3c0fbbf6019a60eb4a`](https://github.com/zayra-rwx/community-safety-resource-planner/tree/87a892a392727cfaff176d3c0fbbf6019a60eb4a), the shared `main` baseline at inspection.
 
 ## 1. User, task and scope
 
@@ -15,17 +15,13 @@ select dates and distinguish recent recurring nighttime reports from the whole
 selected period. An incomplete month should not silently become a supposedly
 complete comparison month.
 
-The audited version contains a working CLI and reusable backend, plus a
-specification for a future Streamlit dashboard. This audit executes the existing
-CLI and backend; it does not claim dashboard use or classify unbuilt dashboard
-controls as broken features. The relevant requirement is in
+This audit covers the existing CLI and backend at the specified commit.
+The relevant requirement is in
 [`BUILD_SPEC.md`, section 6](https://github.com/zayra-rwx/community-safety-resource-planner/blob/87a892a392727cfaff176d3c0fbbf6019a60eb4a/BUILD_SPEC.md#6-metric-definitions)
 and the current README's canonical definitions.
 
-Olga's available claim covers CLI prioritization and district 0182's **priority
-score**. My distinct scope is **recent-period dates and counts**, supported by
-source-text reconstruction, partial-month cases and small fixtures. Her score
-reconstruction is not presented as my work. My claim and finding are recorded
+My scope is **recent-period dates and counts**, distinct from Olga's
+priority-score audit of district 0182. My claim and finding are recorded
 in the [shared change-request record](https://github.com/zayra-rwx/community-safety-resource-planner/blob/dbe904c908e421353d03c5cd37ace8b0f32a872e/change-requests.md); the request ID is **AUDIT-ANSEL-01**.
 
 ## 2. What the number should mean
@@ -63,8 +59,7 @@ nighttime from `Time OCC_source`. It enumerates month boundaries with Python
 `calendar`/`date` and counts distinct IDs with sets. Expected answers do not call
 the production filtering, normalized date/night flags, month-window helpers, or
 counting functions. These answers are then compared with real backend returns
-and parsed real CLI stdout. All baseline files are checked before and after
-execution. No team source, canonical data, or existing report was rewritten.
+and parsed real CLI stdout.
 
 From the repository root, with the pinned environment installed:
 
@@ -78,7 +73,7 @@ python -m pytest -q
 
 Use the project's configured Python executable for each command. The
 [evidence README](https://github.com/zayra-rwx/community-safety-resource-planner/blob/dbe904c908e421353d03c5cd37ace8b0f32a872e/audits/anselyulin/README.md) supplies fresh-environment setup.
-Evidence is committed at `dbe904c908e421353d03c5cd37ace8b0f32a872e`. The links below are pinned to that commit and work independently of this Markdown file's upload location. Committed evidence includes:
+Evidence is committed at `dbe904c908e421353d03c5cd37ace8b0f32a872e`:
 
 - [Executable check](https://github.com/zayra-rwx/community-safety-resource-planner/blob/dbe904c908e421353d03c5cd37ace8b0f32a872e/audits/anselyulin/check_audit.py),
   [structured results and source hashes](https://github.com/zayra-rwx/community-safety-resource-planner/blob/dbe904c908e421353d03c5cd37ace8b0f32a872e/audits/anselyulin/results.json), and
@@ -107,8 +102,7 @@ The default district result decomposes into **49 in June + 47 in July + 35 in
 August = 131**. Its 22 September reports are excluded from the recent window
 because source availability ends September 19. Across all **1,172** default
 district rows, the independently recomputed recent total is **26,646**, matching
-the backend. This is a new reconstruction, not just a copied validation-report
-number. The audit checks this metric, not the priority-score formula.
+the backend.
 
 Four additional backend scenarios passed: start clamped from 2024 to 2025,
 Pacific-area selection, district 1494 selection, and a sparse offense-description
@@ -144,8 +138,7 @@ gives **3**. April 1 alone has no complete month, giving **0**.
 A fifth fixture retains only F01, F05 and F11. For February 2-April 1, March is
 still the valid recent period even though it has **0** offenses. This distinguishes
 an eligible zero-offense month from the absence of a complete month. All five
-predeclared expected results matched production behavior. The fixture arithmetic
-was prepared and executed by Codex.
+predeclared expected results matched production behavior.
 
 ## 5. Finding and requested change
 
@@ -170,10 +163,9 @@ which exposes `None` without a contextual explanation. The requested improvement
 > No complete months in the selected available interval; recent counts are 0 by convention.
 
 Keep the API's `(None, None)`, zero-count convention, and ordinary selected-period
-counts unchanged. This is a low-severity CLI usability recommendation; it is not
-a demonstrated numeric error or a claim that future dashboard presentation
-requirements already apply to a delivered CLI. A complete month with zero
-offenses must still show its valid period. No implementation was made.
+counts unchanged. This is a low-severity CLI usability recommendation, not a
+numerical defect. A complete month with zero offenses must still show its
+valid period.
 
 ## 6. What this establishes and what remains uncertain
 
@@ -189,19 +181,9 @@ rates, lighting conditions, causality, or the policy merit of the ranking. The
 audit does not test all filter combinations, maps, exports, caching, future GUI
 behavior, or the priority score.
 
-PyArrow emitted sandbox-related macOS CPU-probe warnings in stderr; the logs
-retain them. All commands completed successfully and assertions passed. These
-environment warnings are not treated as a product finding.
-
 ## 7. Personal contribution and AI assistance
 
-I requested and accepted the scope of this individual audit: date selection and
-recent nighttime counts, separate from Olga's score audit. Codex inspected the
-repository and specifications, wrote and ran the independent checks and CLI
-commands, constructed fixture arithmetic, and drafted the evidence and prose.
-No teammate's execution or analysis is claimed as my own.
-
-I have verified the findings in this report and take responsibility for the
-final judgments and explanations. The technical evidence above documents the
-recorded execution; no live dashboard use is claimed. No Gradescope submission,
-production-code fix, or merge into team `main` was performed as part of this audit.
+I selected the audit scope and verified the findings reported here. Codex
+inspected the repository and specifications, wrote and ran the independent
+checks and CLI commands, constructed fixture arithmetic, and drafted the
+evidence and prose.
