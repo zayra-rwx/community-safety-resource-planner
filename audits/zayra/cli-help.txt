@@ -1,0 +1,9 @@
+usage: analysis.py [-h] [--start START] [--end END] [--top TOP]
+
+Reusable full-data analysis. No UI and no hidden global dataframes.
+
+options:
+  -h, --help     show this help message and exit
+  --start START
+  --end END
+  --top TOP
