@@ -1,0 +1,28 @@
+== Check 1: independent recount from raw CSV text
+max date 2026-09-19; districts compared 1172; disagreements 0
+total app 178921  mine 178921
+district 0182: app 1167 mine 1167
+== Check 2: hand-built fixture through clean_offenses + backend
+expected {'0100': 4, '0200': 1} total 5; got {'0100': 4, '0200': 1} total 5 PASS
+== Check 3: are "valid" coordinates plausible for their own district?
+valid mapped nighttime points > 10 km from own district median: 499
+valid mapped nighttime points > 20 km from own district median: 265
+       RPT Dist No  AREA NAME            LOCATION      LAT       LON
+211815        0331  Southwest  3000 S Westview St  34.5683 -118.0878
+211816        0331  Southwest  3000 S Westview St  34.5683 -118.0878
+short (area-level) district codes: ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21']
+nighttime offenses in them: 251; unmapped nighttime total: 288; unmapped in short codes: 251
+== Check 4: district composition feature (category_summary), district 0182
+NIBR Description: 146 categories, sum 1167 vs district count 1167
+                                            NIBR Description  nighttime_offenses
+     459 - PC - F - BFMV- Burglary From Motor Vehicle  - 23F                 222
+594(B)(1) - PC - F - Vandalism ($400 Or More) - Felony - 290                 104
+          487(D)(1) - PC - F - Grand Theft Auto - GTA  - 240                  83
+Premise Desc: 78 categories, sum 1167 vs district count 1167
+                   Premise Desc  nighttime_offenses
+Parking Lot / Garage / Drop Lot                 246
+                 Street/Parkway                 183
+Apartment/Condominium/Townhouse                 152
+    Premise Desc  nighttime_offenses
+Location Unknown                 546
+         Unknown                   1

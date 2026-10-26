@@ -9,6 +9,7 @@ Copy this template into your team's repository if no shared change-request file 
 | Olga Tovstogan | Existing CLI reporting-district prioritization | District 0182 default priority score, displayed as 87.679181 | Executable normal/empty/reversed/repeat CLI cases; independent score reconstruction for all 1,172 districts; explicit tie/universe examples. Audited commit: 87a892a392727cfaff176d3c0fbbf6019a60eb4a. |
 | Yu (Ansel) Lin (anselyulin) | Date-range selection in the existing CLI, with backend category/district invariance checks | Recent nighttime offenses, focused on district 1494 | Independent source-text/calendar/set reconstruction; full-data complete/partial-month checks; CLI output checks and small predeclared fixtures. Distinct from Olga's priority-score audit. Audited commit: 87a892a392727cfaff176d3c0fbbf6019a60eb4a. |
 | Caroline Romero (carolineromero19) | Top-10 ranked district list in the existing CLI (`--top 10`), evaluated as the planning manager would read it | Persistence rate (active months / eligible months), focused on districts 0182, 0122 and 0116 | Independent recomputation for all 1,172 districts that rebuilds nighttime from raw `Time OCC` text instead of the team's `is_night`/`offense_month` columns; hand-calculated small cases. Distinct from Olga's priority-score and Ansel's recent-offenses audits. Audited commit: 87a892a392727cfaff176d3c0fbbf6019a60eb4a. | 
+| Zayra Martinez (zayra-rwx) | District composition (`category_summary` offense/premise breakdown, use case 2) as the planning manager would use it | Valid mapped nighttime offenses, focused on district 0182 (1,167) | Independent recount from raw CSV text with the `csv` module only (no cleaning code, Parquet or derived flags); hand-built boundary fixture; new plausibility check of "valid" coordinates against each district's own median location; investigation of 2-digit area-level district codes. Distinct from Olga, Ansel and Caroline. Audited commit: 87a892a392727cfaff176d3c0fbbf6019a60eb4a. |
 
 ## Requests
 
@@ -62,6 +63,50 @@ Ansel's numeric finding: **PASS** on tested cases. District 1494 independently r
 
 Caroline's numeric finding: **PASS** on tested cases. Persistence rate independently recomputes for all 1,172 districts with 0 disagreements (eligible months = 21; data through 2026-09-19). Hand checks: 0122 = 18/21 = 0.857143; 0116 = 1/21 = 0.047619; 0182 = 21/21 = 1.0, all matching the tool. Not tested: filtered views. Both checks share the canonical Parquet, so an upstream cleaning error would affect both. Evidence: `audits/caroline/check_persistence.py` and `audits/caroline/my-audit.md`. No numerical change is requested.
 
+### AUDIT-ZAYRA-01 Flag "valid" coordinates that are far from their own district
+
+- Author: Zayra Martinez. Check script written and run by Claude Code (AI) at the student's request; the student reviewed it and made the judgments.
+- Status: open. Data-quality and map-accuracy issue, not a formula defect.
+- App version or commit checked: `87a892a392727cfaff176d3c0fbbf6019a60eb4a`.
+- Feature and intended behavior: Valid mapped nighttime offenses, plus the planned approximate offense map (BUILD_SPEC §6, §10). A "valid mapped" offense should be one the manager can trust to appear roughly where it occurred.
+- Inputs and reproduction steps: `python audits/zayra/check_mapped.py --raw data/raw/LAPD_NIBRS_Offenses_Dataset_20261004.csv`, Check 3.
+- Expected result: few or no mapped points far outside their own reporting district.
+- Actual result: 499 valid mapped nighttime points are more than 10 km from their district's median location, and 265 are more than 20 km away (398 districts have at least one point more than 5 km off). Example: 0331 Southwest "3000 S Westview St" is plotted at 34.5683, −118.0878 (Palmdale area). Wilshire 0785 is plotted near Pomona.
+- Evidence and likely cause, if established: `audits/zayra/check-output.txt`. `src/clean_data.py:70-71` tests only the broad box (33.5–34.9, −118.9 to −117.5), which covers much of LA, Orange, San Bernardino and Riverside counties. Likely source geocoding errors. The count itself is computed as specified: an independent raw-text recount shows 0 disagreements over 1,172 districts.
+- Requested change: add a separate audit flag (for example, `coordinates_far_from_district`, more than 10 km from the district median) and report its count in `data_quality.json`. In the Phase 3 map, exclude or visually mark flagged points and say so in Methods. Keep `has_valid_coordinates` and the current count definition unchanged unless the team agrees to redefine it.
+- Verification check: rerun Check 3. The flag count should equal the script's 10 km count, flagged points should not plot as ordinary points, and existing tests and ranking values should be unchanged.
+- Implementation commit and verification result, when built: not implemented.
+
+### AUDIT-ZAYRA-02 Label 2-digit area-level district codes instead of ranking them as districts
+
+- Author: Zayra Martinez (AI-assisted as above).
+- Status: open. Interpretation issue; low effect on top ranks.
+- App version or commit checked: `87a892a392727cfaff176d3c0fbbf6019a60eb4a`.
+- Feature and intended behavior: Ranked reporting districts. The ranking unit is `RPT Dist No` (BUILD_SPEC §5).
+- Inputs and reproduction steps: same script, Check 3; or look at `RPT Dist No` values shorter than 4 characters in `ranked_districts(load_processed())`.
+- Expected result: every ranked row is a real reporting district, or area-level records are clearly labeled.
+- Actual result: 21 codes (`01`–`21`) equal the AREA code. Their LOCATION is often just the area number, and their coordinates are 0/0 (216) or blank (35). They hold 251 nighttime offenses, which is 87% of the 288 unmapped nighttime offenses. They are scored and ranked (for example, `06` is rank 1087) and count in the 1,172-district percentile universe.
+- Evidence and likely cause, if established: `audits/zayra/check-output.txt`. The source records offenses with only area-level location; cleaning keeps the code as a district key.
+- Requested change: the team should decide on and document one rule. Either keep these records out of the district ranking and report them as "area-level, no reporting district", or keep them but label them in outputs and Methods. Do not delete source rows.
+- Verification check: rerun the ranking. Short codes are either absent and reported separately, or visibly labeled. Universe count and percentiles change only as documented; tests are updated accordingly.
+- Implementation commit and verification result, when built: not implemented.
+
+### AUDIT-ZAYRA-03 Make district composition reachable and readable for the manager
+
+- Author: Zayra Martinez (AI-assisted as above).
+- Status: open. Usability gap for use case 2. The calculation passes.
+- App version or commit checked: `87a892a392727cfaff176d3c0fbbf6019a60eb4a`.
+- Feature and intended behavior: for one district, show offense and premise composition so the manager can tell whether the pattern is concentrated (BUILD_SPEC §4 use case 2, §8 District Evidence).
+- Inputs and reproduction steps: `python -m src.analysis --help` (`audits/zayra/cli-help.txt`); Check 4 of the script.
+- Expected result: the manager can request one district's composition and see counts, shares and the period.
+- Actual result: the CLI exposes only `--start`, `--end` and `--top`, so composition needs Python code. When called, `category_summary` is correct: for 0182, 146 offense categories and 78 premises, each adding to 1,167. But it has no share column or period label. Across all districts it shows `Location Unknown` (546, a source label) and `Unknown` (1, a missing value) as separate rows that look alike.
+- Evidence and likely cause, if established: `src/analysis.py:172-179` (`main()` prints only the ranking); `src/analysis.py:155-163`.
+- Requested change: add a `--district` CLI option (or deliver it in the Phase 3 District Evidence view) that prints the top offense and premise categories with counts, percent of the district's nighttime total and the date period. Display missing values as "Missing (no premise recorded)" to separate them from the source label `Location Unknown`. Keep backend output unchanged.
+- Verification check: run with `--district 0182`. Counts match `category_summary`, shares add to 100%, the period is shown, and the two unknown labels are distinguishable. Existing tests pass.
+- Implementation commit and verification result, when built: not implemented.
+
+Zayra's numeric finding: **PASS** on the formula. Valid mapped nighttime offenses for 0182 = 1,167; the independent raw-text recount matches all 1,172 districts with 0 disagreements (total 178,921 of 179,209 = 99.84%); the 11-row boundary fixture passes. Limitations are in AUDIT-ZAYRA-01/02. Evidence: `audits/zayra/my-audit.md`, `check_mapped.py`, `check-output.txt`.
+
 ## Follow through
 
 One teammate can ask Codex to implement open requests one at a time. For each, rerun the evidence, commit with its ID, and mark it built only after checking the result. File a request rather than undoing someone else's work.
@@ -81,3 +126,7 @@ This branch starts from main at `87a892a392727cfaff176d3c0fbbf6019a60eb4a`. The 
 ## Caroline audit branch coordination
 
 This branch (`caroline-module9-audit`) starts from main at `87a892a392727cfaff176d3c0fbbf6019a60eb4a`. The shared record above was copied from Ansel's branch `codex/module9-ansel-audit`; Olga's and Ansel's claims, requests and wording are retained unchanged. Caroline's additions are her claim row, AUDIT-CAROLINE-01 and her numeric finding. No merge or implementation is performed.
+
+## Zayra audit coordination
+
+Zayra's audit starts from Caroline's branch `caroline-module9-audit` (`4375dfb`), so Olga's, Ansel's and Caroline's entries are retained unchanged. It is merged into branch `zayra-rwx`. Zayra's additions are her claim row, AUDIT-ZAYRA-01 to 03, her numeric finding and `audits/zayra/`. No production code is changed.
