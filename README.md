@@ -1,7 +1,59 @@
-# Community Safety Resource Planner — Phase 2
+# Community Safety Resource Planner
+
+## Streamlit Community Cloud deployment (Route B)
+
+The dashboard supports LA street-lighting planning managers deciding which
+reporting districts should receive on-site assessments first. Deploy the
+existing Python app directly; no Sites plugin or JavaScript conversion is needed.
+
+| Community Cloud setting | Value |
+|---|---|
+| Repository | `zayra-rwx/community-safety-resource-planner` |
+| Branch | `codex/phase3-dashboard` |
+| Main file path | `app.py` |
+| Advanced settings: Python | `3.12` (validated locally with 3.12.14) |
+| Dependencies | Root `requirements.txt`, which includes `requirements-phase3.txt` |
+| Secrets | None required for the bundled dataset |
+
+At https://share.streamlit.io/, sign in, choose **Create app** and **Yup, I have
+an app**, then use the settings above and deploy. Community Cloud runs the app
+from the repository root. Do not enter a localhost URL or a custom start command.
+The deployment branch keeps `main` unchanged until team review and merge approval.
+
+Required tracked runtime files are `app.py`, `dashboard_support.py`, `src/`,
+`data/processed/lapd_nibrs_offenses.parquet`, `reports/phase2/data_quality.json`,
+and `reports/phase2/data_dictionary.csv`. The raw CSVs and notebook environment
+are not required at runtime. Do not commit credentials; `.streamlit/secrets.toml`
+and `.env` files are ignored.
+
+After deployment, compare the default KPIs against **179,209** nighttime reported
+offenses, **1,164** eligible districts, **90.4%** mean persistence and **178,921**
+mapped nighttime offenses. Test an area filter, district evidence, comparison,
+CSV/JSON downloads, an empty selection and reset. External map tiles need network
+access; other analysis and downloads use the bundled canonical dataset.
+
+Deployment status: files prepared and tested locally; a live URL is not yet
+recorded. Streamlit account sign-in and any required private-repository access
+must be completed before cloud deployment. Keep the repository private; review
+the app's sharing settings separately if a publicly accessible course demo is
+required.
+
+Official instructions: https://docs.streamlit.io/deploy/streamlit-community-cloud/deploy-your-app/deploy
+
+
+## Local Phase 3 dashboard
+
+See [DASHBOARD.md](DASHBOARD.md) for installation, local startup, filters and downloads. On this Mac, run from the repository root:
+
+```bash
+../../.venv-phase3/bin/python -m streamlit run app.py --server.address 127.0.0.1 --server.port 8501 --server.headless true --browser.gatherUsageStats false
+```
+
+Open http://127.0.0.1:8501.
+## Phase 2 pipeline
 
 The canonical Phase 2 pipeline produces full cleaned team data and reusable
-backend analysis for street-lighting assessment. No dashboard is included.
+backend analysis for street-lighting assessment. The local Phase 3 dashboard is described above.
 The historical notebook documentation below describes the previous workflow;
 use this section and `src/` for current data and metric definitions.
 

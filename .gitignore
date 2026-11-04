@@ -8,3 +8,7 @@ data/cleaned/lapd_nibrs_cleaned.csv
 pytest-cache-files-*/
 data/*.csv
 outputs/
+.streamlit/secrets.toml
+.env
+.env.*
+!.env.example
