@@ -1,0 +1,5 @@
+PASS: Olga branch; main unchanged; 20 baseline file identities preserved
+PASS: concise headings, shared official structure, attribution, matching request ID, code extraction, Markdown and evidence paths
+NEW: compact ranking check passed (see compact-output.txt); no new full-data recomputation or test-suite run
+HISTORICAL: full-data comparison matched all 1172 districts; baseline tests 40 passed in 4.14s
+Scope: submitted CLI only; AUDIT-01 proposed, not implemented; no numeric defect requested

@@ -153,7 +153,8 @@ Preserve these existing decisions:
   Map inputs must use `nighttime_offenses(..., mapped_only=True)`.
 - Missing labels stay missing in Parquet. `category_summary` labels missing
   descriptions/premises `Unknown` only in its output. Display absent area labels
-  as `Unknown` without changing district keys; retain the backend's sorted
+  as `Unknown` outside district selectors; selectors use `Area unavailable`
+  as specified in section 9. Do not change district keys; retain the backend's sorted
   ` / `-joined area labels when multiple labels occur for one district.
 
 ### Streetlight integration: future extension only
@@ -281,6 +282,20 @@ selectors, crime-against and premise selectors. Code and description selections
 intersect; do not assume one-to-one labels. District options derive from the
 non-district-filtered universe. Date controls reject reversed/out-of-scope inputs;
 if no valid dates exist, show a data error and disable date-dependent controls.
+
+All district selectors (global filters, District Evidence and Compare Districts)
+must display both options and selected values as the four-digit reporting district
+code followed by the actual LAPD area name: `0182 — Central`, `1494 — Pacific`,
+`0636 — Hollywood`. Preserve leading zeros. Derive a stable district-to-area label
+mapping from `RPT Dist No` and `AREA NAME` in the full canonical data, before
+applying filters; do not invent neighborhood names. Retain the sorted ` / `-joined
+area names when a district has multiple names, as specified in section 5. If an
+area name is missing or blank, display `0182 — Area unavailable`, substituting the
+actual district code. Keep original district IDs as underlying selection values;
+labels are presentation only and must not change filtering, scoring, ranks,
+comparisons or exports. Filter changes must not rename labels or reset otherwise
+valid selections. Preserve the All/none, clear, invalidated-selection and reset
+behavior specified in this section and section 10.
 
 Minimum-active-months (1 to eligible-month count) and top-N (5/10/20/all) are
 **Phase 3 display logic**, not existing `Filters` fields. Apply this scope order:
@@ -517,7 +532,8 @@ into application results. No streetlight proximity test is an MVP requirement.
    Deterministic ties follow numeric district, then source string ordering.
 9. Display district selection, comparisons, minimum months and top-N preserve
    retained scores/original ranks from the non-district universe, including its
-   represented daytime-only districts.
+   represented daytime-only districts. For the same district IDs and other
+   filters, readable selector labels leave scores and original ranks unchanged.
 10. Full-source regression totals match 179,209 nighttime and 178,921 mapped
     offenses (99.84% coverage), 1,172 districts, 21 eligible months and 24,612
     district-month rows. Quality has 682 retained invalid-coordinate records,
@@ -525,11 +541,16 @@ into application results. No streetlight proximity test is an MVP requirement.
     unthresholded baseline checks, not top-10 display expectations.
 11. All/none states differ; multiple categorical filters intersect. Missing
     categories remain in All. Empty selections show zero/empty states without
-    silently reverting to full data.
+    silently reverting to full data. Single and multiple district selections use
+    the original district IDs and filter the same records with readable labels.
 12. KPIs reconcile to E; table/map/export to T; evidence/comparison to selected E
     districts. Top-N cannot change KPIs. User sorting cannot change T membership.
 13. Row/dropdown selections show the same district without changing filters;
     clearing restores T. Invalidated selections clear. Reset restores all defaults.
+    All district-selector options and selected values show the section 9 labels,
+    including leading-zero codes and the `Area unavailable` fallback for missing
+    or blank area names without errors. Changing filters preserves labels and
+    otherwise valid selected IDs.
 14. Comparison enforces 2-5 E districts, allows choices outside T, and preserves
     common periods and original ranks. Too few choices gives an explanatory state.
 15. Export matches T rows/order before rounding, with all 15 columns and accurate
