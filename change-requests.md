@@ -29,7 +29,7 @@ Copy the following block for each actionable finding. Agree on a unique ID with 
 - Verification check: repeat the command and confirm a clear start-after-end explanation; check that valid empty selections receive a distinct message; normal `--top 3` output and existing backend tests remain unchanged.
 - Implementation commit and verification result, when built: not implemented; no implementation commit or post-change verification. Audit evidence only. Request awaits team review.
 
-Passing numeric check (no numeric defect or corrective change requested): **Pass with limitation**. District 0182 independently recomputes to 87.67918088737201, printed as 87.679181; maximum score difference over all 1,172 districts is 0.0. Tie/universe fixtures pass. Evidence: `my-audit.md` (compact targeted ranking check; prior full-data evidence is separate), `audits/olga/numeric-output.txt`, `numeric_results.json` and `appendix-output.txt`. Agreement checks the stated formula, not source completeness, policy merit of the weights or lighting causality. Overall tested CLI workflow: **Pass with limitation**.
+Passing numeric check (no numeric defect or corrective change requested): **Pass with limitation**. District 0182 independently recomputes to 87.67918088737201, printed as 87.679181; maximum score difference over all 1,172 districts is 0.0. Tie/universe fixtures pass. Evidence: `audits/olga/my-audit.md` (compact targeted ranking check; prior full-data evidence is separate), `audits/olga/numeric-output.txt`, `numeric_results.json` and `appendix-output.txt`. Agreement checks the stated formula, not source completeness, policy merit of the weights or lighting causality. Overall tested CLI workflow: **Pass with limitation**.
 
 ### AUDIT-ANSEL-01 Explain when the CLI has no complete recent months
 
@@ -45,7 +45,7 @@ Passing numeric check (no numeric defect or corrective change requested): **Pass
 - Verification check: repeat the September command and confirm the explanation, zero recent counts, and unchanged selected-period counts; repeat the default command and confirm June 1-August 31, 2026 plus unchanged recent counts; a fixture with an eligible zero-offense month must keep a valid period rather than trigger the no-complete-months message. Existing regression tests must still pass.
 - Implementation commit and verification result, when built: not implemented. Audit evidence and recommendation only; no production files changed.
 
-Ansel's numeric finding: **PASS** on tested cases. District 1494 independently reconstructs to 131 recent nighttime offenses for June-August 2026 (49 + 47 + 35); all-district default total is 26,646. All 10 full-data backend cases, six CLI cases and five predeclared synthetic cases agree with independent expected answers. No numerical change is requested. Remaining uncertainty and AI attribution are recorded in `my-audit.md` and `audits/anselyulin/README.md`.
+Ansel's numeric finding: **PASS** on tested cases. District 1494 independently reconstructs to 131 recent nighttime offenses for June-August 2026 (49 + 47 + 35); all-district default total is 26,646. All 10 full-data backend cases, six CLI cases and five predeclared synthetic cases agree with independent expected answers. No numerical change is requested. Remaining uncertainty and AI attribution are recorded in `audits/anselyulin/my-audit.md` and `audits/anselyulin/README.md`.
 
 ### AUDIT-CAROLINE-01 Make the default ranked CLI output readable for the planning manager
 
