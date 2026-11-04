@@ -6,3 +6,5 @@ data/cleaned/lapd_nibrs_cleaned.csv
 /Olga_Tovstogan_DSO576_Data_Cleaning.pdf
 .pytest_cache/
 pytest-cache-files-*/
+data/*.csv
+outputs/
