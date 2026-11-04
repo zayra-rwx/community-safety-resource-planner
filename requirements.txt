@@ -1,2 +1,4 @@
-pandas
+# Streamlit Community Cloud installs from this file: dashboard + backend pins.
+-r requirements-phase3.txt
+# Notebook work
 jupyter
