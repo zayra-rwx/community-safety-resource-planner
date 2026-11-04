@@ -1,0 +1,12 @@
+CaseNo,UniqueNIBRNo,Date Rptd,Date OCC,Time OCC,AREA,AREA NAME,RPT Dist No,TotalOffenseCount,Group,NIBR Code,NIBR Description,Crime Against,Premise Cd,Premise Desc,Weapon Used Cd,Weapon Desc,Status,Status Desc,TotalVictimCount,Victim Shot,Domestic Violence Crime,Hate Crime,Gang-related Crime,Transit-related Crime,Homeless-Victim Crime,Homeless-Suspect Crime,Homeless-Arrestee Crime,LOCATION,LAT,LON
+synthetic-case,F01,2025 Apr 30 12:00:00 AM,2025 Feb 01 12:00:00 AM,0000,,Pacific,1494,,,23A,Synthetic offense,Property,,Street,,,,,,,,,,,,,,,34.05,-118.25
+synthetic-case,F02,2025 Apr 30 12:00:00 AM,2025 Feb 28 12:00:00 AM,2359,,Pacific,1494,,,23A,Synthetic offense,Property,,Street,,,,,,,,,,,,,,,34.05,-118.25
+synthetic-case,F03,2025 Apr 30 12:00:00 AM,2025 Mar 01 12:00:00 AM,0559,,Pacific,1494,,,23A,Synthetic offense,Property,,Street,,,,,,,,,,,,,,,,
+synthetic-case,F04,2025 Apr 30 12:00:00 AM,2025 Mar 31 12:00:00 AM,1800,,Pacific,1494,,,23A,Synthetic offense,Property,,Street,,,,,,,,,,,,,,,34.05,-118.25
+synthetic-case,F05,2025 Apr 30 12:00:00 AM,2025 Apr 01 12:00:00 AM,1800,,Pacific,1494,,,23A,Synthetic offense,Property,,Street,,,,,,,,,,,,,,,34.05,-118.25
+synthetic-case,F06,2025 Apr 30 12:00:00 AM,2025 Mar 15 12:00:00 AM,0600,,Pacific,1494,,,23A,Synthetic offense,Property,,Street,,,,,,,,,,,,,,,34.05,-118.25
+synthetic-case,F07,2025 Apr 30 12:00:00 AM,2025 Mar 16 12:00:00 AM,1759,,Pacific,1494,,,23A,Synthetic offense,Property,,Street,,,,,,,,,,,,,,,34.05,-118.25
+synthetic-case,F08,2025 Apr 30 12:00:00 AM,2025 Mar 20 12:00:00 AM,2400,,Pacific,1494,,,23A,Synthetic offense,Property,,Street,,,,,,,,,,,,,,,34.05,-118.25
+synthetic-case,F09,2025 Apr 30 12:00:00 AM,2025 Mar 20 12:00:00 AM,1900,,Pacific,1494,,,23A,Synthetic offense,Property,,Street,,,,,,,,,,,,,,,34.05,-118.25
+synthetic-case,F10,2025 Apr 30 12:00:00 AM,2025 Mar 20 12:00:00 AM,1800,,Pacific,0101,,,23A,Synthetic offense,Property,,Street,,,,,,,,,,,,,,,34.05,-118.25
+synthetic-case,F11,2025 Apr 30 12:00:00 AM,2025 Apr 30 12:00:00 AM,1200,,Pacific,1494,,,23A,Synthetic offense,Property,,Street,,,,,,,,,,,,,,,34.05,-118.25

@@ -1,0 +1,26 @@
+/Users/runner/work/crossbow/crossbow/arrow/cpp/src/arrow/util/cpu_info.cc:239: IOError: sysctlbyname failed for 'hw.l1dcachesize'. Detail: [errno 1] Operation not permitted
+/Users/runner/work/crossbow/crossbow/arrow/cpp/src/arrow/util/cpu_info.cc:239: IOError: sysctlbyname failed for 'hw.l2cachesize'. Detail: [errno 1] Operation not permitted
+/Users/runner/work/crossbow/crossbow/arrow/cpp/src/arrow/util/cpu_info.cc:239: IOError: sysctlbyname failed for 'hw.l3cachesize'. Detail: [errno 1] Operation not permitted
+/Users/runner/work/crossbow/crossbow/arrow/cpp/src/arrow/util/cpu_info.cc:239: IOError: sysctlbyname failed for 'hw.optional.neon'. Detail: [errno 1] Operation not permitted
+PASS backend: default 1172 district rows
+PASS backend: february_through_partial_april 1144 district rows
+PASS backend: partial_start_and_end 1143 district rows
+PASS backend: no_complete_months 1062 district rows
+PASS backend: one_complete_month 1112 district rows
+PASS backend: end_capped_to_available_data 1172 district rows
+PASS backend: start_clamped_to_scope 1172 district rows
+PASS backend: pacific_area 76 district rows
+PASS backend: district_1494 1 district rows
+PASS backend: sparse_category 1 district rows
+PASS CLI: default
+PASS CLI: february_through_partial_april
+PASS CLI: partial_start_and_end
+PASS CLI: no_complete_months
+PASS CLI: one_complete_month
+PASS CLI: end_capped_to_available_data
+PASS fixture: fixture_feb1_apr1 5
+PASS fixture: fixture_feb2_apr1 3
+PASS fixture: fixture_march 3
+PASS fixture: fixture_no_complete_month 0
+PASS fixture: fixture_zero_offense_complete_month 0
+PASS: 10 full-data backend scenarios, 6 CLI scenarios and 5 predeclared fixtures; baseline files unchanged.

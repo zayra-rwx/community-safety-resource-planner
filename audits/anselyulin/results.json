@@ -1,0 +1,476 @@
+{
+  "audited_commit": "87a892a392727cfaff176d3c0fbbf6019a60eb4a",
+  "execution_commit": "87a892a392727cfaff176d3c0fbbf6019a60eb4a",
+  "branch": "codex/module9-ansel-audit",
+  "executed_at_los_angeles": "2026-10-23T21:02:38.979803-07:00",
+  "check_script_sha256": "d4a2ada36d4b5b5afaad5b668812b8ba67e1ccab7747ee330c6e6c93a0589267",
+  "processed_rows": 489955,
+  "processed_columns": 45,
+  "processed_sha256": "36b136f5484624977f9d69d77e61bd12e82e24f6e1b1e9d50bb58a82153409b9",
+  "baseline_files_unchanged": true,
+  "baseline_file_sha256": {
+    ".gitignore": "0166253934707751ff74c215fd943a0c9a523870d20c503ebcdbc7d6faeb4f42",
+    "BUILD_SPEC.md": "6f8a350d837056405cc85440629b172c1288ab7b3b41ffef0fec1a164a113d48",
+    "README.md": "92ca978be5bcf77f8c1ba2133833cb6e6a65a0ea66d1a143faf9db4038bd970c",
+    "data/cleaned/.gitkeep": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+    "data/cleaned/cleaning_decision_log.csv": "8f366012bf5ae6564e42d7a4a31ed545bcb3db777d23b2934e1fd4d6aed7956d",
+    "data/cleaned/five_record_checks.csv": "e4f368720bfc2157c242999be341ff1d0724a7ac69641cbf6c69b0fa67aa0697",
+    "data/cleaned/lapd_nibrs_cleaned_sample.csv": "6933f0d452c9bc3834b3fc4054034e82788776b3a41f820a17d593faa0e2ad5e",
+    "data/processed/lapd_nibrs_offenses.parquet": "36b136f5484624977f9d69d77e61bd12e82e24f6e1b1e9d50bb58a82153409b9",
+    "data/raw/.gitkeep": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+    "members.md": "afd96e87b605b5307aa625f70c44d95fb03a28f04c49c8139be2c4b7c619dd2f",
+    "notebooks/data_cleaning.ipynb": "e42c1f225c594a9f0fed61b45c45395e2833cc2e949262527a941ab3038d87c4",
+    "project-start.md": "2fd0e66c9d33c1395851cece51415051610d38beee2e35942bb5a430631e5b59",
+    "reports/phase2/backend_validation.json": "9f5abdfe74ad58c9b89f3381ea94e99fe99af4fe94df9cac79606e2e1e716ecc",
+    "reports/phase2/cleaning_decisions.md": "ed28f61a4c73c93b50ee4dd79bdf13021e10cd6533fe383485c6c791a6e0d404",
+    "reports/phase2/data_dictionary.csv": "181e9e5b80a67409c892e4042f0eef382ece743fbc8ae2c3f1a765765969f677",
+    "reports/phase2/data_quality.json": "5b63c1248e73c426243da8e2ce35161c48937b0ea3b743a698851d440f04b869",
+    "reports/phase2/district_ranking.csv": "081894129329feb7ba761d4434d177bceb4d9e6a338e750d924d5abfb7700d25",
+    "reports/phase2/example_comparison_monthly.csv": "4a8e4267c0fb881b6955fc7b526acc88df5e57df737806285dbdb46704b241ed",
+    "reports/phase2/fresh_agent_test.md": "ae6b513097b55d312fc63757b5dd2d3320e197d606d5fc1fb76432f89d9c1290",
+    "reports/phase2/handoff.md": "e5374bf3a1ed32c215279e292f4f175b9ef093baaa86ba2f515ee18bf6426359",
+    "reports/phase2/offense_summary.csv": "56ffa797cbc9c2d2522142a4a7a4ac3e16f6fec500abbe500688eda7c77e9574",
+    "reports/phase2/premise_summary.csv": "cb2000a888f94c2acde74a4f7da51d7abe08ff0c7f10f6416b68705d476af8f6",
+    "requirements-phase2.txt": "5840fa38ba2901efe28eab594b656e7605f6d3671f600e81f6bcaf620deac412",
+    "requirements.txt": "f5a6513b579f18e7e99fefb84ed61fd51a1ca9b92120223417d81e2faeda15be",
+    "src/__init__.py": "c5f57512c080e8466417dc0b0f4708f987fb788615bfd48bad9e53fd7cdba882",
+    "src/analysis.py": "4522537b18fa1a3dff17640224d92565757c570983853393bed1d55fd73712c1",
+    "src/clean_data.py": "7e6f6d685dac83a4d1ea2d55a1fd662e6c05a20566aa34af8a4db78260e48ca4",
+    "src/config.py": "d53269c645149f654b212b90437d7644b062b633ff14b0ab0751700e10efbe50",
+    "src/validate_phase2.py": "1c15fb70c67d2f09a38fafff55e79216da30fe11b9221d3d6c6553ef3f3977c4",
+    "tests/test_phase2.py": "fd382b5b3e0ee5274c3800c4fe7a8353e72c83477e1497c9f5ded624f9fcbfdb"
+  },
+  "environment": {
+    "python": "3.12.14",
+    "pandas": "3.0.6",
+    "pyarrow": "23.0.1",
+    "pytest": "9.0.2",
+    "numpy": "2.5.4"
+  },
+  "backend_cases": [
+    {
+      "name": "default",
+      "filters": {},
+      "status": "PASS",
+      "recent_start": "2026-06-01",
+      "recent_end": "2026-08-31",
+      "eligible_months": 21,
+      "districts_checked": 1172,
+      "reference_recent_total": 26646,
+      "actual_recent_total": 26646,
+      "district_1494_reference": 131,
+      "district_1494_actual": 131
+    },
+    {
+      "name": "february_through_partial_april",
+      "filters": {
+        "start": "2025-02-01",
+        "end": "2025-04-01"
+      },
+      "status": "PASS",
+      "recent_start": "2025-02-01",
+      "recent_end": "2025-03-31",
+      "eligible_months": 3,
+      "districts_checked": 1144,
+      "reference_recent_total": 17538,
+      "actual_recent_total": 17538,
+      "district_1494_reference": 116,
+      "district_1494_actual": 116
+    },
+    {
+      "name": "partial_start_and_end",
+      "filters": {
+        "start": "2025-02-02",
+        "end": "2025-04-01"
+      },
+      "status": "PASS",
+      "recent_start": "2025-03-01",
+      "recent_end": "2025-03-31",
+      "eligible_months": 3,
+      "districts_checked": 1143,
+      "reference_recent_total": 9127,
+      "actual_recent_total": 9127,
+      "district_1494_reference": 62,
+      "district_1494_actual": 62
+    },
+    {
+      "name": "no_complete_months",
+      "filters": {
+        "start": "2026-09-01",
+        "end": "2026-09-19"
+      },
+      "status": "PASS",
+      "recent_start": null,
+      "recent_end": null,
+      "eligible_months": 1,
+      "districts_checked": 1062,
+      "reference_recent_total": 0,
+      "actual_recent_total": 0,
+      "district_1494_reference": 0,
+      "district_1494_actual": 0
+    },
+    {
+      "name": "one_complete_month",
+      "filters": {
+        "start": "2026-08-01",
+        "end": "2026-08-31"
+      },
+      "status": "PASS",
+      "recent_start": "2026-08-01",
+      "recent_end": "2026-08-31",
+      "eligible_months": 1,
+      "districts_checked": 1112,
+      "reference_recent_total": 8682,
+      "actual_recent_total": 8682,
+      "district_1494_reference": 35,
+      "district_1494_actual": 35
+    },
+    {
+      "name": "end_capped_to_available_data",
+      "filters": {
+        "start": "2025-01-01",
+        "end": "2026-12-31"
+      },
+      "status": "PASS",
+      "recent_start": "2026-06-01",
+      "recent_end": "2026-08-31",
+      "eligible_months": 21,
+      "districts_checked": 1172,
+      "reference_recent_total": 26646,
+      "actual_recent_total": 26646,
+      "district_1494_reference": 131,
+      "district_1494_actual": 131
+    },
+    {
+      "name": "start_clamped_to_scope",
+      "filters": {
+        "start": "2024-01-01",
+        "end": "2026-09-19"
+      },
+      "status": "PASS",
+      "recent_start": "2026-06-01",
+      "recent_end": "2026-08-31",
+      "eligible_months": 21,
+      "districts_checked": 1172,
+      "reference_recent_total": 26646,
+      "actual_recent_total": 26646,
+      "district_1494_reference": 131,
+      "district_1494_actual": 131
+    },
+    {
+      "name": "pacific_area",
+      "filters": {
+        "areas": [
+          "Pacific"
+        ]
+      },
+      "status": "PASS",
+      "recent_start": "2026-06-01",
+      "recent_end": "2026-08-31",
+      "eligible_months": 21,
+      "districts_checked": 76,
+      "reference_recent_total": 1374,
+      "actual_recent_total": 1374,
+      "district_1494_reference": 131,
+      "district_1494_actual": 131
+    },
+    {
+      "name": "district_1494",
+      "filters": {
+        "districts": [
+          "1494"
+        ]
+      },
+      "status": "PASS",
+      "recent_start": "2026-06-01",
+      "recent_end": "2026-08-31",
+      "eligible_months": 21,
+      "districts_checked": 1,
+      "reference_recent_total": 131,
+      "actual_recent_total": 131,
+      "district_1494_reference": 131,
+      "district_1494_actual": 131
+    },
+    {
+      "name": "sparse_category",
+      "filters": {
+        "descriptions": [
+          "10 886 - US - F - Absence Without Leave - Absent From Place Of Duty - 90Z"
+        ]
+      },
+      "status": "PASS",
+      "recent_start": "2026-06-01",
+      "recent_end": "2026-08-31",
+      "eligible_months": 21,
+      "districts_checked": 1,
+      "reference_recent_total": 0,
+      "actual_recent_total": 0,
+      "district_1494_reference": null,
+      "district_1494_actual": null
+    }
+  ],
+  "cli_cases": [
+    {
+      "name": "default",
+      "filters": {},
+      "status": "PASS",
+      "exit_code": 0,
+      "recent_start": "2026-06-01",
+      "recent_end": "2026-08-31",
+      "displayed_rows": [
+        {
+          "district": "0182",
+          "recent_nighttime_offenses": 147
+        },
+        {
+          "district": "1494",
+          "recent_nighttime_offenses": 131
+        },
+        {
+          "district": "0636",
+          "recent_nighttime_offenses": 164
+        }
+      ],
+      "no_complete_months_explanation": false
+    },
+    {
+      "name": "february_through_partial_april",
+      "filters": {
+        "start": "2025-02-01",
+        "end": "2025-04-01"
+      },
+      "status": "PASS",
+      "exit_code": 0,
+      "recent_start": "2025-02-01",
+      "recent_end": "2025-03-31",
+      "displayed_rows": [
+        {
+          "district": "1494",
+          "recent_nighttime_offenses": 116
+        },
+        {
+          "district": "0182",
+          "recent_nighttime_offenses": 111
+        },
+        {
+          "district": "0162",
+          "recent_nighttime_offenses": 109
+        }
+      ],
+      "no_complete_months_explanation": false
+    },
+    {
+      "name": "partial_start_and_end",
+      "filters": {
+        "start": "2025-02-02",
+        "end": "2025-04-01"
+      },
+      "status": "PASS",
+      "exit_code": 0,
+      "recent_start": "2025-03-01",
+      "recent_end": "2025-03-31",
+      "displayed_rows": [
+        {
+          "district": "1494",
+          "recent_nighttime_offenses": 62
+        },
+        {
+          "district": "0182",
+          "recent_nighttime_offenses": 63
+        },
+        {
+          "district": "0162",
+          "recent_nighttime_offenses": 58
+        }
+      ],
+      "no_complete_months_explanation": false
+    },
+    {
+      "name": "no_complete_months",
+      "filters": {
+        "start": "2026-09-01",
+        "end": "2026-09-19"
+      },
+      "status": "PASS",
+      "exit_code": 0,
+      "recent_start": null,
+      "recent_end": null,
+      "displayed_rows": [
+        {
+          "district": "0646",
+          "recent_nighttime_offenses": 0
+        },
+        {
+          "district": "1258",
+          "recent_nighttime_offenses": 0
+        },
+        {
+          "district": "0162",
+          "recent_nighttime_offenses": 0
+        }
+      ],
+      "no_complete_months_explanation": false
+    },
+    {
+      "name": "one_complete_month",
+      "filters": {
+        "start": "2026-08-01",
+        "end": "2026-08-31"
+      },
+      "status": "PASS",
+      "exit_code": 0,
+      "recent_start": "2026-08-01",
+      "recent_end": "2026-08-31",
+      "displayed_rows": [
+        {
+          "district": "0636",
+          "recent_nighttime_offenses": 62
+        },
+        {
+          "district": "0904",
+          "recent_nighttime_offenses": 55
+        },
+        {
+          "district": "0646",
+          "recent_nighttime_offenses": 53
+        }
+      ],
+      "no_complete_months_explanation": false
+    },
+    {
+      "name": "end_capped_to_available_data",
+      "filters": {
+        "start": "2025-01-01",
+        "end": "2026-12-31"
+      },
+      "status": "PASS",
+      "exit_code": 0,
+      "recent_start": "2026-06-01",
+      "recent_end": "2026-08-31",
+      "displayed_rows": [
+        {
+          "district": "0182",
+          "recent_nighttime_offenses": 147
+        },
+        {
+          "district": "1494",
+          "recent_nighttime_offenses": 131
+        },
+        {
+          "district": "0636",
+          "recent_nighttime_offenses": 164
+        }
+      ],
+      "no_complete_months_explanation": false
+    }
+  ],
+  "synthetic_cases": [
+    {
+      "name": "fixture_feb1_apr1",
+      "filters": {
+        "start": "2025-02-01",
+        "end": "2025-04-01",
+        "districts": [
+          "1494"
+        ]
+      },
+      "status": "PASS",
+      "recent_start": "2025-02-01",
+      "recent_end": "2025-03-31",
+      "eligible_months": 3,
+      "districts_checked": 1,
+      "reference_recent_total": 5,
+      "actual_recent_total": 5,
+      "district_1494_reference": 5,
+      "district_1494_actual": 5,
+      "predeclared_expected_count": 5
+    },
+    {
+      "name": "fixture_feb2_apr1",
+      "filters": {
+        "start": "2025-02-02",
+        "end": "2025-04-01",
+        "districts": [
+          "1494"
+        ]
+      },
+      "status": "PASS",
+      "recent_start": "2025-03-01",
+      "recent_end": "2025-03-31",
+      "eligible_months": 3,
+      "districts_checked": 1,
+      "reference_recent_total": 3,
+      "actual_recent_total": 3,
+      "district_1494_reference": 3,
+      "district_1494_actual": 3,
+      "predeclared_expected_count": 3
+    },
+    {
+      "name": "fixture_march",
+      "filters": {
+        "start": "2025-03-01",
+        "end": "2025-03-31",
+        "districts": [
+          "1494"
+        ]
+      },
+      "status": "PASS",
+      "recent_start": "2025-03-01",
+      "recent_end": "2025-03-31",
+      "eligible_months": 1,
+      "districts_checked": 1,
+      "reference_recent_total": 3,
+      "actual_recent_total": 3,
+      "district_1494_reference": 3,
+      "district_1494_actual": 3,
+      "predeclared_expected_count": 3
+    },
+    {
+      "name": "fixture_no_complete_month",
+      "filters": {
+        "start": "2025-04-01",
+        "end": "2025-04-01",
+        "districts": [
+          "1494"
+        ]
+      },
+      "status": "PASS",
+      "recent_start": null,
+      "recent_end": null,
+      "eligible_months": 1,
+      "districts_checked": 1,
+      "reference_recent_total": 0,
+      "actual_recent_total": 0,
+      "district_1494_reference": 0,
+      "district_1494_actual": 0,
+      "predeclared_expected_count": 0
+    },
+    {
+      "name": "fixture_zero_offense_complete_month",
+      "filters": {
+        "start": "2025-02-02",
+        "end": "2025-04-01",
+        "districts": [
+          "1494"
+        ]
+      },
+      "status": "PASS",
+      "recent_start": "2025-03-01",
+      "recent_end": "2025-03-31",
+      "eligible_months": 3,
+      "districts_checked": 1,
+      "reference_recent_total": 0,
+      "actual_recent_total": 0,
+      "district_1494_reference": 0,
+      "district_1494_actual": 0,
+      "predeclared_expected_count": 0
+    }
+  ],
+  "overall_numeric_status": "PASS",
+  "all_checks_passed": true,
+  "limitations": [
+    "Source-derived oracle reads preserved text from the committed Parquet; it does not reverify the original raw download.",
+    "CLI/API audit only; no dashboard exists in the audited baseline.",
+    "Execution and fixture arithmetic were performed by Codex; no human manual verification is claimed."
+  ]
+}

@@ -1,0 +1,94 @@
+CASE: default
+COMMAND: python -m src.analysis --top 3
+EXIT: 0
+STDOUT:
+ Rank RPT Dist No AREA NAME  Priority score  Nighttime reported offenses  Active months  Eligible months  Persistence rate  Average monthly nighttime offenses  Recent nighttime offenses  Valid mapped nighttime offenses  Frequency percentile  Persistence percentile Recent period start Recent period end
+    1        0182   Central       87.679181                         1167             21               21               1.0                           55.571429                        147                             1167              1.000000                 0.69198          2026-06-01        2026-08-31
+    2        1494   Pacific       87.627986                         1097             21               21               1.0                           52.238095                        131                             1097              0.999147                 0.69198          2026-06-01        2026-08-31
+    3        0636 Hollywood       87.576792                          978             21               21               1.0                           46.571429                        164                              978              0.998294                 0.69198          2026-06-01        2026-08-31
+
+STDERR:
+/Users/runner/work/crossbow/crossbow/arrow/cpp/src/arrow/util/cpu_info.cc:239: IOError: sysctlbyname failed for 'hw.l1dcachesize'. Detail: [errno 1] Operation not permitted
+/Users/runner/work/crossbow/crossbow/arrow/cpp/src/arrow/util/cpu_info.cc:239: IOError: sysctlbyname failed for 'hw.l2cachesize'. Detail: [errno 1] Operation not permitted
+/Users/runner/work/crossbow/crossbow/arrow/cpp/src/arrow/util/cpu_info.cc:239: IOError: sysctlbyname failed for 'hw.l3cachesize'. Detail: [errno 1] Operation not permitted
+/Users/runner/work/crossbow/crossbow/arrow/cpp/src/arrow/util/cpu_info.cc:239: IOError: sysctlbyname failed for 'hw.optional.neon'. Detail: [errno 1] Operation not permitted
+
+
+CASE: february_through_partial_april
+COMMAND: python -m src.analysis --top 3 --start 2025-02-01 --end 2025-04-01
+EXIT: 0
+STDOUT:
+ Rank RPT Dist No AREA NAME  Priority score  Nighttime reported offenses  Active months  Eligible months  Persistence rate  Average monthly nighttime offenses  Recent nighttime offenses  Valid mapped nighttime offenses  Frequency percentile  Persistence percentile Recent period start Recent period end
+    1        1494   Pacific       95.751748                          120              3                3               1.0                           40.000000                        116                              120              1.000000                0.893794          2025-02-01        2025-03-31
+    2        0182   Central       95.699301                          112              3                3               1.0                           37.333333                        111                              112              0.999126                0.893794          2025-02-01        2025-03-31
+    3        0162   Central       95.646853                          111              3                3               1.0                           37.000000                        109                              111              0.998252                0.893794          2025-02-01        2025-03-31
+
+STDERR:
+/Users/runner/work/crossbow/crossbow/arrow/cpp/src/arrow/util/cpu_info.cc:239: IOError: sysctlbyname failed for 'hw.l1dcachesize'. Detail: [errno 1] Operation not permitted
+/Users/runner/work/crossbow/crossbow/arrow/cpp/src/arrow/util/cpu_info.cc:239: IOError: sysctlbyname failed for 'hw.l2cachesize'. Detail: [errno 1] Operation not permitted
+/Users/runner/work/crossbow/crossbow/arrow/cpp/src/arrow/util/cpu_info.cc:239: IOError: sysctlbyname failed for 'hw.l3cachesize'. Detail: [errno 1] Operation not permitted
+/Users/runner/work/crossbow/crossbow/arrow/cpp/src/arrow/util/cpu_info.cc:239: IOError: sysctlbyname failed for 'hw.optional.neon'. Detail: [errno 1] Operation not permitted
+
+
+CASE: partial_start_and_end
+COMMAND: python -m src.analysis --top 3 --start 2025-02-02 --end 2025-04-01
+EXIT: 0
+STDOUT:
+ Rank RPT Dist No AREA NAME  Priority score  Nighttime reported offenses  Active months  Eligible months  Persistence rate  Average monthly nighttime offenses  Recent nighttime offenses  Valid mapped nighttime offenses  Frequency percentile  Persistence percentile Recent period start Recent period end
+    1        1494   Pacific       95.748031                          119              3                3               1.0                           39.666667                         62                              119              1.000000                0.893701          2025-03-01        2025-03-31
+    2        0182   Central       95.695538                          110              3                3               1.0                           36.666667                         63                              110              0.999125                0.893701          2025-03-01        2025-03-31
+    3        0162   Central       95.643045                          109              3                3               1.0                           36.333333                         58                              109              0.998250                0.893701          2025-03-01        2025-03-31
+
+STDERR:
+/Users/runner/work/crossbow/crossbow/arrow/cpp/src/arrow/util/cpu_info.cc:239: IOError: sysctlbyname failed for 'hw.l1dcachesize'. Detail: [errno 1] Operation not permitted
+/Users/runner/work/crossbow/crossbow/arrow/cpp/src/arrow/util/cpu_info.cc:239: IOError: sysctlbyname failed for 'hw.l2cachesize'. Detail: [errno 1] Operation not permitted
+/Users/runner/work/crossbow/crossbow/arrow/cpp/src/arrow/util/cpu_info.cc:239: IOError: sysctlbyname failed for 'hw.l3cachesize'. Detail: [errno 1] Operation not permitted
+/Users/runner/work/crossbow/crossbow/arrow/cpp/src/arrow/util/cpu_info.cc:239: IOError: sysctlbyname failed for 'hw.optional.neon'. Detail: [errno 1] Operation not permitted
+
+
+CASE: no_complete_months
+COMMAND: python -m src.analysis --top 3 --start 2026-09-01 --end 2026-09-19
+EXIT: 0
+STDOUT:
+ Rank RPT Dist No   AREA NAME  Priority score  Nighttime reported offenses  Active months  Eligible months  Persistence rate  Average monthly nighttime offenses  Recent nighttime offenses  Valid mapped nighttime offenses  Frequency percentile  Persistence percentile Recent period start Recent period end
+    1        0646   Hollywood       81.836158                           28              1                1               1.0                                28.0                          0                               28              0.999529                 0.54661                None              None
+    2        1258 77th Street       81.836158                           28              1                1               1.0                                28.0                          0                               28              0.999529                 0.54661                None              None
+    3        0162     Central       81.666667                           25              1                1               1.0                                25.0                          0                               25              0.996704                 0.54661                None              None
+
+STDERR:
+/Users/runner/work/crossbow/crossbow/arrow/cpp/src/arrow/util/cpu_info.cc:239: IOError: sysctlbyname failed for 'hw.l1dcachesize'. Detail: [errno 1] Operation not permitted
+/Users/runner/work/crossbow/crossbow/arrow/cpp/src/arrow/util/cpu_info.cc:239: IOError: sysctlbyname failed for 'hw.l2cachesize'. Detail: [errno 1] Operation not permitted
+/Users/runner/work/crossbow/crossbow/arrow/cpp/src/arrow/util/cpu_info.cc:239: IOError: sysctlbyname failed for 'hw.l3cachesize'. Detail: [errno 1] Operation not permitted
+/Users/runner/work/crossbow/crossbow/arrow/cpp/src/arrow/util/cpu_info.cc:239: IOError: sysctlbyname failed for 'hw.optional.neon'. Detail: [errno 1] Operation not permitted
+
+
+CASE: one_complete_month
+COMMAND: python -m src.analysis --top 3 --start 2026-08-01 --end 2026-08-31
+EXIT: 0
+STDOUT:
+ Rank RPT Dist No AREA NAME  Priority score  Nighttime reported offenses  Active months  Eligible months  Persistence rate  Average monthly nighttime offenses  Recent nighttime offenses  Valid mapped nighttime offenses  Frequency percentile  Persistence percentile Recent period start Recent period end
+    1        0636 Hollywood       81.007194                           62              1                1               1.0                                62.0                         62                               62              1.000000                 0.52518          2026-08-01        2026-08-31
+    2        0904  Van Nuys       80.953237                           55              1                1               1.0                                55.0                         55                               55              0.999101                 0.52518          2026-08-01        2026-08-31
+    3        0646 Hollywood       80.899281                           53              1                1               1.0                                53.0                         53                               53              0.998201                 0.52518          2026-08-01        2026-08-31
+
+STDERR:
+/Users/runner/work/crossbow/crossbow/arrow/cpp/src/arrow/util/cpu_info.cc:239: IOError: sysctlbyname failed for 'hw.l1dcachesize'. Detail: [errno 1] Operation not permitted
+/Users/runner/work/crossbow/crossbow/arrow/cpp/src/arrow/util/cpu_info.cc:239: IOError: sysctlbyname failed for 'hw.l2cachesize'. Detail: [errno 1] Operation not permitted
+/Users/runner/work/crossbow/crossbow/arrow/cpp/src/arrow/util/cpu_info.cc:239: IOError: sysctlbyname failed for 'hw.l3cachesize'. Detail: [errno 1] Operation not permitted
+/Users/runner/work/crossbow/crossbow/arrow/cpp/src/arrow/util/cpu_info.cc:239: IOError: sysctlbyname failed for 'hw.optional.neon'. Detail: [errno 1] Operation not permitted
+
+
+CASE: end_capped_to_available_data
+COMMAND: python -m src.analysis --top 3 --start 2025-01-01 --end 2026-12-31
+EXIT: 0
+STDOUT:
+ Rank RPT Dist No AREA NAME  Priority score  Nighttime reported offenses  Active months  Eligible months  Persistence rate  Average monthly nighttime offenses  Recent nighttime offenses  Valid mapped nighttime offenses  Frequency percentile  Persistence percentile Recent period start Recent period end
+    1        0182   Central       87.679181                         1167             21               21               1.0                           55.571429                        147                             1167              1.000000                 0.69198          2026-06-01        2026-08-31
+    2        1494   Pacific       87.627986                         1097             21               21               1.0                           52.238095                        131                             1097              0.999147                 0.69198          2026-06-01        2026-08-31
+    3        0636 Hollywood       87.576792                          978             21               21               1.0                           46.571429                        164                              978              0.998294                 0.69198          2026-06-01        2026-08-31
+
+STDERR:
+/Users/runner/work/crossbow/crossbow/arrow/cpp/src/arrow/util/cpu_info.cc:239: IOError: sysctlbyname failed for 'hw.l1dcachesize'. Detail: [errno 1] Operation not permitted
+/Users/runner/work/crossbow/crossbow/arrow/cpp/src/arrow/util/cpu_info.cc:239: IOError: sysctlbyname failed for 'hw.l2cachesize'. Detail: [errno 1] Operation not permitted
+/Users/runner/work/crossbow/crossbow/arrow/cpp/src/arrow/util/cpu_info.cc:239: IOError: sysctlbyname failed for 'hw.l3cachesize'. Detail: [errno 1] Operation not permitted
+/Users/runner/work/crossbow/crossbow/arrow/cpp/src/arrow/util/cpu_info.cc:239: IOError: sysctlbyname failed for 'hw.optional.neon'. Detail: [errno 1] Operation not permitted
