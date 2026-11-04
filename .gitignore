@@ -8,3 +8,6 @@ data/cleaned/lapd_nibrs_cleaned.csv
 pytest-cache-files-*/
 data/*.csv
 outputs/
+# Personal work kept locally, not part of the dashboard
+nibrs_exploration.ipynb
+report/

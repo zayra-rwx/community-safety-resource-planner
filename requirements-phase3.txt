@@ -1,0 +1,4 @@
+# Phase 3 dashboard: backend pins plus UI/chart/map rendering (Plotly map, no GIS packages).
+-r requirements-phase2.txt
+streamlit==1.66.1
+plotly==7.1.0
