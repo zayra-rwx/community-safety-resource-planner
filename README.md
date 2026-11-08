@@ -1,11 +1,82 @@
-# Community Safety Resource Planner — Phase 2
+# Community Safety Resource Planner: Streetlight Assessment
 
-The canonical Phase 2 pipeline produces full cleaned team data and reusable
-backend analysis for street-lighting assessment. No dashboard is included.
-The historical notebook documentation below describes the previous workflow;
-use this section and `src/` for current data and metric definitions.
+A Streamlit dashboard that helps an LA Bureau of Street Lighting planning manager
+decide which LAPD reporting districts should receive on-site lighting assessments
+first. It compares recurring nighttime reported-offense patterns using the full
+cleaned LAPD NIBRS dataset.
 
 Reported-offense patterns and mapped streetlights identify places for further assessment. They do not establish that lighting conditions caused offenses or that additional lighting will reduce them.
+
+Streetlight asset data was unavailable for this MVP. Rankings use reported-offense frequency and persistence; the map shows approximate offense locations, not measured lighting conditions.
+
+## Run the dashboard
+
+Use Python 3.11 or later. From the repository root (Windows PowerShell; use
+`.venv/bin/python` on macOS/Linux):
+
+```powershell
+python -m venv .venv
+.venv\Scripts\python.exe -m pip install -r requirements-phase3.txt
+.venv\Scripts\python.exe -m pytest -q
+.venv\Scripts\python.exe -m streamlit run app.py
+```
+
+The app opens at http://localhost:8501. It needs only three committed files:
+`data/processed/lapd_nibrs_offenses.parquet`, `reports/phase2/data_quality.json`
+and `reports/phase2/data_dictionary.csv`. The raw CSV is not needed to run it.
+
+## Deploy on Streamlit Community Cloud
+
+Use repository `zayra-rwx/community-safety-resource-planner`, branch `main`, main
+file `app.py`, and Python 3.12 or 3.13 under Advanced settings. No secrets are
+needed. Cloud installs from `requirements.txt`, which includes the pinned dashboard
+requirements, and redeploys when `main` changes.
+
+## Dashboard views
+
+- **Priority Overview:** ranked districts, totals, an approximate offense map, and
+  the worklist CSV and metadata downloads.
+- **District Evidence:** one district's monthly counts, persistence, and offense and
+  premise composition.
+- **Compare Districts:** 2 to 5 districts on the same evidence, with original ranks.
+- **Methods and Data Quality:** limitations, how zeros are handled, definitions,
+  the full-source audit and data provenance.
+
+District labels such as `0182 · Central · near S Flower St` combine the official
+code and LAPD area with the most common street recorded in that district. The street
+is a landmark we derive, not an official name. The first two digits of a code are
+the LAPD area; two-digit codes are area-level entries. Downloads keep plain codes,
+so import `RPT Dist No` as text to retain leading zeros.
+
+## Repository layout
+
+| Path | Contents |
+| --- | --- |
+| `app.py` | Streamlit UI and session state |
+| `src/analysis.py`, `src/clean_data.py`, `src/config.py`, `src/validate_phase2.py` | Backend: cleaning, metrics, validation |
+| `src/dashboard/` | Adapters, charts, map, export, loading, validation, settings and styling |
+| `.streamlit/config.toml` | Theme and app settings |
+| `tests/` | Backend, label and app tests |
+| `data/processed/`, `reports/phase2/` | Canonical data, quality report, dictionary and validation evidence |
+| `audits/<name>/`, `change-requests.md` | Individual Module 9 audits and the shared change requests |
+| `BUILD_SPEC.md`, `project-start.md`, `members.md` | Project specification, vision and team |
+
+## Troubleshooting
+
+- **Changes under `src/` don't appear, or an `AttributeError` names a new function:**
+  stop the server with `Ctrl+C` and start it again. Refreshing the browser does not
+  reload those modules.
+- **A named data error appears on launch:** restore the file it names from `main`.
+  The app never falls back to a sample or other dataset.
+- **The map background is blank:** basemap tiles load from the internet. Metrics,
+  charts and downloads keep working without them.
+- **Some map points seem missing:** the map opens on where most points are. Zoom out;
+  the caption under the map says how many plot outside the opening view.
+- **Results are all 0:** a filter has "All" unticked with nothing chosen, which means
+  no records. Tick "All" or use **Reset all to defaults**.
+
+The sections below document the backend data pipeline, metric definitions and
+historical notebook workflow. Use `src/` and these sections for current definitions.
 
 ## Canonical data and reproducibility
 
