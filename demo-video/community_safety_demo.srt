@@ -1,0 +1,200 @@
+1
+00:00:00,950 --> 00:00:04,890
+This is our Community Safety Resource Planner.
+
+2
+00:00:04,910 --> 00:00:10,250
+Our user is a program manager at the LA Bureau of Street Lighting,
+
+3
+00:00:10,270 --> 00:00:12,670
+deciding which LAPD reporting districts
+
+4
+00:00:12,690 --> 00:00:16,810
+get an on-site lighting assessment first.
+
+5
+00:00:16,830 --> 00:00:19,510
+The app sets assessment priority only.
+
+6
+00:00:19,530 --> 00:00:20,750
+It doesn't predict anything,
+
+7
+00:00:20,770 --> 00:00:25,150
+and it doesn't show that lighting causes offenses.
+
+8
+00:00:26,890 --> 00:00:33,630
+The overview counts nighttime reported offenses, 6 p.m. to 6 a.m.,
+
+9
+00:00:33,650 --> 00:00:38,250
+from January 2025 to September 2026.
+
+10
+00:00:38,270 --> 00:00:46,430
+That's about 179,000 offenses in 1,164 districts.
+
+11
+00:00:46,450 --> 00:00:50,010
+Persistence is 90%:
+
+12
+00:00:50,030 --> 00:00:56,850
+a typical district has nighttime reports in nine of every ten months.
+
+13
+00:00:56,870 --> 00:01:00,250
+And almost every offense can be mapped.
+
+14
+00:01:02,400 --> 00:01:07,640
+The ranked table shows which districts to assess first.
+
+15
+00:01:07,660 --> 00:01:14,520
+The score, from 0 to 100, is 60% frequency, how many reports,
+
+16
+00:01:14,540 --> 00:01:19,020
+and 40% persistence, how many months they appear in,
+
+17
+00:01:19,040 --> 00:01:22,000
+so one short spike can't reach the top.
+
+18
+00:01:22,020 --> 00:01:29,800
+District 0182 in Central ranks first, at 87.68.
+
+19
+00:01:30,440 --> 00:01:35,860
+The map shows where these reports are; darker means more.
+
+20
+00:01:37,710 --> 00:01:41,190
+The filters update everything together.
+
+21
+00:01:41,210 --> 00:01:42,970
+With only Central selected,
+
+22
+00:01:42,990 --> 00:01:48,090
+we get 56 districts and about 14,000 offenses.
+
+23
+00:01:48,710 --> 00:01:54,450
+0182 is still first, but its score drops to 86.07,
+
+24
+00:01:54,470 --> 00:01:58,590
+because it's now compared with Central districts only,
+
+25
+00:01:58,610 --> 00:02:00,050
+not the whole city.
+
+26
+00:02:00,750 --> 00:02:01,970
+Now I'll reset.
+
+27
+00:02:04,600 --> 00:02:08,860
+Clicking a row opens District Evidence.
+
+28
+00:02:08,880 --> 00:02:13,580
+Is the pattern steady, or concentrated in a few months?
+
+29
+00:02:13,600 --> 00:02:19,480
+For 0182, it's steady, around 40 to 80 a month.
+
+30
+00:02:20,140 --> 00:02:26,100
+The last month looks low only because the data ends in mid-September.
+
+31
+00:02:26,120 --> 00:02:30,800
+The top offense is burglary from vehicles,
+
+32
+00:02:31,460 --> 00:02:34,360
+and the top premise is parking lots,
+
+33
+00:02:34,380 --> 00:02:37,300
+so the crew knows what to inspect.
+
+34
+00:02:39,600 --> 00:02:43,120
+Compare puts districts side by side.
+
+35
+00:02:43,140 --> 00:02:55,960
+The top two, 0182 and 1494, are almost tied: 87.68 versus 87.63.
+
+36
+00:02:56,740 --> 00:03:03,020
+0182 has more reports overall and more in the last three months,
+
+37
+00:03:03,040 --> 00:03:05,140
+and both are steady.
+
+38
+00:03:05,160 --> 00:03:09,480
+The app shows the evidence; the manager decides.
+
+39
+00:03:12,180 --> 00:03:15,140
+Now two edge cases.
+
+40
+00:03:15,160 --> 00:03:20,760
+If I select no areas, the app shows zero and says nothing matches,
+
+41
+00:03:20,780 --> 00:03:23,700
+instead of quietly showing all the data.
+
+42
+00:03:24,420 --> 00:03:30,120
+District 06 has 25 reports but no valid coordinates.
+
+43
+00:03:30,140 --> 00:03:31,400
+They're still counted,
+
+44
+00:03:31,420 --> 00:03:36,660
+but the map shows a message instead of points in the wrong place.
+
+45
+00:03:37,820 --> 00:03:44,480
+The Worklist CSV exports this list for the field team.
+
+46
+00:03:44,500 --> 00:03:49,640
+Our biggest limitation: there's no streetlight data yet,
+
+47
+00:03:49,660 --> 00:03:54,740
+so we rank by reported offenses, not lighting conditions.
+
+48
+00:03:55,400 --> 00:03:58,180
+Next, we'd add the city's streetlight map,
+
+49
+00:03:58,200 --> 00:04:03,480
+so the manager can see nearby lights before sending a crew.
+
+50
+00:04:03,500 --> 00:04:04,420
+Thank you.
+
