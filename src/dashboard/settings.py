@@ -7,6 +7,7 @@ from ..config import (FREQUENCY_WEIGHT, LAT_BOUNDS, LON_BOUNDS, PERSISTENCE_WEIG
                       PROCESSED, REPORTS, ROOT, START_DATE)
 
 APP_TITLE = 'Community Safety Resource Planner: Streetlight Assessment'
+APP_EYEBROW, APP_HEADLINE = APP_TITLE.split(': ')
 APP_VERSION = '0.3.0-mvp'
 PURPOSE = ('Compare recurring nighttime reported-offense patterns across LAPD reporting '
            'districts to decide which districts should receive on-site lighting assessments first.')
@@ -66,6 +67,7 @@ OTHER_LABEL = 'Other (remaining categories)'
 # Map generalization: display-only rounding of valid coordinates.
 MAP_DECIMALS = 3
 MAP_MAX_CELLS = 25000
+MAP_VIEW_SHARE = 0.98  # share of offenses the opening map view is fitted to
 
 SCORE_FORMULA = (f'Priority score = ({FREQUENCY_WEIGHT:.2f} x frequency percentile + '
                  f'{PERSISTENCE_WEIGHT:.2f} x persistence percentile) x 100; zero when a district has '
@@ -77,6 +79,37 @@ COORDINATE_RULE = (f'Valid coordinates: latitude {LAT_BOUNDS[0]} to {LAT_BOUNDS[
                    'city boundary). Missing, nonnumeric, zero or outside-box coordinates are invalid; those '
                    f'offenses still count in district metrics but never enter the map. Map cells round '
                    f'valid coordinates to {MAP_DECIMALS} decimal places for display only.')
+
+DISTRICT_CODE_SHORT = ('First two digits of a district code are the LAPD area. "Near" is the most common street '
+                       'recorded there, not an official name.')
+ELIGIBLE_HELP = ('Eligible districts pass your filters and minimum active months. Eligible months are all calendar '
+                 'months in the selected period. Persistence is the share of those months with at least one '
+                 'nighttime reported offense.')
+DISTRICT_CODE_HELP = ('Reporting districts are numbered LAPD map units and have no names in the source data. '
+                      'The first two digits are the LAPD area (0182 is in area 01, Central); the last two '
+                      'identify a unit within it. Two-digit codes such as 06 are area-level entries. '
+                      '"Near" in a district label is the most common street recorded for that district: a '
+                      'landmark to help recognize it, not an official name or its full extent.')
+
+# How zero counts and zero denominators are treated (rendered in Methods).
+ZERO_RULES = [
+    '**Months with no nighttime reports count as zero, not as missing.** Every calendar month in the selected '
+    'period is kept for every district, so a quiet month lowers persistence instead of being skipped.',
+    '**Districts with zero nighttime reports stay in the ranking pool.** A district that only has daytime '
+    'records still counts toward everyone else\'s percentiles, but its own priority score is 0. Because it has '
+    'no active months, the minimum-active-months setting (lowest value 1) keeps it out of the table, totals and '
+    'district choices.',
+    '**Zero denominators never divide.** With no eligible months, persistence and average monthly offenses are '
+    '0; mapped coverage with no nighttime offenses shows N/A instead of a percentage.',
+    '**Recent offenses can be 0 for two reasons:** the district had none in the latest complete months, or the '
+    'selected dates contain no complete month (shown as "No complete months").',
+    '**Zero coordinates are invalid.** A latitude or longitude of 0 is treated like a missing location: the '
+    'offense still counts for its district but never appears on the map.',
+    '**An empty filter selection means zero records, not everything.** Untick "All" and choose nothing, and '
+    'results show 0 rather than silently returning to the full data.',
+    '**Source count columns are not used.** `TotalOffenseCount` and `TotalVictimCount` (which can be 0) are '
+    'never summed; every count is distinct offense IDs.',
+]
 
 LIMITATIONS = [
     'Reported offenses are not the same as actual incidents; some offenses are never reported.',

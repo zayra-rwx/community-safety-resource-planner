@@ -43,7 +43,7 @@ def date_bounds(full_max):
 def date_errors(start, end, bounds):
     """Reject reversed or out-of-scope inclusive date inputs. Empty list = valid."""
     if bounds is None:
-        return ['No valid occurrence dates are available in the canonical data.']
+        return ['No valid occurrence dates are available in the data.']
     errors = []
     low, high = bounds
     if start is None or end is None:

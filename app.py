@@ -13,12 +13,13 @@ import pandas as pd
 import streamlit as st
 
 from src.analysis import Filters, eligible_months, selected_interval
-from src.dashboard import adapters, charts, export, filtering, mapping, settings
+from src.dashboard import adapters, charts, export, filtering, mapping, settings, style
 from src.dashboard.loading import launch_signature, load_bundle
 from src.dashboard.validation import DataError
 
 log = logging.getLogger('dashboard')
-st.set_page_config(page_title='Streetlight Assessment Planner', layout='wide')
+st.set_page_config(page_title='Streetlight Assessment Planner', page_icon='💡', layout='wide')
+style.inject()
 
 NON_DISTRICT = [f for f in settings.CATEGORY_FILTERS if f[0] != 'districts']
 
@@ -41,6 +42,11 @@ def cached_options(signature):
     bundle = cached_bundle(signature)
     return {col: filtering.source_options(bundle.frame, col, bundle.meta['full_max_date'])
             for _, col, _ in NON_DISTRICT}
+
+
+@st.cache_data(show_spinner=False, max_entries=2)
+def cached_streets(signature):
+    return adapters.district_streets(cached_bundle(signature).frame)
 
 
 def session_memo(name, key, fn):
@@ -111,17 +117,17 @@ def fmt_int(v):
 
 def table_config():
     return {
-        'Rank': st.column_config.NumberColumn('Rank', format='%d', help='Original rank among all districts after non-district filters (U).'),
-        'RPT Dist No': st.column_config.TextColumn('Reporting district'),
-        'AREA NAME': st.column_config.TextColumn('Area'),
-        'Priority score': st.column_config.NumberColumn('Priority score', format='%.2f', help=settings.SCORE_FORMULA),
-        'Nighttime reported offenses': st.column_config.NumberColumn(format='%d'),
-        'Active months': st.column_config.NumberColumn(format='%d'),
-        'Eligible months': st.column_config.NumberColumn(format='%d'),
-        'Persistence rate': st.column_config.NumberColumn(format='percent', help='Active months / eligible months'),
-        'Average monthly nighttime offenses': st.column_config.NumberColumn(format='%.2f'),
-        'Recent nighttime offenses': st.column_config.NumberColumn(format='%d'),
-        'Valid mapped nighttime offenses': st.column_config.NumberColumn(format='%d'),
+        'Rank': st.column_config.NumberColumn('Rank', format='localized', width=56, help='Original rank among all districts after non-district filters.'),
+        'RPT Dist No': st.column_config.TextColumn('Reporting district', width=262),
+        'AREA NAME': st.column_config.TextColumn('Area', width=88),
+        'Priority score': st.column_config.NumberColumn('Score', format='%.2f', width=62, help=settings.SCORE_FORMULA),
+        'Nighttime reported offenses': st.column_config.NumberColumn('Nighttime', format='localized', width=78, help='Nighttime reported offenses'),
+        'Active months': st.column_config.NumberColumn('Active', format='localized', width=60, help='Active months: months with at least one nighttime reported offense'),
+        'Eligible months': st.column_config.NumberColumn('Eligible', format='localized', width=64, help='Eligible months: calendar months in the selected period'),
+        'Persistence rate': st.column_config.NumberColumn('Persist.', format='percent', width=68, help='Persistence rate: active months / eligible months'),
+        'Average monthly nighttime offenses': st.column_config.NumberColumn('Avg/mo', format='%.2f', width=64, help='Average monthly nighttime offenses'),
+        'Recent nighttime offenses': st.column_config.NumberColumn('Recent', format='localized', width=60, help='Recent nighttime offenses: latest up to three complete months'),
+        'Valid mapped nighttime offenses': st.column_config.NumberColumn('Mapped', format='localized', width=64, help='Valid mapped nighttime offenses'),
         'Frequency percentile': st.column_config.NumberColumn(format='%.4f'),
         'Persistence percentile': st.column_config.NumberColumn(format='%.4f'),
     }
@@ -135,7 +141,9 @@ def show_chart(fig, empty_message, key):
 
 
 def display_frame(frame, columns):
+    """On-screen copy only: the frames behind downloads keep plain district codes."""
     out = frame[columns].copy()
+    out['RPT Dist No'] = out['RPT Dist No'].map(adapters.district_names(frame, streets=streets))
     if 'AREA NAME' in out:
         out['AREA NAME'] = out['AREA NAME'].map(adapters.area_label)
     return out
@@ -156,27 +164,24 @@ def render_map(d, filters, ids, title, period, scope_label, key):
             st.caption(f'Rendering reduced to the {len(shown):,} busiest of {len(cells):,} cells; counts are unaffected.')
         fig = mapping.map_figure(shown, title, period)
         st.plotly_chart(fig, config={'displaylogo': False}, key=key)
-        st.caption(f'{int(cells["offenses"].sum()):,} mapped nighttime reported offenses in {len(cells):,} cells. '
-                   'Basemap tiles load from the network; if they fail, cells still plot on a blank background.')
+        outside = mapping.view(shown)['outside']
+        st.caption(f'{int(cells["offenses"].sum()):,} mapped nighttime reported offenses in {len(cells):,} cells.'
+                   + (f' The map opens on where most points are; {outside:,} plot outside this view, so zoom out to '
+                      'see them.' if outside else ''))
     except Exception:  # noqa: BLE001
         log.exception('map rendering failed')
         st.warning('The map could not be rendered. Metrics, charts and export are unaffected.')
 
 
 # ------------------------------------------------------------------ header + load
-st.title(settings.APP_TITLE)
-st.markdown(settings.PURPOSE)
-st.warning(settings.WARNING_TEXT)
-st.info(settings.STREETLIGHT_TEXT)
+style.hero(settings.APP_HEADLINE, settings.PURPOSE, settings.APP_EYEBROW)
+style.callouts(settings.WARNING_TEXT, settings.STREETLIGHT_TEXT)
 
 try:
     signature = launch_signature()
-    if 'bundle_loaded' not in st.session_state:
-        with st.status('Loading and validating the canonical processed data...', expanded=False) as status:
-            bundle = cached_bundle(signature)
-            status.update(label='Canonical data loaded and validated.', state='complete')
-        st.session_state['bundle_loaded'] = True
-    bundle = cached_bundle(signature)
+    # Runs every time so the page layout never shifts; it only appears during a slow first load.
+    with st.spinner('Loading and validating the data...'):
+        bundle = cached_bundle(signature)
 except DataError as err:
     log.exception('data load failed')
     st.error(f'**{err.title}.** {err.public_message}')
@@ -184,7 +189,7 @@ except DataError as err:
     st.stop()
 except Exception:  # noqa: BLE001
     log.exception('unexpected load failure')
-    st.error('**Data error.** The canonical data could not be loaded. See the local console log for details.')
+    st.error('**Data error.** The dashboard data could not be loaded. See the local console log for details.')
     st.stop()
 
 d, meta, quality = bundle.frame, bundle.meta, bundle.quality
@@ -193,18 +198,18 @@ st.session_state['_bounds'] = bounds
 init_state(bounds)
 
 data_through = pd.Timestamp(meta['data_through']) if meta['data_through'] else None
-st.markdown(
-    f"**Data through:** {data_through:%B %d, %Y} &nbsp;|&nbsp; **Loaded file:** `{meta['processed_file']}` "
-    f"({meta['rows']:,} rows) &nbsp;|&nbsp; **{settings.NIGHT_DEFINITION}**" if data_through else
-    f"**Loaded file:** `{meta['processed_file']}` ({meta['rows']:,} rows)")
+style.chips(([('Data through', f'{data_through:%B %d, %Y}')] if data_through else [])
+            + [('Loaded file', f"{meta['processed_file'].rsplit('/', 1)[-1]} ({meta['rows']:,} rows)"),
+               ('Nighttime', '18:00–05:59, midnight included')])
 
 # ------------------------------------------------------------------ sidebar filters
 sb = st.sidebar
 sb.header('Filters')
 sb.button('Reset all to defaults', on_click=reset_all, width='stretch', key='reset_button')
+sb.subheader('Dates')
 dates_ok = bounds is not None
 if not dates_ok:
-    sb.error('Data error: no valid occurrence dates in the canonical data. Date-dependent controls are disabled.')
+    sb.error('Data error: no valid occurrence dates in the data. Date-dependent controls are disabled.')
 start = sb.date_input('Start date (inclusive)', key='start', min_value=bounds[0] if bounds else None,
                       max_value=bounds[1] if bounds else None, disabled=not dates_ok, format='YYYY-MM-DD')
 end = sb.date_input('End date (inclusive)', key='end', min_value=bounds[0] if bounds else None,
@@ -215,24 +220,29 @@ for e in errors:
 dates_ok = not errors
 
 options = cached_options(signature)
+streets = cached_streets(signature)
 categories = {}
 
 
-def category_widget(container, attr, column, label, choices):
+def category_widget(container, attr, column, label, choices, names=None, help=None):
+    """All and none stay distinct: untick All to choose values; choosing nothing means no records."""
     with container:
-        all_on = st.checkbox(f'All {label.lower()}', key=f'all_{attr}',
-                             help='All includes records whose category is missing.')
-        st.multiselect(label, choices, key=f'sel_{attr}', disabled=all_on,
-                       placeholder='Choose values' if not all_on else 'All selected')
-        if not all_on and not st.session_state[f'sel_{attr}']:
-            st.caption(f'No {label.lower()} selected: results are empty until you choose values or tick All.')
+        all_on = st.checkbox(f'All {label.lower()}', key=f'all_{attr}', help=help or
+                             'All includes records whose category is missing. Untick to choose specific values.')
+        if not all_on:
+            st.multiselect(label, choices, key=f'sel_{attr}', placeholder='Choose values',
+                           format_func=(lambda v: names.get(v, v)) if names else str)
+            if not st.session_state[f'sel_{attr}']:
+                st.caption(f'No {label.lower()} selected: results are empty until you choose values or tick All.')
     categories[attr] = (all_on, st.session_state[f'sel_{attr}'])
 
 
+sb.subheader('Location')
 area_box, district_box = sb.container(), sb.container()
 category_widget(area_box, 'areas', 'AREA NAME', 'Areas', options['AREA NAME'])
+more_filters = sb.expander('Offense and premise filters')
 for attr, column, label in NON_DISTRICT[1:]:
-    category_widget(sb.container(), attr, column, label, options[column])
+    category_widget(more_filters.container(), attr, column, label, options[column])
 
 # F (no district) -> U, computed before the district widget so options derive from U.
 f_no_district = filtering.build_filters(start if dates_ok else None, end if dates_ok else None,
@@ -242,10 +252,12 @@ if dates_ok:
 else:
     universe = pd.DataFrame(columns=settings.RANKED_COLUMNS)
 district_choices = list(universe.sort_values('RPT Dist No')['RPT Dist No']) if len(universe) else []
+universe_names = adapters.district_names(universe, streets=streets)
 
 previous = list(st.session_state['sel_districts'])
 st.session_state['sel_districts'] = adapters.reconcile(previous, district_choices)
-category_widget(district_box, 'districts', 'RPT Dist No', 'Reporting districts', district_choices)
+category_widget(district_box, 'districts', 'RPT Dist No', 'Reporting districts', district_choices,
+                names=universe_names, help=settings.DISTRICT_CODE_HELP)
 if previous and not st.session_state['sel_districts'] and not st.session_state['all_districts']:
     district_box.caption('None of the previously chosen districts exist under the current filters, '
                          'so the district selection is now empty.')
@@ -254,30 +266,33 @@ filters = filtering.build_filters(start if dates_ok else None, end if dates_ok e
 interval = selected_interval(d, filters) if dates_ok else (None, None)
 month_count = len(eligible_months(*interval)) if dates_ok else 0
 
-sb.subheader('Display')
+sb.subheader('Recurrence')
 clamped = adapters.clamp_min_active(st.session_state['min_active'], month_count)
 if clamped is not None:
     st.session_state['min_active'] = clamped
     sb.number_input('Minimum active months', min_value=1, max_value=month_count, step=1, key='min_active',
-                    help='Display threshold only; it never changes scores or ranks.')
+                    help='Hide districts active in fewer months. This never changes scores or ranks.')
 else:
     sb.number_input('Minimum active months', value=1, disabled=True, key='_min_active_disabled')
     sb.caption('Disabled: the selected period has no eligible months.')
 min_active = clamped or 1
-sb.selectbox('Districts shown in overview (top N)', settings.TOP_N_OPTIONS, key='top_n')
 
 # ------------------------------------------------------------------ scopes
 E = adapters.eligible_scope(universe, filters.districts, min_active) if dates_ok else universe.iloc[:0]
 e_ids = list(E.sort_values('Rank')['RPT Dist No'])
+names = adapters.district_names(E, streets=streets)  # '0182 · Central · near S Flower St'
+ranked_names = adapters.district_names(E, with_rank=True, streets=streets)  # same label plus '(rank 1)'
+zero_night = adapters.zero_night_districts(universe)
 if st.session_state['active_district'] and st.session_state['active_district'] not in e_ids:
+    gone = st.session_state['active_district']
     st.session_state['notices'].append(
-        f"District {st.session_state['active_district']} is no longer in the eligible scope; evidence selection cleared.")
+        f"District {universe_names.get(gone, gone)} no longer matches your filters, so it was deselected.")
     set_active(None)
 if st.session_state['evidence_select'] not in [None] + e_ids:
     st.session_state['evidence_select'] = None
 pruned = adapters.reconcile(st.session_state['compare_select'], e_ids)
 if len(pruned) != len(st.session_state['compare_select']):
-    st.session_state['notices'].append('Comparison districts no longer in the eligible scope were removed.')
+    st.session_state['notices'].append('Comparison districts that no longer match your filters were removed.')
 st.session_state['compare_select'] = pruned
 recent = adapters.recent_for(d, filters) if dates_ok else (None, None)
 recent_text = adapters.recent_label(*recent)
@@ -288,33 +303,42 @@ for notice in st.session_state['notices']:
     st.toast(notice)
 st.session_state['notices'] = []
 
-tabs = st.tabs(['Priority Overview', 'District Evidence', 'Compare Districts', 'Methods and Data Quality'])
+tabs = st.tabs(['Priority Overview', 'District Evidence', 'Compare Districts', 'Methods and Data Quality'], key='main_tabs')
+partial = adapters.partial_months(*interval) if dates_ok else []
 
 # ------------------------------------------------------------------ overview
 with tabs[0]:
     if not dates_ok:
         st.error('Choose a valid date range in the sidebar to see results. Filters are kept as entered.')
-    st.subheader('Key evidence in the eligible selected scope')
-    st.caption(f'KPIs: all eligible selected districts ({len(E):,} districts; minimum {min_active} active '
-               f'month(s); top-N does not apply). Period: {period}.')
+    st.subheader('Which districts merit assessment first?')
     k = adapters.kpi_summary(E)
+    st.caption(f'Totals: all {len(E):,} eligible selected districts, active in at least {min_active} month(s); the '
+               f"table limit doesn't change them. Period: {period}. Mapped coverage: {charts.percent(k['coverage'])}.",
+               help=settings.ELIGIBLE_HELP)
     c1, c2, c3, c4 = st.columns(4)
     c1.metric('Nighttime reported offenses', fmt_int(k['nighttime']))
     c2.metric('Reporting districts', fmt_int(k['districts']))
     c3.metric('Mean district persistence', charts.percent(k['mean_persistence']),
-              help='Unweighted mean of district persistence rates in E.')
+              help='Average persistence rate across these districts, each counted equally.')
     c4.metric('Valid mapped nighttime offenses', fmt_int(k['mapped']),
               help=f"Mapped coverage: {charts.percent(k['coverage'])}")
-    st.caption(f"Mapped coverage in this scope: {charts.percent(k['coverage'])}.")
 
     top_n = st.session_state['top_n']
-    sort_label = st.selectbox('Sort table by', list(settings.SORT_OPTIONS), key='sort',
-                              help='Reorders the shown rows only; membership, scores and ranks are unchanged.')
+    shown = 'all' if top_n == 'All' else f'top {top_n}'
+    st.subheader(f'Ranked reporting districts ({shown} of {len(E):,} eligible)')
+    st.caption(f'Rank compares all {len(universe):,} districts after non-district filters. '
+               f'Recent period: {recent_text}. {settings.DISTRICT_CODE_SHORT}')
+    if zero_night:
+        st.caption(f'{zero_night:,} ranked district(s) have zero nighttime reported offenses: they score 0 and are '
+                   'not listed. See "How zeros are handled" in Methods and Data Quality.')
+    controls = st.columns([2.4, 1, 1.25, 1.25], vertical_alignment='bottom')
+    sort_label = controls[0].selectbox('Sort table by', list(settings.SORT_OPTIONS), key='sort',
+                                       help='Reorders the shown rows only; membership, scores and ranks are unchanged.')
+    controls[1].selectbox('Show', settings.TOP_N_OPTIONS, key='top_n',
+                          format_func=lambda v: 'All' if v == 'All' else f'Top {v}',
+                          help='Limits the table, map and downloads. Totals above are unaffected.')
     T = adapters.overview_rows(E, top_n, sort_label)
     st.session_state['_t_order'] = list(T['RPT Dist No'])
-    st.subheader(f'Ranked reporting districts (top {top_n} of {len(E):,} eligible)')
-    st.caption(f'Overview: top {top_n} of E districts. Rank: all districts after non-district filters '
-               f'({len(universe):,} districts). Recent nighttime offenses period: {recent_text}.')
     if E.empty:
         st.info('No districts match the current filters and minimum active months. '
                 'Adjust or reset the filters in the sidebar; your selections are kept.')
@@ -325,19 +349,20 @@ with tabs[0]:
         st.dataframe(display_frame(T, settings.DISPLAY_COLUMNS), hide_index=True, column_config=table_config(),
                      on_select=lambda: on_table_select(key), selection_mode='single-row', key=key,
                      selection_default={'selection': {'rows': rows}})
-        b1, b2, b3 = st.columns([1, 1, 1])
-        b1.button('Clear district selection', on_click=clear_active, disabled=active is None, key='clear_button')
-        b2.download_button('Download worklist CSV', export.worklist_csv(T), file_name='district_worklist.csv',
-                           mime='text/csv', help='Exactly the rows above in this order, unrounded, all 15 columns.')
-        b3.download_button('Download worklist metadata (JSON)', export.worklist_metadata(
+        controls[2].download_button('Worklist CSV', export.worklist_csv(T), file_name='district_worklist.csv',
+                                    mime='text/csv', width='stretch',
+                                    help='Exactly these rows in this order, unrounded, all 15 columns, with plain '
+                                         'district codes. Import "RPT Dist No" as text to keep leading zeros.')
+        controls[3].download_button('Metadata JSON', export.worklist_metadata(
             meta=meta, filters=filters, resolved=resolved, min_active=min_active, top_n=top_n,
             sort_label=sort_label, counts={'U': len(universe), 'E': len(E), 'T': len(T)}, recent=recent),
-            file_name='district_worklist_metadata.json', mime='application/json')
-        if active:
-            st.caption(f'Active evidence district: **{active}**. Select a row or use District Evidence to change it.')
-        else:
-            st.caption('Select a row to make it the active evidence district (see District Evidence).')
-        st.caption('Open the CSV with "RPT Dist No" imported as text to keep leading zeros.')
+            file_name='district_worklist_metadata.json', mime='application/json', width='stretch',
+            help='Filters, sort, counts, source and formulas behind this worklist.')
+        selected_note, clear_box = st.columns([4, 1], vertical_alignment='center')
+        selected_note.caption(f'Selected district: **{names[active]}**. See District Evidence.' if active else
+                              'Select a row to see that district in District Evidence.')
+        clear_box.button('Clear selection', on_click=clear_active, disabled=active is None, key='clear_button',
+                         width='stretch')
         with st.expander('Score detail: percentiles behind the priority score'):
             st.markdown(f'{settings.SCORE_FORMULA}. {settings.PERCENTILE_METHOD}.')
             st.dataframe(display_frame(T, ['Rank', 'RPT Dist No', 'Priority score', 'Frequency percentile',
@@ -346,12 +371,12 @@ with tabs[0]:
     st.subheader('Approximate offense locations')
     active = st.session_state['active_district']
     if active:
-        render_map(d, filters, (active,), f'Mapped nighttime reported offenses, district {active}', period,
-                   f'Map focus: active evidence district {active} (may be outside the table). '
-                   'Clear the selection to return to the table scope', key='map_overview')
+        render_map(d, filters, (active,), f'Mapped nighttime reported offenses, {names[active]}', period,
+                   f'Map focus: selected district {names[active]} (may be outside the table). '
+                   'Clear the selection to return to the table districts', key='map_overview')
     elif dates_ok:
         render_map(d, filters, adapters.scope_ids(T), 'Mapped nighttime reported offenses, overview districts',
-                   period, f'Map scope: the {len(T):,} districts in the table (T)', key='map_overview')
+                   period, f'Map scope: the {len(T):,} districts in the table', key='map_overview')
 
     with st.expander('Data-quality summary'):
         q = quality
@@ -361,18 +386,16 @@ with tabs[0]:
             f"- {q['records_before_2025']:,} records before 2025 are kept in the data but outside metrics.\n"
             f"- {q['invalid_coordinates_total']:,} records have invalid coordinates (still counted in district metrics, not mapped).\n"
             f"- Full-source qualifying mapped coverage: {q['qualifying_mapped_percentage']:.2f}%.\n"
-            f"- Current eligible scope (E) mapped coverage: {charts.percent(k['coverage'])}.\n"
+            f"- Mapped coverage for the eligible selected districts: {charts.percent(k['coverage'])}.\n"
             "- See Methods and Data Quality for the full audit, definitions and limitations.")
 
 # ------------------------------------------------------------------ evidence
 with tabs[1]:
-    st.subheader('District evidence')
-    st.caption(f'Choices: all {len(e_ids):,} eligible districts (E), including those outside the overview table. '
+    st.subheader('Is this district\'s pattern recurring or concentrated?')
+    st.caption(f'Choices: all {len(e_ids):,} eligible districts, including those outside the overview table. '
                f'Period: {period}.')
-    labels = E.set_index('RPT Dist No')
     st.selectbox('Reporting district', [None] + e_ids, key='evidence_select', on_change=on_evidence_change,
-                 format_func=lambda v: 'Choose a district' if v is None else
-                 f"{v} - {adapters.area_label(labels.loc[v, 'AREA NAME'])} (rank {int(labels.loc[v, 'Rank']):,})")
+                 format_func=lambda v: 'Choose a district' if v is None else ranked_names[v])
     active = st.session_state['active_district']
     if not e_ids:
         st.info('No eligible districts under the current filters.')
@@ -382,7 +405,7 @@ with tabs[1]:
         ev = session_memo('evidence', (signature, astuple(filters), active),
                           lambda: adapters.evidence(d, filters, active, universe))
         row = ev['row']
-        m = st.columns(6)
+        m = st.columns(3) + st.columns(3)
         m[0].metric('Area', adapters.area_label(row['AREA NAME']))
         m[1].metric('Original rank', fmt_int(row['Rank']))
         m[2].metric('Priority score', f"{row['Priority score']:.2f}")
@@ -391,22 +414,20 @@ with tabs[1]:
                     help=f"Persistence rate {charts.percent(row['Persistence rate'])}")
         m[5].metric('Mapped coverage', charts.percent(ev['coverage']),
                     help=f"{fmt_int(row['Valid mapped nighttime offenses'])} valid mapped nighttime offenses")
-        st.markdown(adapters.evidence_sentence(row, period))
+        st.markdown(adapters.evidence_sentence(row, period, names[active]))
         st.caption(f"Persistence rate {charts.percent(row['Persistence rate'])}; recent nighttime offenses "
                    f"{fmt_int(row['Recent nighttime offenses'])} ({recent_text}).")
-        fig = charts.monthly_line(ev['monthly'], f'Monthly nighttime reported offenses, district {active}', period)
+        fig = charts.monthly_line(ev['monthly'], f'Monthly nighttime reported offenses, {names[active]}', period,
+                                  names, partial)
         show_chart(fig, 'No monthly data for this selection.', 'chart_evidence_monthly')
-        left, right = st.columns(2)
-        with left:
-            fig = charts.composition_bar(ev['offenses'], 'NIBR Description',
-                                         f"Offense composition (top {settings.TOP_CATEGORIES} of "
-                                         f"{ev['offense_categories']:,} descriptions)", period)
-            show_chart(fig, 'No offense categories.', 'chart_offenses')
-        with right:
-            fig = charts.composition_bar(ev['premises'], 'Premise Desc',
-                                         f"Premise composition (top {settings.TOP_CATEGORIES} of "
-                                         f"{ev['premise_categories']:,} premises)", period)
-            show_chart(fig, 'No premise categories.', 'chart_premises')
+        fig = charts.composition_bar(ev['offenses'], 'NIBR Description',
+                                     f"Offense composition (top {settings.TOP_CATEGORIES} of "
+                                     f"{ev['offense_categories']:,} descriptions)", period)
+        show_chart(fig, 'No offense categories.', 'chart_offenses')
+        fig = charts.composition_bar(ev['premises'], 'Premise Desc',
+                                     f"Premise composition (top {settings.TOP_CATEGORIES} of "
+                                     f"{ev['premise_categories']:,} premises)", period)
+        show_chart(fig, 'No premise categories.', 'chart_premises')
         st.caption(f'"{settings.OTHER_LABEL}" sums every category below the top {settings.TOP_CATEGORIES}. '
                    '"Unknown" marks records with no recorded description/premise; it is different from source '
                    'labels such as "Location Unknown". Shares are of this district\'s nighttime total.')
@@ -416,21 +437,20 @@ with tabs[1]:
                     columns={'nighttime_offenses': 'Nighttime reported offenses', 'share': 'Share of district'}),
                     hide_index=True, column_config={'Share of district': st.column_config.NumberColumn(format='percent')})
         st.markdown('**Approximate mapped locations for this district**')
-        render_map(d, filters, (active,), f'Mapped nighttime reported offenses, district {active}', period,
-                   f'Map scope: district {active}', key='map_evidence')
+        render_map(d, filters, (active,), f'Mapped nighttime reported offenses, {names[active]}', period,
+                   f'Map scope: district {names[active]}', key='map_evidence')
 
 # ------------------------------------------------------------------ comparison
 with tabs[2]:
-    st.subheader('Compare districts')
+    st.subheader('How do selected districts compare on the same evidence?')
     st.caption(f'Choose {settings.COMPARE_MIN}-{settings.COMPARE_MAX} districts from the {len(e_ids):,} eligible '
-               f'districts (E), including ones outside the overview table. Ranks are original. Period: {period}.')
+               f'districts, including ones outside the overview table. Ranks are original. Period: {period}.')
     if len(e_ids) < settings.COMPARE_MIN:
         st.info(f'Comparison needs at least {settings.COMPARE_MIN} eligible districts; the current filters leave '
                 f'{len(e_ids)}. Broaden the filters or lower the minimum active months.')
     else:
         st.multiselect('Districts to compare', e_ids, key='compare_select', max_selections=settings.COMPARE_MAX,
-                       format_func=lambda v: f"{v} - {adapters.area_label(labels.loc[v, 'AREA NAME'])} "
-                                             f"(rank {int(labels.loc[v, 'Rank']):,})")
+                       format_func=lambda v: ranked_names[v])
         chosen = st.session_state['compare_select']
         if len(chosen) < settings.COMPARE_MIN:
             st.info(f'Select at least {settings.COMPARE_MIN} districts (up to {settings.COMPARE_MAX}).')
@@ -439,32 +459,30 @@ with tabs[2]:
                                   lambda: adapters.comparison(d, filters, chosen, E))
             table = result['districts']
             st.dataframe(display_frame(table, settings.DISPLAY_COLUMNS), hide_index=True, column_config=table_config())
-            fig = charts.comparison_panels(table, period)
+            fig = charts.comparison_panels(table, period, names)
             show_chart(fig, 'No comparison data.', 'chart_compare_panels')
-            fig = charts.monthly_line(result['monthly'], 'Monthly nighttime reported offenses, selected districts', period)
+            fig = charts.monthly_line(result['monthly'], 'Monthly nighttime reported offenses, selected districts', period,
+                                      names, partial)
             show_chart(fig, 'No monthly data.', 'chart_compare_monthly')
 
 # ------------------------------------------------------------------ methods
 with tabs[3]:
     q = quality
-    st.subheader('Methods and data quality')
-    st.markdown('#### Provenance')
-    st.table(pd.DataFrame([
-        ('Approved source file', q['source']['filename']),
-        ('Source SHA-256', q['source']['sha256']),
-        ('Processed file', meta['processed_file']),
-        ('Processed file SHA-256', meta['processed_sha256']),
-        ('Processed file size', f"{meta['processed_bytes']:,} bytes"),
-        ('Loaded rows / columns', f"{meta['rows']:,} / {meta['columns']}"),
-        ('Full date range in file', f"{meta['full_min_date']} to {meta['full_max_date']}"),
-        ('Available analysis range', f"{meta['analysis_start']} to {meta['data_through']}"),
-        ('App version / code revision', f"{meta['app_version']} / {meta['code_revision']}"),
-        ('Last successful load (UTC)', meta['loaded_at_utc']),
-        ('Quality report / dictionary', f"{meta['quality_file']} / {meta['dictionary_file']}"),
-    ], columns=['Item', 'Value']).set_index('Item'))
-
-    st.markdown('#### Definitions')
-    with st.expander('Metric definitions', expanded=True):
+    st.subheader('How reliable and interpretable is this evidence?')
+    st.markdown('#### Limitations')
+    st.markdown('\n'.join(f'- {item}' for item in settings.LIMITATIONS))
+    st.markdown('#### How zeros are handled')
+    st.markdown('\n'.join(f'- {rule}' for rule in settings.ZERO_RULES))
+    st.caption(f'In the current selection, {zero_night:,} of {len(universe):,} ranked districts have zero '
+               'nighttime reported offenses (score 0, not listed).')
+    st.markdown('#### What reporting-district codes mean')
+    st.markdown(settings.DISTRICT_CODE_HELP)
+    st.markdown('#### Mapped coverage in the current selection')
+    k = adapters.kpi_summary(E)
+    st.markdown(f"{fmt_int(k['mapped'])} of {fmt_int(k['nighttime'])} nighttime reported offenses in the "
+                f"{fmt_int(k['districts'])} eligible districts have valid coordinates "
+                f"(mapped coverage {charts.percent(k['coverage'])}).")
+    with st.expander('Metric definitions'):
         st.markdown(f"""
 - **Qualifying nighttime record:** inside the selected dates and category filters, {settings.NIGHT_DEFINITION.lower()}
   Nonmissing reporting district and offense ID required; missing coordinates do not disqualify a record.
@@ -477,50 +495,59 @@ with tabs[3]:
 - **{settings.SCORE_FORMULA}.** {settings.PERCENTILE_METHOD}. The scoring universe is every district present after
   non-district filters, including districts with only daytime records.
 - **Rank:** score, nighttime count, persistence (all descending), then numeric district ascending, then district text.
-- **Display scopes:** U = all districts after non-district filters (scores and ranks); E = U limited to the district
-  selection and minimum active months (KPIs, evidence and comparison choices); T = top N of E by original rank, then table sort
-  (table, map, export). District selection, thresholds, top-N and sorting never change scores or ranks.
+- **Which districts each part uses:** ranks and scores use all districts after non-district filters. Totals and the
+  evidence and comparison choices use the eligible districts: those that also pass the district selection and minimum
+  active months. The table, map and downloads use the top rows of those, in your sort order. Selections, limits and
+  sorting never change scores or ranks.
 - **Coordinates:** {settings.COORDINATE_RULE}
 - No population-adjusted rates and no spatial measure enter any metric.
 """)
-    st.markdown('#### Full-source audit (unfiltered, from the quality report)')
-    st.caption('Flags overlap (for example, a pre-2025 record may also have invalid coordinates); they are not '
-               'disjoint removals and must not be summed. Only exact duplicate rows were removed during cleaning.')
-    audit = [
-        ('Raw rows / processed rows', f"{q['raw_rows']:,} / {q['processed_rows']:,}"),
-        ('Exact duplicate rows found / removed', f"{q['exact_duplicates_found']:,} / {q['exact_duplicates_removed']:,}"),
-        ('Repeated offense-ID rows (retained, flagged)', fmt_int(q['repeated_offense_id_rows'])),
-        ('Rows in multi-offense cases (repeated CaseNo, retained)', fmt_int(q['repeated_case_rows_retained'])),
-        ('Missing offense IDs', fmt_int(q['missing_offense_ids'])),
-        ('Invalid or missing occurrence dates', fmt_int(q['invalid_or_missing_dates'])),
-        ('Records before 2025 (kept, outside metrics)', fmt_int(q['records_before_2025'])),
-        ('Invalid or missing occurrence times', fmt_int(q['invalid_or_missing_times'])),
-        ('Recorded midnight (0000) values, full history', fmt_int(q['midnight_codes'])),
-        ('Missing reporting districts', fmt_int(q['missing_reporting_districts'])),
-        ('Missing / nonnumeric coordinates', f"{q['missing_coordinates']:,} / {q['nonnumeric_coordinates']:,}"),
-        ('Zero / nonzero out-of-box coordinates', f"{q['zero_coordinates']:,} / {q['out_of_area_nonzero_coordinates']:,}"),
-        ('Invalid coordinates, total (union)', fmt_int(q['invalid_coordinates_total'])),
-        ('Qualifying nighttime records, 2025 onward', fmt_int(q['qualifying_nighttime_records'])),
-        ('Qualifying mapped nighttime records', fmt_int(q['qualifying_mapped_nighttime_records'])),
-        ('Full-source qualifying mapped coverage', f"{q['qualifying_mapped_percentage']:.2f}%"),
-    ]
-    st.table(pd.DataFrame(audit, columns=['Full-source measure', 'Count']).set_index('Full-source measure'))
-    st.markdown('**Midnight treatment:** `0000` is valid midnight, included in nighttime metrics and flagged '
-                'separately. Invalid or missing times stay in quality totals but never enter nighttime metrics; '
-                'hours are never derived from the date field.')
-    st.markdown('#### Current eligible-scope coverage (filtered, E)')
-    k = adapters.kpi_summary(E)
-    st.markdown(f"{fmt_int(k['mapped'])} of {fmt_int(k['nighttime'])} nighttime reported offenses in the "
-                f"{fmt_int(k['districts'])} eligible districts have valid coordinates "
-                f"(mapped coverage {charts.percent(k['coverage'])}).")
+    with st.expander('Full-source audit (unfiltered, from the quality report)'):
+        st.caption('Flags overlap (for example, a pre-2025 record may also have invalid coordinates); they are not '
+                   'disjoint removals and must not be summed. Only exact duplicate rows were removed during cleaning.')
+        audit = [
+            ('Raw rows / processed rows', f"{q['raw_rows']:,} / {q['processed_rows']:,}"),
+            ('Exact duplicate rows found / removed', f"{q['exact_duplicates_found']:,} / {q['exact_duplicates_removed']:,}"),
+            ('Repeated offense-ID rows (retained, flagged)', fmt_int(q['repeated_offense_id_rows'])),
+            ('Rows in multi-offense cases (repeated CaseNo, retained)', fmt_int(q['repeated_case_rows_retained'])),
+            ('Missing offense IDs', fmt_int(q['missing_offense_ids'])),
+            ('Invalid or missing occurrence dates', fmt_int(q['invalid_or_missing_dates'])),
+            ('Records before 2025 (kept, outside metrics)', fmt_int(q['records_before_2025'])),
+            ('Invalid or missing occurrence times', fmt_int(q['invalid_or_missing_times'])),
+            ('Recorded midnight (0000) values, full history', fmt_int(q['midnight_codes'])),
+            ('Missing reporting districts', fmt_int(q['missing_reporting_districts'])),
+            ('Missing / nonnumeric coordinates', f"{q['missing_coordinates']:,} / {q['nonnumeric_coordinates']:,}"),
+            ('Zero / nonzero out-of-box coordinates', f"{q['zero_coordinates']:,} / {q['out_of_area_nonzero_coordinates']:,}"),
+            ('Invalid coordinates, total (union)', fmt_int(q['invalid_coordinates_total'])),
+            ('Qualifying nighttime records, 2025 onward', fmt_int(q['qualifying_nighttime_records'])),
+            ('Qualifying mapped nighttime records', fmt_int(q['qualifying_mapped_nighttime_records'])),
+            ('Full-source qualifying mapped coverage', f"{q['qualifying_mapped_percentage']:.2f}%"),
+        ]
+        st.table(pd.DataFrame(audit, columns=['Full-source measure', 'Count']).set_index('Full-source measure'))
+        st.markdown('**Midnight treatment:** `0000` is valid midnight, included in nighttime metrics and flagged '
+                    'separately. Invalid or missing times stay in quality totals but never enter nighttime metrics; '
+                    'hours are never derived from the date field.')
+    with st.expander('Data source and file details'):
+        st.table(pd.DataFrame([
+            ('Approved source file', q['source']['filename']),
+            ('Source SHA-256', q['source']['sha256']),
+            ('Processed file', meta['processed_file']),
+            ('Processed file SHA-256', meta['processed_sha256']),
+            ('Processed file size', f"{meta['processed_bytes']:,} bytes"),
+            ('Loaded rows / columns', f"{meta['rows']:,} / {meta['columns']}"),
+            ('Full date range in file', f"{meta['full_min_date']} to {meta['full_max_date']}"),
+            ('Available analysis range', f"{meta['analysis_start']} to {meta['data_through']}"),
+            ('App version / code revision', f"{meta['app_version']} / {meta['code_revision']}"),
+            ('Last successful load (UTC)', meta['loaded_at_utc']),
+            ('Quality report / dictionary', f"{meta['quality_file']} / {meta['dictionary_file']}"),
+        ], columns=['Item', 'Value']).set_index('Item'))
+
     with st.expander('Schema and derived-field checks run at load'):
         st.caption('Every column and type matched reports/phase2/data_dictionary.csv; rows violating each invariant:')
         st.table(pd.DataFrame(list(meta['invariant_checks'].items()), columns=['Check', 'Violating rows']).set_index('Check'))
-    st.markdown('#### Limitations')
-    st.markdown('\n'.join(f'- {item}' for item in settings.LIMITATIONS))
-    st.markdown('#### Future extension (not part of this MVP)')
-    st.markdown('With a separately approved streetlight GIS file, a future version could validate asset IDs '
-                '(SLID/STLID), geometry and CRS, project to EPSG:2229 and describe nearest-light distance and lights '
-                'within 150 feet. Those descriptive measures would never enter the priority score. Nothing of this is '
-                'implemented or displayed here.')
+    with st.expander('Future extension (not part of this MVP)'):
+        st.markdown('With a separately approved streetlight GIS file, a future version could validate asset IDs '
+                    '(SLID/STLID), geometry and CRS, project to EPSG:2229 and describe nearest-light distance and lights '
+                    'within 150 feet. Those descriptive measures would never enter the priority score. Nothing of this is '
+                    'implemented or displayed here.')
     st.caption(settings.WARNING_TEXT)

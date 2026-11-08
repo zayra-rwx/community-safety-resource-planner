@@ -7,7 +7,8 @@ IDs, case numbers, LOCATION text or original precise coordinates.
 import pandas as pd
 import plotly.graph_objects as go
 
-from .settings import MAP_DECIMALS, MAP_MAX_CELLS
+from .settings import MAP_DECIMALS, MAP_MAX_CELLS, MAP_VIEW_SHARE as VIEW_SHARE
+from .style import FONT_STACK, HEADING_STACK, NAVY
 
 CELL_COLUMNS = ['lat', 'lon', 'offenses', 'districts', 'district_list', 'first_month', 'last_month']
 SEQUENTIAL = ['#cde2fb', '#86b6ef', '#3987e5', '#256abf', '#104281']
@@ -51,6 +52,28 @@ def render_cells(cells, max_cells=MAP_MAX_CELLS):
     return cells.head(max_cells), True
 
 
+def _core_range(values, weights, share):
+    """Smallest and largest value after trimming equal offense-weighted tails."""
+    order = values.argsort()
+    ordered, cumulative = values.iloc[order], weights.iloc[order].cumsum() / weights.sum()
+    tail = (1 - share) / 2
+    return float(ordered[cumulative >= tail].iloc[0]), float(ordered[cumulative >= 1 - tail].iloc[0])
+
+
+def view(cells, share=VIEW_SHARE):
+    """Opening center/zoom for the middle of the offenses, so a few stray points can't zoom the map out.
+
+    Display only: every cell is still plotted and ``outside`` counts offenses beyond the opening box.
+    """
+    lat_low, lat_high = _core_range(cells['lat'], cells['offenses'], share)
+    lon_low, lon_high = _core_range(cells['lon'], cells['offenses'], share)
+    span = max(lat_high - lat_low, lon_high - lon_low)
+    zoom = next((z for limit, z in ((.015, 14), (.03, 13), (.07, 12), (.14, 11), (.3, 10), (.6, 9)) if span < limit), 8)
+    inside = cells['lat'].between(lat_low, lat_high) & cells['lon'].between(lon_low, lon_high)
+    return dict(lat=(lat_low + lat_high) / 2, lon=(lon_low + lon_high) / 2, zoom=zoom,
+                outside=int(cells.loc[~inside, 'offenses'].sum()))
+
+
 def map_figure(cells, title, period):
     """Plotly map of generalized cells; returns None for an empty layer."""
     if cells.empty:
@@ -66,15 +89,13 @@ def map_figure(cells, title, period):
     fig = go.Figure(go.Scattermap(
         lat=cells['lat'], lon=cells['lon'], mode='markers', customdata=custom, hovertemplate=hover,
         marker=dict(size=size, color=cells['offenses'], colorscale=[[i / 4, c] for i, c in enumerate(SEQUENTIAL)],
-                    opacity=0.75, colorbar=dict(title='Offenses<br>per cell'))))
-    lat_span = float(cells['lat'].max() - cells['lat'].min())
-    lon_span = float(cells['lon'].max() - cells['lon'].min())
-    span = max(lat_span, lon_span, 0.01)
-    zoom = 13 if span < 0.02 else 12 if span < 0.05 else 11 if span < 0.1 else 10 if span < 0.25 else 9 \
-        if span < 0.6 else 8
+                    opacity=0.75, colorbar=dict(title=dict(text='Offenses', font=dict(size=11)), thickness=14, x=0.915, xanchor='left'))))
+    opening = view(cells)
     fig.update_layout(
         title=dict(text=title, x=0, font=dict(size=15)),
-        map=dict(style='carto-positron', zoom=zoom,
-                 center=dict(lat=float(cells['lat'].median()), lon=float(cells['lon'].median()))),
-        margin=dict(l=0, r=0, t=40, b=0), height=480)
+        map=dict(style='carto-positron', zoom=opening['zoom'], center=dict(lat=opening['lat'], lon=opening['lon']),
+                 domain=dict(x=[0, 0.9], y=[0, 1])),
+        margin=dict(l=0, r=0, t=40, b=0), height=480,
+        font=dict(family=FONT_STACK, size=13), title_font=dict(family=HEADING_STACK, color=NAVY, size=17),
+        paper_bgcolor='rgba(0,0,0,0)', hoverlabel=dict(font=dict(family=FONT_STACK), bgcolor='#ffffff'))
     return fig

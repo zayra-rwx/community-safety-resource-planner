@@ -12,7 +12,7 @@ from dataclasses import replace
 
 import pandas as pd
 
-from ..analysis import (category_summary, compare_districts, monthly_counts, nighttime_offenses, ranked_districts, recent_period)
+from ..analysis import (category_summary, compare_districts, eligible_months, monthly_counts, nighttime_offenses, ranked_districts, recent_period)
 from . import settings
 
 
@@ -80,6 +80,45 @@ def area_label(value):
     return 'Unknown' if value is None or pd.isna(value) or str(value).strip() == '' else str(value)
 
 
+def district_label(code, area, rank=None, street=None):
+    """'0182 · Central · near S Figueroa St (rank 1)'; two-digit codes are flagged as area-level (AUDIT-ZAYRA-02)."""
+    level = ' · area-level code' if len(str(code)) < 4 else ''
+    near = f' · near {street}' if street else ''
+    ranked = f' (rank {int(rank):,})' if rank is not None and not pd.isna(rank) else ''
+    return f'{code} · {area_label(area)}{level}{near}{ranked}'
+
+
+def district_names(frame, with_rank=False, streets=None):
+    """District key -> display label for every row of a ranked frame."""
+    ranks = frame['Rank'] if with_rank else [None] * len(frame)
+    return {code: district_label(code, area, rank, (streets or {}).get(code))
+            for code, area, rank in zip(frame['RPT Dist No'], frame['AREA NAME'], ranks)}
+
+
+def district_streets(d):
+    """Four-digit district key -> its most common recorded street, 2025 onward, for display labels.
+
+    A recognition aid, not an official name. Block numbers are removed and
+    intersections skipped; ties go to the alphabetically first street. Keep this
+    out of map hover/custom data and exports.
+    """
+    scope = d.loc[d['in_analysis_scope'].fillna(False) & d['LOCATION'].notna() & d['RPT Dist No'].notna(),
+                  ['RPT Dist No', 'LOCATION']]
+    streets = scope['LOCATION'].astype(str).str.replace(r'^\d+(\s+\d+/\d+)?\s+', '', regex=True).str.strip()
+    usable = (streets.str.contains('[A-Za-z]') & ~streets.str.contains('&')
+              & scope['RPT Dist No'].astype(str).str.len().eq(4))
+    counts = (pd.DataFrame({'district': scope['RPT Dist No'], 'street': streets})[usable]
+              .groupby(['district', 'street']).size().rename('n').reset_index()
+              .sort_values(['district', 'n', 'street'], ascending=[True, False, True])
+              .drop_duplicates('district'))
+    return dict(zip(counts['district'], counts['street']))
+
+
+def zero_night_districts(universe):
+    """Districts in U with no nighttime reported offenses: scored 0 and never in E (0 active months)."""
+    return int(universe['Nighttime reported offenses'].eq(0).sum()) if len(universe) else 0
+
+
 def recent_label(start, end):
     if start is None or pd.isna(start):
         return 'No complete months'
@@ -90,6 +129,14 @@ def period_label(start, end):
     if start is None or end is None or pd.isna(start) or pd.isna(end) or pd.Timestamp(end) < pd.Timestamp(start):
         return 'No valid period'
     return f'{pd.Timestamp(start):%b %d, %Y} - {pd.Timestamp(end):%b %d, %Y}'
+
+
+def partial_months(start, end):
+    """Month starts only partly inside the selected dates (they still count as eligible months)."""
+    if start is None or end is None or pd.isna(start) or pd.isna(end):
+        return []
+    start, end = pd.Timestamp(start).normalize(), pd.Timestamp(end).normalize()
+    return [m for m in eligible_months(start, end) if m < start or m + pd.offsets.MonthEnd(0) > end]
 
 
 def recent_for(d, filters):
@@ -151,12 +198,13 @@ def evidence(d, filters, district, universe):
     )
 
 
-def evidence_sentence(row, period):
+def evidence_sentence(row, period, label=None):
     """Deterministic, non-causal summary sentence built from returned values."""
     count = int(row['Nighttime reported offenses'])
     active, eligible = int(row['Active months']), int(row['Eligible months'])
     noun = 'offense' if count == 1 else 'offenses'
-    return (f"Reporting district {row['RPT Dist No']} ({area_label(row['AREA NAME'])}) had {count:,} "
+    label = label or f"{row['RPT Dist No']} ({area_label(row['AREA NAME'])})"
+    return (f"Reporting district {label} had {count:,} "
             f"nighttime reported {noun} during {period}, with at least one in {active} of {eligible} "
             f"eligible calendar months. It holds original rank {int(row['Rank']):,} among all districts "
             "after non-district filters. This describes reported-offense patterns only, not lighting conditions.")
