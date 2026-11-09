@@ -9,6 +9,13 @@ Reported-offense patterns and mapped streetlights identify places for further as
 
 Streetlight asset data was unavailable for this MVP. Rankings use reported-offense frequency and persistence; the map shows approximate offense locations, not measured lighting conditions.
 
+## Links
+
+- **Live app:** https://community-safety-resource-planner-dso576.streamlit.app/ (no sign-in needed)
+- **Demo video (4:05, with subtitles):** `demo_video.mp4` in the submission zip; also
+  on branch [`jiatongy-svg`](https://github.com/zayra-rwx/community-safety-resource-planner/tree/jiatongy-svg/demo-video)
+  with its subtitle file and script
+
 ## Run the dashboard
 
 Use Python 3.11 or later. From the repository root (Windows PowerShell; use
