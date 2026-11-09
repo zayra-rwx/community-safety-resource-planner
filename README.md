@@ -5,7 +5,7 @@
 
 ## Intended users and decision
 
-The dashboard is for an LA Bureau of Street Lighting planning manager deciding which
+The dashboard is for an LA Bureau of Street Lighting program manager deciding which
 LAPD reporting districts should receive on-site lighting assessments first. It ranks
 districts by how often and how consistently nighttime offenses are reported there.
 
